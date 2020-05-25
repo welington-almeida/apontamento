@@ -1,0 +1,17 @@
+<html>
+	<body>
+		<p>
+		Olá, nós recebemos o seu pedido de troca de senha.<br>
+		Para criar uma nova senha acesse o <a href="$url">link</a>.<br>
+		Caso você não tenha feito esta solicitação, ignore este e-mail.
+		</p>
+		<p>
+			<b>Atenção</b>
+			Você deve trocar sua senha o quanto antes, caso contrário este o link não será mais válido.
+		</p>
+		<p>
+			Atenciosamente,<br/>
+			Sistema Apontamento.
+		</p>
+	</body>
+<html>
