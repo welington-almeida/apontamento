@@ -348,5 +348,6 @@
   	<module>apontamento-model</module>
   	<module>apontamento-dao</module>
   	<module>apontamento-service</module>
+  	<module>apontamento-web</module>
   </modules>
 </project>

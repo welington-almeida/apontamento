@@ -9,10 +9,7 @@ import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 
-/**
- * @author WELINGTON ALMEIDA - MECK
- *
- */
+
 public class WebAppInitializer implements WebApplicationInitializer {
 
 	public void onStartup(final ServletContext servletContext) throws ServletException {

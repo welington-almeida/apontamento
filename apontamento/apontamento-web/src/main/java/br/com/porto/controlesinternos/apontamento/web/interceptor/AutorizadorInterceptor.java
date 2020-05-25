@@ -5,10 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-/**
- * @author WELINGTON ALMEIDA - MECK
- * 
- */
+
 public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(final HttpServletRequest request,
@@ -17,9 +14,9 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 		if (request.getSession().getAttribute("usuarioLogado") != null) {
 			return true;
 		} else if (request.getUserPrincipal() != null) {
-			response.sendRedirect("/mapa-astral/login");
+			response.sendRedirect("/apontamento/login");
 		} else {
-			response.sendRedirect("/mapa-astral/");
+			response.sendRedirect("/apontamento/");
 		}
 		return false;
 	}

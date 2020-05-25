@@ -18,17 +18,16 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
 import org.springframework.web.servlet.view.tiles2.TilesConfigurer;
 
-import br.com.altoastral.mapaastral.service.config.ConfigService;
-import br.com.altoastral.mapaastral.web.interceptor.AutorizadorInterceptor;
-
+import br.com.porto.controlesinternos.apontamento.service.config.ConfigService;
+import br.com.porto.controlesinternos.apontamento.web.interceptor.AutorizadorInterceptor;
 
 @PropertySources(
 		{
-			@PropertySource("classpath:/properties/mapaastral-application.properties")
+			@PropertySource("classpath:/properties/apontamento-application.properties")
 		})
 @Configuration
 @EnableWebMvc
-@ComponentScan(value={"br.com.altoastral.mapaastral.web"})
+@ComponentScan(value={"br.com.porto.controlesinternos.apontamento.web"})
 @Import({ConfigService.class})
 public class WebSpringConfig extends WebMvcConfigurerAdapter {
 	
@@ -73,6 +72,6 @@ public class WebSpringConfig extends WebMvcConfigurerAdapter {
 	@Override
 	public void addInterceptors(final InterceptorRegistry registry) {
 	    registry.addInterceptor(new AutorizadorInterceptor()).addPathPatterns("/**").addPathPatterns("/sair**")
-	    .excludePathPatterns("/resources/**","/salvar-nova-senha","/redefinir-senha/**","/enviar-senha","/esqueceu-senha","/api/**","/mapa-astral/","/login/","/login","/sair","/");
+	    .excludePathPatterns("/resources/**","/salvar-nova-senha","/redefinir-senha/**","/enviar-senha","/esqueceu-senha","/api/**","/apontamento/","/login/","/login","/sair","/");
 	}
 }

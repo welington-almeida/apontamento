@@ -11,12 +11,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import br.com.altoastral.mapaastral.dao.config.ConfigDAO;
+import br.com.porto.controlesinternos.apontamento.dao.config.ConfigDAO;
 
-/**
- * @author WELINGTON ALMEIDA - MECK
- *
- */
 @Configuration
 @EnableWebSecurity
 @Import({ConfigDAO.class})
