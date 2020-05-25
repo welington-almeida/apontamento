@@ -3,13 +3,13 @@
        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
 <tiles-definitions>
 
-	<!-- TEMPLATE PÚBLICO -->
+	<!-- TEMPLATE PÚBLICO
     <definition name="main" template="/pages/templates/main.jsp">
     	<put-attribute name="cabecalho" value="/pages/templates/cabecalho.jsp"/>
 		<put-attribute name="rodape" value="/pages/templates/rodape.jsp"/>
-	</definition>
+	</definition> -->
 
 	<!-- LOGIN -->
-	<definition name="index" template="/pages/index.jsp" />
+	<definition name="index" template="/pages/inicio.html" />
     	
 </tiles-definitions>
