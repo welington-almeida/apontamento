@@ -1,25 +1,32 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<!doctype html>
 <html lang="en">
 
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
-    <link href="visual/v.1/css/ps-lib.core-min.css" rel="stylesheet" type="text/css" media="screen" />
-    <link href="visual/v.1/css/ps-lib-iconGlyphs-min.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="<c:url value="/resources/visual/v.1/css/ps-lib.core-min.css" />" rel="stylesheet" type="text/css" media="screen" />
+    <link href="<c:url value="/resources/visual/v.1/css/ps-lib-iconGlyphs-min.css" />" rel="stylesheet" type="text/css" media="screen" />
     <!--[if lt IE 9]> 
-                <script src="visual/v.1/js/plugins/html5-3.6-respond-1.1.0.min.js"></script> 
+                <script src="<c:url value="/resources/visual/v.1/js/plugins/html5-3.6-respond-1.1.0.min.js" />"></script> 
             <![endif]-->
 
 
-    <script src="visual/v.1/js/vendor/jquery-1.9.1.min.js"></script>
-    <script src="visual/v.1/js/min/ps-lib.core-min.js"></script>
+    <script src="<c:url value="/resources/visual/v.1/js/vendor/jquery-1.9.1.min.js" />"></script>
+    <script src="<c:url value="/resources/visual/v.1/js/min/ps-lib.core-min.js"/>"></script>
     <meta charset="UTF-8">
 
-    <title>Visualização</title>
+    <title>VisualizaÃ§Ã£o</title>
 </head>
 
 <body>
-    <!-- CABEÇALHO -->
+    <!-- CABEÃALHO -->
+    <c:out value="${grupo.codigo}"></c:out>
+    <c:out value="${grupo.nome}"></c:out>
+    <c:out value="${grupo.tipo}"></c:out>
     <header class="ps-site-top ps-site-bgWhite">
         <div class="ps-container">
             <div class="ps-mod4 ps-sm-mod2">
@@ -43,9 +50,9 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#" class="ps-menu-hasLevel">Relatórios</a>
+                        <a href="#" class="ps-menu-hasLevel">RelatÃ³rios</a>
                         <ul>
-                            <li><a href="#">Por Funcionário</a></li>
+                            <li><a href="#">Por FuncionÃ¡rio</a></li>
                             <li><a href="#">Por Grupo</a></li>
                             <li><a href="#">Por Demanda</a></li>
                             <li><a href="#">Por Atividade</a></li>
@@ -53,7 +60,7 @@
 
                     </li>
                     <li>
-                        <a href="#">Atualização de Usuários</a>
+                        <a href="#">AtualizaÃ§Ã£o de UsuÃ¡rios</a>
                     </li>
                 </ul>
             </div>
@@ -96,9 +103,9 @@
                             <div class="ps-frm-select">
                                 <select>
                                     <option value="">Filtrar</option>
-                                    <option value="1">RE/Fiança/Transporte</option>
-                                    <option value="2">Automóvel</option>
-                                    <option value="3">Vida e previdência</option>
+                                    <option value="1">RE/FianÃ§a/Transporte</option>
+                                    <option value="2">AutomÃ³vel</option>
+                                    <option value="3">Vida e previdÃªncia</option>
                                 </select>
                             </div>
                         </td>
@@ -117,8 +124,8 @@
                                 <select>
                                     <option value="">Filtrar</option>
                                     <option value="1">Emitida</option>
-                                    <option value="2">Em análise</option>
-                                    <option value="3">Aguardando posição</option>
+                                    <option value="2">Em anÃ¡lise</option>
+                                    <option value="3">Aguardando posiÃ§Ã£o</option>
                                 </select>
                             </div>
                         </td>
@@ -126,16 +133,16 @@
                     <tbody>
 
 
-                        <!--Para JSON, depois que tivermos a conexão com o banco-->
-                        <!--<tbody data-source="[Seu serviço JSON]" data-method="get"></tbody>
+                        <!--Para JSON, depois que tivermos a conexÃ£o com o banco-->
+                        <!--<tbody data-source="[Seu serviÃ§o JSON]" data-method="get"></tbody>
                         </table>-->
 
 
-                        <!--No campo data-source, preencher o endereço do serviço JSON que irá devolver todos os itens da em formato de array.
+                        <!--No campo data-source, preencher o endereÃ§o do serviÃ§o JSON que irÃ¡ devolver todos os itens da em formato de array.
 
 
-                            Definir o método de consulta no campo data-method: GET ou POST.
-Se certificar que todas as colunas estão com o parâmetro data-name preenchidos conforme cada campo do JSON. Por exemplo:
+                            Definir o mÃ©todo de consulta no campo data-method: GET ou POST.
+Se certificar que todas as colunas estÃ£o com o parÃ¢metro data-name preenchidos conforme cada campo do JSON. Por exemplo:
     Modelo do JSON 
 {
     [
@@ -208,7 +215,7 @@ Se certificar que todas as colunas estão com o parâmetro data-name preenchidos
                 class="ps-ico ps-ico-sm ps-sm-ico-lg ps-ico-close"></span></a>
         <div class="ps-modal-container ps-sm-modal-large">
             <div class="ps-modal-title">
-                [título]
+                [tÃ­tulo]
             </div>
             <div class="ps-modal-content">
 
@@ -227,7 +234,7 @@ Se certificar que todas as colunas estão com o parâmetro data-name preenchidos
                                     <div class="ps-popover ps-popover-error">
                                         <div class="ps-popover-ctt ps-popover-ctt-icon">
                                             <span class="ps-ico ps-ico-alert"></span>
-                                            CPF Inválido.
+                                            CPF InvÃ¡lido.
                                         </div>
                                     </div>
                                 </div>
@@ -245,7 +252,7 @@ Se certificar que todas as colunas estão com o parâmetro data-name preenchidos
                                     <div class="ps-popover ps-popover-error">
                                         <div class="ps-popover-ctt ps-popover-ctt-icon">
                                             <span class="ps-ico ps-ico-alert"></span>
-                                            CNPJ Inválido.
+                                            CNPJ InvÃ¡lido.
                                         </div>
                                     </div>
                                 </div>
@@ -266,46 +273,46 @@ Se certificar que todas as colunas estão com o parâmetro data-name preenchidos
                             </div>
                             <div class="ps-row">
                                 <div class="ps-mod8 ps-sm-mod8 ps-frm-row ps-frm-valid">
-                                    <label class="ps-frm-lbl">Máscara dinâmica</label>
+                                    <label class="ps-frm-lbl">MÃ¡scara dinÃ¢mica</label>
                                     <input type="text" name="test" class="ps-frm-entry ps-frm-mask" data-mask="aaa-9999"
-                                        placeholder="Insira uma data válida" />
+                                        placeholder="Insira uma data vÃ¡lida" />
                                 </div>
                             </div>
                         </div>
                         <div class="ps-mod8 ps-sm-mod6">
                             <div class="ps-row">
                                 <div class="ps-mod8 ps-sm-mod8 ps-frm-row ps-frm-valid">
-                                    <label class="ps-frm-lbl">Somente números</label>
+                                    <label class="ps-frm-lbl">Somente nÃºmeros</label>
                                     <input type="tel" name="test" class="ps-frm-entry ps-frm-number"
-                                        placeholder="Somente números" />
+                                        placeholder="Somente nÃºmeros" />
                                 </div>
                             </div>
                             <div class="ps-row">
                                 <div class="ps-mod8 ps-sm-mod8 ps-frm-row ps-frm-valid">
                                     <label class="ps-frm-lbl">Sem caracteres especiais</label>
                                     <input type="text" name="test" class="ps-frm-entry ps-frm-cleanup"
-                                        data-cleanuptext="allowNumbers" placeholder="Somente números" />
+                                        data-cleanuptext="allowNumbers" placeholder="Somente nÃºmeros" />
                                 </div>
                             </div>
                             <div class="ps-row">
                                 <div class="ps-mod8 ps-sm-mod8 ps-frm-row ps-frm-valid">
                                     <label class="ps-frm-lbl">Telefone res.</label>
                                     <input type="tel" name="test" class="ps-frm-entry ps-frm-phone"
-                                        data-onlynumber="false" placeholder="DDD + Número" />
+                                        data-onlynumber="false" placeholder="DDD + NÃºmero" />
                                 </div>
                             </div>
                             <div class="ps-row">
                                 <div class="ps-mod8 ps-sm-mod8 ps-frm-row ps-frm-valid">
                                     <label class="ps-frm-lbl">Telefone celular</label>
                                     <input type="tel" name="test" class="ps-frm-entry ps-frm-celPhone"
-                                        data-onlynumber="false" placeholder="DDD + Número" />
+                                        data-onlynumber="false" placeholder="DDD + NÃºmero" />
                                 </div>
                             </div>
                             <div class="ps-row">
                                 <div class="ps-mod8 ps-sm-mod8 ps-frm-row ps-frm-valid">
                                     <label class="ps-frm-lbl">Data</label>
                                     <input type="tel" name="test" class="ps-frm-entry ps-frm-date"
-                                        placeholder="Insira uma data válida" />
+                                        placeholder="Insira uma data vÃ¡lida" />
                                 </div>
                             </div>
 
@@ -313,7 +320,7 @@ Se certificar que todas as colunas estão com o parâmetro data-name preenchidos
                     </div>
             </div>
             <div class="ps-modal-foot">
-                [rodapé]
+                [rodapÃ©]
             </div>
         </div>
     </div>

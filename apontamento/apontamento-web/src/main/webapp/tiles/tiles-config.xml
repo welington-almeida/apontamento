@@ -10,6 +10,6 @@
 	</definition> -->
 
 	<!-- LOGIN -->
-	<definition name="index" template="/pages/inicio.html" />
+	<definition name="index" template="/pages/grupos.jsp" />
     	
 </tiles-definitions>

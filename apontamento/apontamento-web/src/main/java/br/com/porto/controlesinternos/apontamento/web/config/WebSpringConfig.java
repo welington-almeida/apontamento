@@ -69,9 +69,9 @@ public class WebSpringConfig extends WebMvcConfigurerAdapter {
 	    return resolver;
 	}
 	
-	@Override
-	public void addInterceptors(final InterceptorRegistry registry) {
-	    registry.addInterceptor(new AutorizadorInterceptor()).addPathPatterns("/**").addPathPatterns("/sair**")
-	    .excludePathPatterns("/resources/**","/salvar-nova-senha","/redefinir-senha/**","/enviar-senha","/esqueceu-senha","/api/**","/apontamento/","/login/","/login","/sair","/");
-	}
+//	@Override
+//	public void addInterceptors(final InterceptorRegistry registry) {
+//	    registry.addInterceptor(new AutorizadorInterceptor()).addPathPatterns("/**").addPathPatterns("/sair**")
+//	    .excludePathPatterns("/resources/**","/salvar-nova-senha","/redefinir-senha/**","/enviar-senha","/esqueceu-senha","/api/**","/apontamento/","/login/","/login","/sair","/");
+//	}
 }
