@@ -8,7 +8,7 @@
   <description>Aplicação responsavel por controlar as atividades dentro do projeto.</description>
   
   <properties>
-		<spring.version>4.0.5.RELEASE</spring.version>
+		<spring.version>5.2.6.RELEASE</spring.version>
 		<mysql.version>5.1.44</mysql.version>
 		<hibernate.version>4.3.6.Final</hibernate.version>
 		<antlr.version>2.7.7</antlr.version>
