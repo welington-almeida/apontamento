@@ -65,7 +65,7 @@
 	</header>
 
 	<!-- CORPO -->
-	</br>
+	</br></br>
 	<div class="ps-container">
 		<div class="ps-row">
 			<div class="ps-mod8 ps-sm-mod12">
@@ -81,7 +81,10 @@
 					<tbody>
 						<c:forEach items="${grupos}" var="grupo">
 							<tr>
-								<td><c:out value="${grupo.codigo}" /></td>
+								<td class="ps-heading-4 ps-light"><a href="javascript:;" class="ps-open-modal"
+                                    data-modal="#ModalLarge" data-modalbackdropstatic="false"
+                                    data-modalkeyboarddisable="true" data-modalonshow="console.log('abrir modal')"
+                                    data-modalonhide="console.log('fechar modal')"><c:out value="${grupo.codigo}" /></a></td>
 								<td><c:out value="${grupo.nome}" /></td>
 								<td><c:out value="${grupo.tipo}" /></td>
 							</tr>
@@ -91,6 +94,121 @@
 			</div>
 		</div>
 	</div>
+	
+	<div class="ps-modal" id="ModalLarge">
+        <a href="javascript:;" class="ps-modal-close ps-modal-close-default"><span
+                class="ps-ico ps-ico-sm ps-sm-ico-lg ps-ico-close"></span></a>
+        <div class="ps-modal-container ps-sm-modal-large">
+            <div class="ps-modal-title">
+               [Título]
+            </div>
+            <div class="ps-modal-content">
+
+                <br />
+                
+                    <div class="ps-row">
+                        <div class="ps-mod8 ps-sm-mod6" style="text-align: center;">
+                            <div class="ps-row">
+                                <div class="ps-mod8 ps-sm-mod8 ps-frm-row">
+                                    <label class="ps-frm-lbl">CPF</label>
+                                    <input type="tel" name="test" class="ps-frm-entry ps-frm-cpf"
+                                        placeholder="Preencha o CPF" data-onerror="#cpfError" />
+                                </div>
+                                <div class="ps-mod8 ps-sm-mod4 ps-frm-row" id="cpfError" style="display: none;">
+                                    <label class="ps-frm-lbl">&#160;</label>
+                                    <div class="ps-popover ps-popover-error">
+                                        <div class="ps-popover-ctt ps-popover-ctt-icon">
+                                            <span class="ps-ico ps-ico-alert"></span>
+                                            CPF Inválido.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ps-row">
+                                <div class="ps-mod8 ps-sm-mod8 ps-frm-row">
+                                    <label class="ps-frm-lbl">
+                                        CNPJ
+                                    </label>
+                                    <input type="tel" name="test" class="ps-frm-entry ps-frm-cnpj"
+                                        placeholder="Preencha o CNPJ" data-onerror="#cnpjError" />
+                                </div>
+                                <div class="ps-mod8 ps-sm-mod4 ps-frm-row" id="cnpjError" style="display: none;">
+                                    <label class="ps-frm-lbl">&#160;</label>
+                                    <div class="ps-popover ps-popover-error">
+                                        <div class="ps-popover-ctt ps-popover-ctt-icon">
+                                            <span class="ps-ico ps-ico-alert"></span>
+                                            CNPJ Inválido.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ps-row">
+                                <div class="ps-mod8 ps-sm-mod12 ps-frm-row ps-frm-valid">
+                                    <label class="ps-frm-lbl">E-mail</label>
+                                    <input type="email" name="test" class="ps-frm-entry ps-frm-email"
+                                        placeholder="Preencha o e-mail" />
+                                </div>
+                            </div>
+                            <div class="ps-row">
+                                <div class="ps-mod8 ps-sm-mod8 ps-frm-row ps-frm-valid">
+                                    <label class="ps-frm-lbl">CEP</label>
+                                    <input type="tel" name="test" class="ps-frm-entry ps-frm-zipcode"
+                                        placeholder="Insira o CEP" />
+                                </div>
+                            </div>
+                            <div class="ps-row">
+                                <div class="ps-mod8 ps-sm-mod8 ps-frm-row ps-frm-valid">
+                                    <label class="ps-frm-lbl">Máscara dinâmica</label>
+                                    <input type="text" name="test" class="ps-frm-entry ps-frm-mask" data-mask="aaa-9999"
+                                        placeholder="Insira uma data válida" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ps-mod8 ps-sm-mod6">
+                            <div class="ps-row">
+                                <div class="ps-mod8 ps-sm-mod8 ps-frm-row ps-frm-valid">
+                                    <label class="ps-frm-lbl">Somente números</label>
+                                    <input type="tel" name="test" class="ps-frm-entry ps-frm-number"
+                                        placeholder="Somente números" />
+                                </div>
+                            </div>
+                            <div class="ps-row">
+                                <div class="ps-mod8 ps-sm-mod8 ps-frm-row ps-frm-valid">
+                                    <label class="ps-frm-lbl">Sem caracteres especiais</label>
+                                    <input type="text" name="test" class="ps-frm-entry ps-frm-cleanup"
+                                        data-cleanuptext="allowNumbers" placeholder="Somente números" />
+                                </div>
+                            </div>
+                            <div class="ps-row">
+                                <div class="ps-mod8 ps-sm-mod8 ps-frm-row ps-frm-valid">
+                                    <label class="ps-frm-lbl">Telefone res.</label>
+                                    <input type="tel" name="test" class="ps-frm-entry ps-frm-phone"
+                                        data-onlynumber="false" placeholder="DDD + Número" />
+                                </div>
+                            </div>
+                            <div class="ps-row">
+                                <div class="ps-mod8 ps-sm-mod8 ps-frm-row ps-frm-valid">
+                                    <label class="ps-frm-lbl">Telefone celular</label>
+                                    <input type="tel" name="test" class="ps-frm-entry ps-frm-celPhone"
+                                        data-onlynumber="false" placeholder="DDD + Número" />
+                                </div>
+                            </div>
+                            <div class="ps-row">
+                                <div class="ps-mod8 ps-sm-mod8 ps-frm-row ps-frm-valid">
+                                    <label class="ps-frm-lbl">Data</label>
+                                    <input type="tel" name="test" class="ps-frm-entry ps-frm-date"
+                                        placeholder="Insira uma data válida" />
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+            </div>
+            <div class="ps-modal-foot">
+                [rodapé]
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
