@@ -29,11 +29,7 @@ public class GrupoServiceImpl implements GrupoService {
 				 Object registroExistente = grupoDAO.selecionarPorNome(grupo.getNome());
 				 if(registroExistente == null){
 					 
-					 GrupoEntity grupoEntity = new GrupoEntity();
-					 grupoEntity.setCodigo(grupo.getCodigo());
-					 grupoEntity.setNome(grupo.getNome());
-					 grupoEntity.setTipo(grupo.getTipo());
-					 
+					 GrupoEntity grupoEntity = grupoToGrupoEntity(grupo);
 					 grupoDAO.inserir(grupoEntity);
 					 retorno = true;
 				 }
@@ -47,23 +43,41 @@ public class GrupoServiceImpl implements GrupoService {
 		GrupoEntity grupoEntity = grupoDAO.selecionarPorCodigo(codigo);
 		Grupo grupo = null;
 		if(grupoEntity != null){
-			grupo = new Grupo();
-			grupo.setCodigo(grupoEntity.getCodigo());
-			grupo.setNome(grupoEntity.getNome());
-			grupo.setTipo(grupoEntity.getTipo());
+			grupo = grupoEntityToGrupo(grupoEntity);
 		}
 		return grupo;
 	}
 
 	@Override
 	public boolean alterar(Grupo grupo) {
-		// TODO Auto-generated method stub
-		return false;
+		GrupoEntity grupoEntity = grupoToGrupoEntity(grupo);
+		this.grupoDAO.alterar(grupoEntity);
+		return true;
 	}
 
+	public GrupoEntity grupoToGrupoEntity(Grupo grupo) {
+		GrupoEntity grupoEntity = new GrupoEntity();
+		grupoEntity.setCodigo(grupo.getCodigo());
+		grupoEntity.setNome(grupo.getNome());
+		grupoEntity.setTipo(grupo.getTipo());
+		
+		return grupoEntity;
+		
+	}
+
+	public Grupo grupoEntityToGrupo(GrupoEntity grupoEntity) {
+		Grupo grupo = new Grupo();
+		grupo.setCodigo(grupoEntity.getCodigo());
+		grupo.setNome(grupoEntity.getNome());
+		grupo.setTipo(grupoEntity.getTipo());
+		
+		return grupo;
+		
+	}
 	@Override
-	public boolean deletar(long codigo) {
-		// TODO Auto-generated method stub
+	public boolean deletar(long codigoGrupo) {
+		GrupoEntity grupoEntity = grupoDAO.selecionarPorCodigo(codigoGrupo);
+		grupoDAO.deletar(grupoEntity);
 		return false;
 	}
 	

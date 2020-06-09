@@ -10,7 +10,7 @@ public interface GrupoDAO {
 	
 	public void alterar(GrupoEntity grupo);
 	
-	public void deletar(GrupoEntity grupo);
+	public void deletar(GrupoEntity codigoGrupo);
 	
 	public GrupoEntity selecionarPorCodigo(long codigo);
 	

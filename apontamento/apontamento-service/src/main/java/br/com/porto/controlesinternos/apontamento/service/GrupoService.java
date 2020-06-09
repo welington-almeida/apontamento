@@ -12,7 +12,7 @@ public interface GrupoService {
 	
 	public boolean alterar(Grupo grupo);
 	
-	public boolean deletar(long codigo);
+	public boolean deletar(long codigoGrupo);
 
 	public List<Grupo> listar();
 

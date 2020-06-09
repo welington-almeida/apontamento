@@ -20,26 +20,25 @@ public class GrupoDAOImpl implements GrupoDAO {
 	@PersistenceContext
 	private EntityManager entityManager;
 
-	@Override
+	
 	public void inserir(GrupoEntity grupo) {
 		entityManager.persist(grupo);
 
 	}
 
-	@Override
+	
 	public void alterar(GrupoEntity grupo) {
 		entityManager.merge(grupo);
 
 	}
 
-	@Override
-	public void deletar(GrupoEntity grupo) {
-		entityManager.remove(grupo);
+	
+	public void deletar(GrupoEntity codigoGrupo) {
+		entityManager.remove(codigoGrupo);
 
 	}
 
-	@SuppressWarnings("unchecked")
-	@Override
+	
 	public GrupoEntity selecionarPorCodigo(long codigo) {
 
 		Query query = entityManager.createQuery("select g from GrupoEntity as g where g.codigo = :codigoParam")
@@ -53,14 +52,13 @@ public class GrupoDAOImpl implements GrupoDAO {
 		return null;
 	}
 
-	@Override
+	
 	public GrupoEntity selecionarPorNome(String nome) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@SuppressWarnings("unchecked")
-	@Override
+	
 	public List<GrupoEntity> listar() {
 		Query query = entityManager.createQuery("select g from GrupoEntity as g");
 		return query.getResultList();

@@ -45,16 +45,16 @@ public class GrupoController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/grupo/alterar",method=RequestMethod.PUT)
+	@RequestMapping(value="/grupo/alterar",method=RequestMethod.POST)
 	public ModelAndView alterar(@RequestBody Grupo grupo){
 		mav.clear();
 		mav.setViewName("index");
 		boolean retorno = grupoService.alterar(grupo);
 		if(retorno){
-			System.out.println("Incluido com sucesso...");
+			System.out.println("Grupo alterado com sucesso...");
 		}
 		else{
-			System.out.println("Erro ao Incluir Grupo...");
+			System.out.println("Erro ao alterar Grupo...");
 		}
 		return mav;
 	}
@@ -68,16 +68,16 @@ public class GrupoController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/grupo/deletar",method=RequestMethod.DELETE)
-	public ModelAndView deletar(@RequestBody long codigoGrupo){
+	@RequestMapping(value="/grupo/deletar/{codigo}",method=RequestMethod.DELETE)
+	public ModelAndView deletar(@PathVariable ("codigo") int codigo){
 		mav.clear();
 		mav.setViewName("index");
-		boolean retorno = grupoService.deletar(codigoGrupo);
+		boolean retorno = grupoService.deletar(codigo);
 		if(retorno){
-			System.out.println("Incluido com sucesso...");
+			System.out.println("Deletado com sucesso...");
 		}
 		else{
-			System.out.println("Erro ao Incluir Grupo...");
+			System.out.println("Erro ao Deletar Grupo...");
 		}
 		return mav;
 	}

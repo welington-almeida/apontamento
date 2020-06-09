@@ -1,11 +1,18 @@
 package br.com.porto.controlesinternos.apontamento.dao.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import br.com.porto.controlesinternos.apontamento.model.Demanda;
+@Embeddable
 @Entity
 @Table(name="GRUPO")
 public class GrupoEntity {
@@ -20,6 +27,8 @@ public class GrupoEntity {
 	@Column(name="TIPO",nullable=false)
 	private String tipo;
 
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "grupo")
+	private List<DemandaEntity> demandas;
 	/**
 	 * @return the codigo
 	 */
@@ -61,4 +70,16 @@ public class GrupoEntity {
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
+
+	public List<DemandaEntity> getDemandas() {
+		return demandas;
+	}
+
+	public void setDemandas(List<DemandaEntity> demandas) {
+		this.demandas = demandas;
+	}
+
+	
+
+	
 }
