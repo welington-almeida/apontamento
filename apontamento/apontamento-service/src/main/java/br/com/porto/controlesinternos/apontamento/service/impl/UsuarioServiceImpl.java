@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.porto.controlesinternos.apontamento.dao.UsuarioDAO;
 import br.com.porto.controlesinternos.apontamento.dao.entity.UsuarioEntity;
 import br.com.porto.controlesinternos.apontamento.model.Usuario;
+import br.com.porto.controlesinternos.apontamento.model.enumeracoes.EnumPerfilUsuario;
 import br.com.porto.controlesinternos.apontamento.model.enumeracoes.EnumStatus;
 import br.com.porto.controlesinternos.apontamento.service.UsuarioService;
 
@@ -38,7 +39,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 					usuarioEntity.setNome(usuario.getNome());
 					usuarioEntity.setEmail(usuario.getEmail());
 					usuarioEntity.setStatus(EnumStatus.APROVACAO);
-					usuarioEntity.setPerfil(usuario.getPerfil());
+					usuarioEntity.setPerfil(EnumPerfilUsuario.USER);
 					usuarioEntity.setSenha(usuario.getSenha());
 
 					usuarioDAO.inserir(usuarioEntity);

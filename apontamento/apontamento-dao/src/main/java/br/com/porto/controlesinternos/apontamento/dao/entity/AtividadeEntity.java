@@ -3,7 +3,7 @@ package br.com.porto.controlesinternos.apontamento.dao.entity;
 import java.util.Date;
 
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -11,7 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import br.com.porto.controlesinternos.apontamento.model.Usuario;
+
 import br.com.porto.controlesinternos.apontamento.model.enumeracoes.EnumStatus;
 
 //@Embeddable

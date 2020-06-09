@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import br.com.porto.controlesinternos.apontamento.model.Demanda;
 @Embeddable
 @Entity
 @Table(name="GRUPO")
