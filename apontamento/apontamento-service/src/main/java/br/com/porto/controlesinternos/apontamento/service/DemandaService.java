@@ -10,11 +10,11 @@ public interface DemandaService {
 
 	public boolean inserir(Demanda demanda);
 
-	public Demanda selecionarPorCodigo(int codigo);
+	public Demanda selecionarPorCodigo(long codigo);
 
 	public void alterar(Demanda demanda);
 
-	public void deletar(int codigo);
+	public void deletar(long codigo);
 
 	public List<Demanda> listar();
 }

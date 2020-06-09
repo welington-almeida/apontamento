@@ -20,6 +20,8 @@ import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import br.com.porto.controlesinternos.apontamento.model.enumeracoes.EnumStatus;
+
 @Entity
 @Table(name="DEMANDA")
 public class DemandaEntity {
@@ -46,7 +48,7 @@ public class DemandaEntity {
 	private Date dataFinalizacao;
 	
 	@Column(name="STATUS", nullable=false, unique=false)
-	private String status;
+	private EnumStatus status;
 	
 	@Column(name="HORAS_APONTADAS", nullable=false, unique=false)
 	private Long horasApontadas;
@@ -102,11 +104,11 @@ public class DemandaEntity {
 		this.dataFinalizacao = dataFinalizacao;
 	}
 
-	public String getStatus() {
+	public EnumStatus getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(EnumStatus status) {
 		this.status = status;
 	}
 

@@ -3,6 +3,8 @@ package br.com.porto.controlesinternos.apontamento.model;
 import java.util.Date;
 import java.util.List;
 
+import br.com.porto.controlesinternos.apontamento.model.enumeracoes.EnumStatus;
+
 public class Demanda {
 
 	private int codigoDemanda;
@@ -12,7 +14,7 @@ public class Demanda {
 	private Long horasApontadas;
 	private Date dataAbertura;
 	private Date dataFinalizacao;
-	private String status;
+	private EnumStatus status;
 	private Usuario autorEncerramento;
 	private List<Atividade> atividades;
 	
@@ -46,10 +48,10 @@ public class Demanda {
 	public void setDataAbertura(Date dataAbertura) {
 		this.dataAbertura = dataAbertura;
 	}
-	public String getStatus() {
+	public EnumStatus getStatus() {
 		return status;
 	}
-	public void setStatus(String status) {
+	public void setStatus(EnumStatus status) {
 		this.status = status;
 	}
 	public Date getDataFinalizacao() {

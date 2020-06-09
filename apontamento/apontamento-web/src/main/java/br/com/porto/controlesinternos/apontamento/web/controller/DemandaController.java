@@ -1,5 +1,7 @@
 package br.com.porto.controlesinternos.apontamento.web.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
@@ -22,6 +24,15 @@ public class DemandaController {
 	
 	private final ModelAndView mav = new ModelAndView();
 
+	@RequestMapping(value="/demanda/", method=RequestMethod.GET)
+	public ModelAndView listar() {
+		mav.clear();
+		mav.setViewName("index");
+		List<Demanda> demandas = demandaService.listar();
+		mav.addObject("demandas", demandas);
+		
+		return mav;
+	}
 	@RequestMapping(value="/demanda/inserir", method=RequestMethod.POST)
 	public ModelAndView listar(@RequestBody Demanda demanda) {
 		mav.clear();
@@ -54,7 +65,7 @@ public class DemandaController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/demanda/alterar", method=RequestMethod.PUT)
+	@RequestMapping(value="/demanda/alterar", method=RequestMethod.POST)
 	public ModelAndView alterar(@RequestBody Demanda demanda) {
 		mav.clear();
 		mav.setViewName("index");
@@ -68,7 +79,6 @@ public class DemandaController {
 	public ModelAndView deletarDemanda(@PathVariable ("codigo") int codigo) {
 		mav.clear();
 		mav.setViewName("index");
-//		Demanda demanda = demandaService.selecionarPorCodigo(codigo);
 		demandaService.deletar(codigo);
 		System.out.println("Demanda Deletada.");
 		return mav;

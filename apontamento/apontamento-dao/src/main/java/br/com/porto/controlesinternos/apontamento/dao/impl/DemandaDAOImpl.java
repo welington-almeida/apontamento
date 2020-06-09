@@ -22,16 +22,24 @@ public class DemandaDAOImpl implements DemandaDAO {
 	@PersistenceContext
 	private EntityManager entityManager;
 
-	public Object selecionaPorDescricao(String descricao) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	public void inserir(DemandaEntity demandaEntity) {
 		this.entityManager.persist(demandaEntity);
 	}
+	
+	public void alterar(DemandaEntity demanda) {
+		this.entityManager.merge(demanda);
+	}
+	
+	public void deletar(DemandaEntity demanda) {
+		this.entityManager.remove(demanda);
+		
+	}
+	
+	public Object selecionaPorDescricao(String descricao) {
+		return null;
+	}
 
-	public DemandaEntity selecionarPorCodigo(int codigo) {
+	public DemandaEntity selecionarPorCodigo(long codigo) {
 		Query query = entityManager.createQuery("select d from DemandaEntity as d where d.codigoDemanda = :codigoParam")
 				.setParameter("codigoParam", codigo);
 
@@ -42,13 +50,9 @@ public class DemandaDAOImpl implements DemandaDAO {
 		return null;
 	}
 
-	public void deletar(DemandaEntity demanda) {
-		this.entityManager.remove(demanda);
-		
-	}
-	
-	public void alterar(DemandaEntity demanda) {
-		this.entityManager.merge(demanda);
+	public List<DemandaEntity> listar() {
+		Query query = entityManager.createQuery("select d from DemandaEntity as d");
+		return query.getResultList();
 	}
 	
 }
