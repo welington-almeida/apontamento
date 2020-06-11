@@ -13,6 +13,8 @@ public class Usuario {
 	
 	private EnumPerfilUsuario perfil;
 	
+	private String senha;
+	
 	private EnumStatus acesso;
 
 	public EnumPerfilUsuario getPerfil() {
@@ -31,7 +33,7 @@ public class Usuario {
 		this.acesso = acesso;
 	}
 
-	private String senha;
+	
 
 	/**
 	 * @return the codigo

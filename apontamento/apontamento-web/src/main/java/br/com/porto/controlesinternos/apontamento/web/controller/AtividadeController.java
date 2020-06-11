@@ -73,4 +73,5 @@ public class AtividadeController {
 		boolean retorno = atividadeService.deletar(codigo);
 		return mav;
 	}
+
 }

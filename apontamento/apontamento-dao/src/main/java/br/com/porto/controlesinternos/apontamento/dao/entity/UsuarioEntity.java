@@ -1,9 +1,13 @@
 package br.com.porto.controlesinternos.apontamento.dao.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import br.com.porto.controlesinternos.apontamento.model.enumeracoes.EnumStatus;
@@ -32,8 +36,18 @@ public class UsuarioEntity {
 	@Column(name="SENHA",nullable=false)
 	private String senha;
 	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "funcionario")
+	private List<ApontamentoEntity> apontamentos;
 	
 	
+	public List<ApontamentoEntity> getApontamentos() {
+		return apontamentos;
+	}
+
+	public void setApontamentos(List<ApontamentoEntity> apontamentos) {
+		this.apontamentos = apontamentos;
+	}
+
 	/**
 	 * @return the codigo
 	 */

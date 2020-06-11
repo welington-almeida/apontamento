@@ -1,0 +1,92 @@
+.font-color.ps-color-white {
+    color: #fff;
+}
+.font-color.ps-color-red {
+    color: #e75a5b;
+}
+.font-color.ps-color-green {
+    color: #87c74d;
+}
+.font-color.ps-color-yellow {
+    color: #fda529;
+}
+.font-color.ps-color-grey {
+    color: rgba(28, 28, 28, 0.6);
+}
+.font-color.ps-color-blue {
+    color: #30c5ff;
+}
+.ps-table td,
+.ps-table th,
+a {
+    -webkit-transition: all 0.2s ease-out 0s;
+    -moz-transition: all 0.2s ease-out 0s;
+    -ms-transition: all 0.2s ease-out 0s;
+    -o-transition: all 0.2s ease-out 0s;
+    transition: all 0.2s ease-out 0s;
+}
+.ps-chart {
+    position: relative;
+    padding-bottom: 32px;
+}
+.ps-chart.ps-chart-downloadPad {
+    padding-top: 32px;
+}
+.ps-chart .ps-ico-loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -36px 0 0 -36px;
+}
+.ps-chart .doughnut-legend,
+.ps-chart .pie-legend {
+    position: relative;
+    display: none;
+    left: 0;
+    top: 100%;
+    width: 100%;
+    margin: 21px 0 0 0;
+    padding: 0;
+    background: #fff;
+    background: rgba(255, 255, 255, 0.7);
+    font-family: "Open Sans", Sans-serif;
+    text-align: center;
+}
+.ps-chart .doughnut-legend li,
+.ps-chart .pie-legend li {
+    list-style: none;
+    margin: 0 7px 7px;
+    display: inline-block;
+}
+.ps-chart .doughnut-legend span,
+.ps-chart .pie-legend span {
+    display: inline-block;
+    width: 21px;
+    height: 21px;
+    border-radius: 2px;
+    margin-right: 5px;
+    vertical-align: middle;
+}
+.ps-chart .ps-chart-download {
+    position: absolute;
+    top: 0;
+    right: 14px;
+}
+.ps-chart .ps-chart-download .ps-ico {
+    color: #d2d2d2;
+    font-size: 32px;
+    -webkit-transition: all 0.2s ease-out 0s;
+    -moz-transition: all 0.2s ease-out 0s;
+    -ms-transition: all 0.2s ease-out 0s;
+    -o-transition: all 0.2s ease-out 0s;
+    transition: all 0.2s ease-out 0s;
+}
+.ps-chart .ps-chart-download:hover .ps-ico {
+    color: #30c5ff;
+}
+@media all and (min-width: 768px) {
+    .ps-chart .doughnut-legend,
+    .ps-chart .pie-legend {
+        display: block;
+    }
+} /*# sourceMappingURL=ps-lib-chart-min.css.map */

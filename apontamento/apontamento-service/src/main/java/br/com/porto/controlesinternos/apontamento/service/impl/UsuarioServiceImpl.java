@@ -29,8 +29,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 		boolean retorno = false;
 		if (usuario != null) {
 			if (usuario.getNome() != null && !usuario.getNome().isEmpty() && usuario.getEmail() != null
-					&& !usuario.getEmail().isEmpty() && usuario.getSenha() != null && !usuario.getSenha().isEmpty() && 
-					usuario.getPerfil() != null && !usuario.getPerfil().isEmpty()) {
+					&& !usuario.getEmail().isEmpty() && usuario.getSenha() != null && !usuario.getSenha().isEmpty()) {
 				Object registroExistente = usuarioDAO.selecionarPorNome(usuario.getNome());
 				if (registroExistente == null) {
 

@@ -11,10 +11,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.porto.controlesinternos.apontamento.dao.ApontamentoDAO;
 import br.com.porto.controlesinternos.apontamento.dao.entity.ApontamentoEntity;
-
+import br.com.porto.controlesinternos.apontamento.dao.entity.AtividadeEntity;
 import br.com.porto.controlesinternos.apontamento.dao.entity.UsuarioEntity;
 import br.com.porto.controlesinternos.apontamento.model.Apontamento;
-
+import br.com.porto.controlesinternos.apontamento.model.Atividade;
 import br.com.porto.controlesinternos.apontamento.model.Usuario;
 import br.com.porto.controlesinternos.apontamento.service.ApontamentoService;
 
@@ -40,7 +40,9 @@ public class ApontamentoServiceImpl implements ApontamentoService {
 				UsuarioEntity usuarioEntity = new UsuarioEntity();
 				usuarioEntity.setCodigo(apontamento.getFuncionario().getCodigo());
 				apontamentoEntity.setFuncionario(usuarioEntity);
-				apontamentoEntity.setAtividade(apontamento.getAtividade());
+				AtividadeEntity atividadeEntity = new AtividadeEntity();
+				atividadeEntity.setCodigoAtividade(apontamento.getAtividade().getCodigoAtividade());
+				apontamentoEntity.setAtividade(atividadeEntity);
 				apontamentoEntity.setData(apontamento.getDataApontamento());
 				apontamentoEntity.setHoras(apontamento.getHorasApontadas());
 
@@ -63,7 +65,9 @@ public class ApontamentoServiceImpl implements ApontamentoService {
 			UsuarioEntity usuarioEntity = new UsuarioEntity();
 			usuarioEntity.setCodigo(apontamento.getFuncionario().getCodigo());
 			apontamentoEntity.setFuncionario(usuarioEntity);
-			apontamentoEntity.setAtividade(apontamento.getAtividade());
+			AtividadeEntity atividadeEntity = new AtividadeEntity();
+			atividadeEntity.setCodigoAtividade(apontamento.getAtividade().getCodigoAtividade());
+			apontamentoEntity.setAtividade(atividadeEntity);
 			apontamentoEntity.setData(apontamento.getDataApontamento());
 			apontamentoEntity.setHoras(apontamento.getHorasApontadas());
 
@@ -95,7 +99,9 @@ public class ApontamentoServiceImpl implements ApontamentoService {
 				Usuario usuario = new Usuario();
 				usuario.setCodigo(apontamento.getFuncionario().getCodigo());
 				apontamento.setFuncionario(usuario);
-				apontamento.setAtividade(entity.getAtividade());
+				Atividade atividade = new Atividade();
+				atividade.setCodigoAtividade(apontamento.getAtividade().getCodigoAtividade());
+				apontamento.setAtividade(atividade);
 				apontamento.setDataApontamento(entity.getData());
 				apontamento.setHorasApontadas(entity.getHoras());
 			}

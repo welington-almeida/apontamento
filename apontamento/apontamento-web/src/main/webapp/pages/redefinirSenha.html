@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+
+
+
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+	<link href="/resources/visual/v.1/css/ps-lib.core-min.css" rel="stylesheet" type="text/css" media="screen" />
+	<link href="/resources/visual/v.1/css/ps-lib-iconGlyphs-min.css" rel="stylesheet" type="text/css" media="screen" />
+	<!--[if lt IE 9]> 
+                <script src="/resources/visual/v.1/js/plugins/html5-3.6-respond-1.1.0.min.js"></script> 
+            <![endif]-->
+
+
+	<script src="/resources/visual/v.1/js/vendor/jquery-1.9.1.min.js"></script>
+	<script src="/resources/visual/v.1/js/min/ps-lib.core-min.js"></script>
+	<meta charset="UTF-8">
+
+	<title>Redefinir Senha</title>
+</head>
+
+<body style="background: #fff;">
+	<!-- CABEÃALHO -->
+	<c:out value="${grupo.codigo}"></c:out>
+	<c:out value="${grupo.nome}"></c:out>
+	<c:out value="${grupo.tipo}"></c:out>
+	<header class="ps-site-top ps-site-bgWhite">
+		<div class="ps-container">
+			<div class="ps-mod4 ps-sm-mod2">
+				<a href="inicio.html" title="Porto Seguro"><span class="ps-logo"></span></a>
+			</div>
+			<div class="ps-mod4 ps-sm-mod9">
+				<ul class="ps-menu ps-menu-mobile ps-menu-allCaps ps-menu-horizontal" data-mobilewithouttext="true">
+					<li>
+						<a href="#" class="ps-menu-hasLevel">Apontamentos</a>
+						<ul>
+							<li><a href="#">Novo Apontamento</a></li>
+							<li><a href="#">Meus Apontamentos</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#" class="ps-menu-hasLevel">Visualizar</a>
+						<ul>
+							<li><a href="#">Grupos</a></li>
+							<li><a href="#">Demandas</a></li>
+							<li><a href="#">Atividades</a></li>
+							<li><a href="#">Apontamentos</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#" class="ps-menu-hasLevel">Relatórios</a>
+						<ul>
+							<li><a href="#">Por Funcionário</a></li>
+							<li><a href="#">Por Grupo</a></li>
+							<li><a href="#">Por Demanda</a></li>
+							<li><a href="#">Por Atividade</a></li>
+						</ul>
+
+					</li>
+					<li>
+						<a href="#" class="ps-menu-hasLevel">Usuário</a>
+						<ul>
+							<li><a href="#">Redefinir Senha</a></li>
+							<li><a href="#">Atualizar Usuários</a></li>
+
+						</ul>
+
+					</li>
+
+				</ul>
+			</div>
+		</div>
+	</header>
+	<div class="ps-site-container" style="padding-bottom: 50px;">
+
+		<section>
+
+			<div class="ps-sm-mod4 ps-sm-lspan1 lp-chat-frm" style="align-content: center;">
+				</br>
+				</br>
+				<h4 class="ps-heading-4 ps-light">Redefinir Senha</h4>
+				</br>
+				<form name="" id="validateForm">
+					<div class="ps-row">
+						<div class="ps-mod8 ps-sm-mod12 ps-frm-row">
+							<label class="ps-frm-lbl">E-mail</label>
+							<input type="text" name="test" class="ps-frm-entry" placeholder="E-mail Funcionário"
+								disabled />
+						</div>
+
+					</div>
+					<div class="ps-row ps-frm-row">
+						<div class="ps-mod8 ps-sm-mod12">
+							<input type="password" name="senhaAtual" class="ps-frm-entry ps-frm-valid"
+								placeholder="Senha Atual">
+						</div>
+					</div>
+					<div class="ps-row ps-frm-row">
+						<div class="ps-mod8 ps-sm-mod12">
+							<input type="password" name="novaSenha1" class="ps-frm-entry ps-frm-valid"
+								placeholder="Nova Senha">
+						</div>
+					</div>
+					<div class="ps-row ps-frm-row">
+						<div class="ps-mod8 ps-sm-mod12">
+							<input type="password" name="novaSenha2" class="ps-frm-entry ps-frm-valid"
+								placeholder="Digite a Nova senha novamente">
+						</div>
+					</div>
+					<div class="ps-row ps-frm-row">
+						<div class="ps-mod8 ps-sm-mod12">
+							<a href="javascript:;" class="ps-btn ps-btn-primary ps-btn-blue-dark ps-frm-validate"
+								data-validatescope="#validateForm"
+								data-validatesuccess="alert('Campos vÃ¡lidos')"><span></span>Redefinir
+								Senha</a>
+						</div>
+
+					</div>
+				</form>
+			</div>
+
+		</section>
+
+		<footer class="ps-site-foot">
+			<div class="ps-container">
+				<div class="ps-mod8 ps-sm-mod5 ps-md-mod4">
+					À <span class="ps-currentYear">2020</span> Porto Seguro Todos
+					os direitos reservados.
+				</div>
+
+			</div>
+		</footer>
+	</div>
+
+</body>
+
+</html>

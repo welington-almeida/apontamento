@@ -2,18 +2,26 @@ package br.com.porto.controlesinternos.apontamento.dao.entity;
 
 
 import java.util.Calendar;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 import br.com.porto.controlesinternos.apontamento.model.Atividade;
 
+@Entity
+@Table(name="APONTAMENTO")
 public class ApontamentoEntity {
+	
 	
 	@Id @GeneratedValue
 	@Column(name="CODIGO_APONTAMENTO",nullable=false,unique=true)
@@ -21,13 +29,11 @@ public class ApontamentoEntity {
 	
 	@ManyToOne
 	@JoinColumn(name="CODIGO_USUARIO")
-	@Column(name="FUNCIONARIO",nullable=false)
 	private UsuarioEntity funcionario;
 
 	@ManyToOne
 	@JoinColumn(name="CODIGO_ATIVIDADE")
-	@Column(name="ATIVIDADE",nullable=false)
-	private Atividade atividade;
+	private AtividadeEntity atividade;
 	
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Column(name="DATA_APONTAMENTO",nullable=false)
@@ -36,6 +42,8 @@ public class ApontamentoEntity {
 	@DateTimeFormat(pattern = "HH:mm")
 	@Column(name="HORAS_APONTADAS", nullable=false)
 	private Calendar horas;
+	
+	
 
 	public long getCodigo() {
 		return codigo;
@@ -53,11 +61,11 @@ public class ApontamentoEntity {
 		this.funcionario = funcionario;
 	}
 
-	public Atividade getAtividade() {
+	public AtividadeEntity getAtividade() {
 		return atividade;
 	}
 
-	public void setAtividade(Atividade atividade) {
+	public void setAtividade(AtividadeEntity atividade) {
 		this.atividade = atividade;
 	}
 

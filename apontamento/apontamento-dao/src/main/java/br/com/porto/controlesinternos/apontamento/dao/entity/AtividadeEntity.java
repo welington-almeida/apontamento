@@ -1,7 +1,9 @@
 package br.com.porto.controlesinternos.apontamento.dao.entity;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 
 import javax.persistence.Entity;
@@ -9,12 +11,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
 import br.com.porto.controlesinternos.apontamento.model.enumeracoes.EnumStatus;
 
-//@Embeddable
+
 @Entity
 @Table(name="ATIVIDADE")
 public class AtividadeEntity {
@@ -44,12 +47,25 @@ public class AtividadeEntity {
 	
 	@Column(name="STATUS", nullable=false, unique=false)
 	private EnumStatus status;
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "atividade")
+	private List<ApontamentoEntity> apontamentos;
 	
+
 	@ManyToOne
 	@JoinColumn(name="AUTOR_ENCERRAMENTO")
 //	@Column(name="CODIGO_USUARIO", nullable=false, unique=false)
 	private UsuarioEntity autorEncerramento;
 
+	
+	public List<ApontamentoEntity> getApontamentos() {
+		return apontamentos;
+	}
+
+	public void setApontamentos(List<ApontamentoEntity> apontamentos) {
+		this.apontamentos = apontamentos;
+	}
+	
 	public Long getCodigoAtividade() {
 		return codigoAtividade;
 	}
