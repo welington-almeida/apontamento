@@ -1,12 +1,13 @@
 package br.com.porto.controlesinternos.apontamento.web.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -25,16 +26,37 @@ public class GrupoController {
 	@RequestMapping(value="/grupo/",method=RequestMethod.GET)
 	public ModelAndView listar(){
 		mav.clear();
-		mav.setViewName("index");
+		mav.setViewName("visualizarGrupos");
 		List<Grupo> grupos = grupoService.listar();
 		mav.addObject("grupos", grupos);
 		return mav;
 	}
 	
-	@RequestMapping(value="/grupo/inserir",method=RequestMethod.POST)
-	public ModelAndView inserir(@RequestBody Grupo grupo){
+	@RequestMapping(value="/grupo/pesquisar/",method=RequestMethod.POST)
+	public ModelAndView pesquisar(Grupo grupo){
 		mav.clear();
-		mav.setViewName("index");
+
+		if(grupo.getCodigo() > 0 ) {
+			mav.setViewName("visualizarGrupos");
+			Grupo grupoPesquisado = grupoService.selecionar(grupo.getCodigo());
+			if(grupoPesquisado == null) {
+				mav.setViewName("redirect:/grupo/");
+			}
+			List<Grupo> grupos = new ArrayList<Grupo>();
+			grupos.add(grupoPesquisado);
+			mav.addObject("grupos", grupos);
+			
+		} else {
+			mav.setViewName("redirect:/grupo/");
+		}
+		
+		return mav;
+	}
+	
+	@RequestMapping(value="/grupo/inserir",method=RequestMethod.POST)
+	public ModelAndView inserir (@ModelAttribute Grupo grupo){
+		mav.clear();
+		mav.setViewName("redirect:/grupo/");
 		boolean retorno = grupoService.inserir(grupo);
 		if(retorno){
 			System.out.println("Incluido com sucesso...");
@@ -45,10 +67,10 @@ public class GrupoController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/grupo/alterar",method=RequestMethod.POST)
-	public ModelAndView alterar(@RequestBody Grupo grupo){
+	@RequestMapping(value="/grupo/alterar",method=RequestMethod.PUT)
+	public ModelAndView alterar(@ModelAttribute Grupo grupo){
 		mav.clear();
-		mav.setViewName("index");
+		mav.setViewName("visualizarGrupos");
 		boolean retorno = grupoService.alterar(grupo);
 		if(retorno){
 			System.out.println("Grupo alterado com sucesso...");
@@ -68,11 +90,11 @@ public class GrupoController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/grupo/deletar/{codigo}",method=RequestMethod.DELETE)
-	public ModelAndView deletar(@PathVariable ("codigo") int codigo){
+	@RequestMapping(value="/grupo/deletar/",method=RequestMethod.POST)
+	public ModelAndView deletar(@ModelAttribute Grupo grupo){
 		mav.clear();
-		mav.setViewName("index");
-		boolean retorno = grupoService.deletar(codigo);
+		mav.setViewName("redirect:/grupo/");
+		boolean retorno = grupoService.deletar(grupo.getCodigo());
 		if(retorno){
 			System.out.println("Deletado com sucesso...");
 		}

@@ -17,4 +17,6 @@ public interface GrupoDAO {
 	public GrupoEntity selecionarPorNome(String nome);
 
 	public List<GrupoEntity> listar();
+	
+	public Long horasTotaisDemandasAtivas(long codigoGrupo);
 }

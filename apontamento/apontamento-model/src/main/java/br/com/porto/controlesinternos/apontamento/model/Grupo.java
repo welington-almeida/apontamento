@@ -7,6 +7,8 @@ public class Grupo {
 	private String nome;
 	
 	private String tipo;
+	
+	private Long horasTotaisDemandasAtivas;
 
 	/**
 	 * @return the codigo
@@ -49,4 +51,15 @@ public class Grupo {
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
+
+	public Long getHorasTotaisDemandasAtivas() {
+		return horasTotaisDemandasAtivas;
+	}
+
+	public void setHorasTotaisDemandasAtivas(Long horasTotaisDemandasAtivas) {
+		this.horasTotaisDemandasAtivas = horasTotaisDemandasAtivas;
+	}
+
+	
+	
 }

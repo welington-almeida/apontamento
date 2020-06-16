@@ -10,6 +10,8 @@
 	</definition> -->
 
 	<!-- LOGIN -->
-	<definition name="index" template="/pages/grupos.jsp" />
-    	
+	<definition name="index" template="/pages/grupos.jsp" />	
+	<definition name="visualizarGrupos" template="/pages/perfilAdmin/visualizarGrupos.jsp" />
+  	<definition name="visualizarAtividades" template="/pages/perfilAdmin/visualizarAtividades.jsp" />
+  	<definition name="visualizarDemandas" template="/pages/perfilAdmin/visualizarDemandas.jsp"/>
 </tiles-definitions>

@@ -70,6 +70,7 @@ public class GrupoServiceImpl implements GrupoService {
 		grupo.setCodigo(grupoEntity.getCodigo());
 		grupo.setNome(grupoEntity.getNome());
 		grupo.setTipo(grupoEntity.getTipo());
+		grupo.setHorasTotaisDemandasAtivas(10l);
 		
 		return grupo;
 		
@@ -92,6 +93,8 @@ public class GrupoServiceImpl implements GrupoService {
 				grupo.setCodigo(entity.getCodigo());
 				grupo.setNome(entity.getNome());
 				grupo.setTipo(entity.getTipo());
+//				grupo.setHorasTotaisDemandasAtivas(grupoDAO.horasTotaisDemandasAtivas(entity.getCodigo()));
+				grupo.setHorasTotaisDemandasAtivas(10l);
 				grupos.add(grupo);
 			}
 		}
