@@ -47,7 +47,7 @@
 						</ul></li>
 					<li><a href="#" class="ps-menu-hasLevel">Visualizar</a>
 						<ul>
-							<li><a href="#">Grupos</a></li>
+							<li><a href="/visualizarGrupos">Grupos</a></li>
 							<li><a href="#">Demandas</a></li>
 							<li><a href="#">Atividades</a></li>
 						</ul></li>

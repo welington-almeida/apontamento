@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!doctype html>
 <html lang="en">
 
@@ -6,17 +10,17 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
-    <link href="/resources/visual/v.1/css/ps-lib.core-min.css" rel="stylesheet" type="text/css" media="screen" />
-    <link href="/resources/visual/v.1/css/ps-lib-iconGlyphs-min.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="<c:url value="/resources/visual/v.1/css/ps-lib.core-min.css" />" rel="stylesheet" type="text/css" media="screen" />
+    <link href="<c:url value="/resources/visual/v.1/css/ps-lib-iconGlyphs-min.css" />" rel="stylesheet" type="text/css" media="screen" />
     <!--[if lt IE 9]> 
-                <script src="/resources/visual/v.1/js/plugins/html5-3.6-respond-1.1.0.min.js"></script> 
+                <script src="<c:url value="/resources/visual/v.1/js/plugins/html5-3.6-respond-1.1.0.min.js" /> "></script> 
             <![endif]-->
 
 
-    <script src="/resources/visual/v.1/js/vendor/jquery-1.9.1.min.js"></script>
-    <script src="/resources/visual/v.1/js/min/ps-lib.core-min.js"></script>
-    <script src="/resources/visual/v.1/js/vendor/visualizacoes.js"></script>
-    <script src="/resources/visual/v.1/js/vendor/calendario.js"></script>
+    <script src="<c:url value="/resources/visual/v.1/js/vendor/jquery-1.9.1.min.js" />" ></script>
+    <script src="<c:url value="/resources/visual/v.1/js/min/ps-lib.core-min.js" /> "></script>
+    <script src="<c:url value="/resources/visual/v.1/js/vendor/visualizacoes.js" />"></script>
+    <script src="<c:url value="/resources/visual/v.1/js/vendor/calendario.js"/> "></script>
     <meta charset="UTF-8">
 
     <title>Visualizar Atividades</title>
@@ -27,6 +31,10 @@
     <c:out value="${grupo.codigo}"></c:out>
     <c:out value="${grupo.nome}"></c:out>
     <c:out value="${grupo.tipo}"></c:out>
+    <!--<jsp:useBean id="atividade" class="br.com.porto.controlesinternos.apontamento.model.Atividade"/> -->
+    <jsp:useBean id="demanda" class="br.com.porto.controlesinternos.apontamento.model.Demanda"/>
+    <jsp:useBean id="demandaDAO" class="br.com.porto.controlesinternos.apontamento.dao.impl.DemandaDAOImpl"/>
+    
     <header class="ps-site-top ps-site-bgWhite">
         <div class="ps-container">
             <div class="ps-mod4 ps-sm-mod2">
@@ -181,41 +189,16 @@
                     </td>
                 </tr>
                 <tbody>
-
-
+                    <c:forEach items="${atividades}" var="atividade">
                     <tr>
-                        <td class="ps-heading-4 ps-light"><a href="#">30000</a><br />
-                        </td>
-                        <td>Atividade 1</td>
-                        <td>Demanda 2</td>
-                        <td>Compliance</td>
-                        <td>10:00</td>
+                        <td class="ps-heading-4 ps-light"><a href="#">${atividade.codigoAtividade}</a></td>
+                        <td>${atividade.nomeAtividade}</td>
+                        <td>${atividade.demanda.descricao}</td>
+                        <td>${atividade.demanda.grupo.nome}</td>
                     </tr>
-                    <tr>
-                        <td class="ps-heading-4 ps-light"><a href="#">30001</a><br />
-                        </td>
-                        <td>Atividade 2</td>
-                        <td>Demanda 1</td>
-                        <td>Controles Internos</td>
-                        <td>08:00</td>
-                    </tr>
-                    <tr>
-                        <td class="ps-heading-4 ps-light"><a href="#">30002</a><br />
-                        </td>
-                        <td>Atividade 3</td>
-                        <td>Demanda 3</td>
-                        <td>Prevenção a Lavagem de Dinheiro</td>
-                        <td>06:30</td>
-                    </tr>
-                    <tr>
-                        <td class="ps-heading-4 ps-light"><a href="#">30003</a><br />
-                        </td>
-                        <td>Atividade 1</td>
-                        <td>Demanda 1</td>
-                        <td>Administração</td>
-                        <td>03:30</td>
-                    </tr>
-
+                    </c:forEach>
+            
+                    
                 </tbody>
             </table>
         </div>
@@ -234,11 +217,11 @@
 
                 <div class="ps-row">
                     <div class="ps-mod8 ps-sm-mod6" style="text-align: center;">
-                        <form name="" id="validateForm">
+                        <form action="/apontamento/atividade/inserir" name="" id="validateForm" method="POST">
                             <div class="ps-row ps-frm-row">
                                 <div class="ps-mod8 ps-sm-mod12">
                                     <label class="ps-frm-lbl">Nome da Atividade</label>
-                                    <input type="text" name="NomeAtividade" class="ps-frm-entry ps-frm-valid"
+                                    <input type="text" name="nomeAtividade" class="ps-frm-entry ps-frm-valid"
                                         placeholder="Nome">
                                 </div>
                             </div>
@@ -246,20 +229,22 @@
                                 <div class="ps-mod8 ps-sm-mod8 ps-frm-row">
                                     <label class="ps-frm-lbl">Demanda Pertencente</label>
                                     <div class="ps-frm-select">
-                                        <select name="test">
-                                            <option>Selecione</option>
-                                            <option>Demanda 1</option>
-                                            <option>Demanda 2</option>
-                                            <option>Demanda 3</option>
-                                            <option>Demanda 4</option>
+                                        <select name="demanda.codigoDemanda">
+                                        <c:forEach items="${demandas}" var="demanda">
+												<option value="${demanda.codigoDemanda}">${demanda.descricao}</option>
+                                            </c:forEach>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="ps-row">
                                     <div class="ps-mod8 ps-sm-mod8 ps-frm-row">
                                         <label class="ps-frm-lbl">Grupo Pertencente</label>
-                                        <input type="text" name="test" class="ps-frm-entry" placeholder="Nome do Grupo"
-                                            disabled />
+                                        <select name="grupo.codigo"> 
+                                       <c:forEach items="${grupos}" var="grupo" >
+                                        <option value="${grupo.codigo}">${grupo.nome}</option>
+                                        </c:forEach>
+                                        </select>
+                                           
                                     </div>
 
                                 </div>
@@ -267,14 +252,14 @@
                                 <div class="ps-row ps-frm-row">
                                     <div class="ps-mod8 ps-sm-mod12">
                                         <label class="ps-frm-lbl">Horas Estimadas</label>
-                                        <input type="number" name="HorasEstimadasDemanda"
+                                        <input type="number" name="horasEstimadas"
                                             class="ps-frm-entry ps-frm-valid" placeholder="Estimativa de Horas"
                                             value="0">
                                     </div>
                                 </div>
                             </div>
-                            <a href="#" class="ps-btn ps-btn-primary ps-btn-blue-dark" style="width: 200px;"
-                                data-validatescope="#validateForm">Criar Atividade</a>
+                            <input type="submit" value="Criar Atividade" class="ps-btn ps-btn-primary ps-btn-blue-dark" style="width: 200px;"
+                                data-validatescope="#validateForm"/>
 
                         </form>
 
@@ -294,19 +279,18 @@
             <div class="ps-modal-content">
                 <div class="ps-row">
                     <div class="ps-mod8 ps-sm-mod6" style="text-align: center;">
-                        <form name="" id="validateForm">
+                        <form action="/apontamento/atividade/deletar" name="" id="validateForm" method="POST">
                             <div class="ps-frm-select">
-                                <select>
-                                    <option value="">Selecione</option>
-                                    <option value="1">Atividade 1</option>
-                                    <option value="2">Atividade 2</option>
-                                    <option value="3">Atividade 3</option>
-                                    <option value="3">Atividade 4</option>
+                                <select name="codigoAtividade">
+                                <c:forEach items="${atividades}" var="atividade">
+                                
+                                    <option value="${atividade.codigoAtividade}">${atividade.codigoAtividade}</option>
+                                    </c:forEach>
                                 </select>
                             </div>
                             </br>
-                            <a href="#" class="ps-btn ps-btn-primary ps-btn-blue-dark" style="width: 200px;"
-                                data-validatescope="#validateForm">Encerrar Atividade</a>
+                            <input type="submit" value="Encerrar Atividade" class="ps-btn ps-btn-primary ps-btn-blue-dark" style="width: 200px;"
+                                data-validatescope="#validateForm"/>
 
                         </form>
 

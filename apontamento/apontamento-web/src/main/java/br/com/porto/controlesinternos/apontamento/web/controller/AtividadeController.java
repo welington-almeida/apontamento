@@ -1,3 +1,4 @@
+
 package br.com.porto.controlesinternos.apontamento.web.controller;
 
 import java.util.ArrayList;
@@ -6,6 +7,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +15,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.porto.controlesinternos.apontamento.model.Atividade;
+import br.com.porto.controlesinternos.apontamento.model.Demanda;
+import br.com.porto.controlesinternos.apontamento.model.Grupo;
 import br.com.porto.controlesinternos.apontamento.service.AtividadeService;
+import br.com.porto.controlesinternos.apontamento.service.DemandaService;
+import br.com.porto.controlesinternos.apontamento.service.GrupoService;
 
 @Controller
 public class AtividadeController {
@@ -21,23 +27,32 @@ public class AtividadeController {
 	@Inject
 	private AtividadeService atividadeService;
 	
+	@Inject
+	private DemandaService demandaService;
+	
+	@Inject GrupoService grupoService;
+	
 	private final ModelAndView mav = new ModelAndView();
 	
 	
 	@RequestMapping(value="/atividade/", method=RequestMethod.GET)
 	public ModelAndView listar() {
 		mav.clear();
-		mav.setViewName("index");
-		List<Atividade> atividades = atividadeService.listar();
+		mav.setViewName("visualizarAtividades");
+		ArrayList<Atividade> atividades = (ArrayList<Atividade>) atividadeService.listar();
+		ArrayList<Demanda> demandas = (ArrayList<Demanda>) demandaService.listar();
+		ArrayList<Grupo> grupos = (ArrayList<Grupo>) grupoService.listar();
 		mav.addObject("atividades", atividades);
+		mav.addObject("demandas", demandas);
+		mav.addObject("grupos", grupos);
 		
 		return mav;
 		
 	}
 	@RequestMapping(value="/atividade/inserir", method=RequestMethod.POST)
-	public ModelAndView inserir(@RequestBody Atividade atividade) {
+	public ModelAndView inserir(@ModelAttribute Atividade atividade) {
 		mav.clear();
-		mav.setViewName("index");
+		mav.setViewName("redirect:/atividade/");
 		boolean retorno = atividadeService.inserir(atividade);
 		if(retorno) {
 			System.out.println("Atividade Incluída com Sucesso.");
@@ -49,28 +64,28 @@ public class AtividadeController {
 	}
 	
 	@RequestMapping(value="/atividade/selecionar/{codigo}", method=RequestMethod.GET)
-	public ModelAndView selecionarPorCodigo(@PathVariable int codigo) {
+	public ModelAndView selecionarPorCodigo(@ModelAttribute Atividade atividade) {
 		mav.clear();
 		mav.setViewName("index");
-		Atividade atividade = atividadeService.selecionar(codigo);
-		mav.addObject("Atividade", atividade);
+		Atividade atividadeSelecionada = atividadeService.selecionar(atividade.getCodigoAtividade());
+		mav.addObject("Atividade", atividadeSelecionada);
 		return mav;
 	}
 	
 	@RequestMapping(value="/atividade/alterar", method=RequestMethod.POST)
 	public ModelAndView alterar(@RequestBody Atividade atividade) {
 		mav.clear();
-		mav.setViewName("index");
+		mav.setViewName("redirect:/atividade/");
 		atividadeService.alterar(atividade);
 		
 		return mav;
 	}
 	
-	@RequestMapping(value="/atividade/deletar/{codigo}", method=RequestMethod.DELETE)
-	public ModelAndView deletar(@PathVariable int codigo) {
+	@RequestMapping(value="/atividade/deletar", method=RequestMethod.POST)
+	public ModelAndView deletar(@ModelAttribute Atividade atividade) {
 		mav.clear();
-		mav.setViewName("index");
-		boolean retorno = atividadeService.deletar(codigo);
+		mav.setViewName("redirect:/atividade/");
+		boolean retorno = atividadeService.deletar(atividade.getCodigoAtividade());
 		return mav;
 	}
 

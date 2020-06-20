@@ -39,7 +39,8 @@ public class DemandaDAOImpl implements DemandaDAO {
 		return null;
 	}
 
-	public DemandaEntity selecionarPorCodigo(long codigo) {
+	@Override
+	public DemandaEntity selecionarPorCodigo(int codigo) {
 		Query query = entityManager.createQuery("select d from DemandaEntity as d where d.codigoDemanda = :codigoParam")
 				.setParameter("codigoParam", codigo);
 
@@ -53,6 +54,10 @@ public class DemandaDAOImpl implements DemandaDAO {
 	public List<DemandaEntity> listar() {
 		Query query = entityManager.createQuery("select d from DemandaEntity as d");
 		return query.getResultList();
+	}
+	
+	public Long horasTotaisDemanda(Long codigoDemanda) {
+		return codigoDemanda;
 	}
 	
 }

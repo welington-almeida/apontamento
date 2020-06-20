@@ -43,22 +43,23 @@ public class DemandaEntity {
 	
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern="dd-MM-yyyy")
-	@Column(name="DATA_FINALIZACAO", nullable=false, unique=false)
+	@Column(name="DATA_FINALIZACAO", nullable=true, unique=false)
 	private Date dataFinalizacao;
 	
 	@Column(name="STATUS", nullable=false, unique=false)
 	private EnumStatus status;
 	
-	@Column(name="HORAS_APONTADAS", nullable=false, unique=false)
+	@Column(name="HORAS_APONTADAS", nullable=true, unique=false)
 	private Long horasApontadas;
 	 
-	@Column(name="HORAS_ESTIMADAS", nullable=false, unique=false)
+	@Column(name="HORAS_ESTIMADAS", nullable=true, unique=false)
 	private Long horasEstimadas;
 	
-	@ManyToOne
-	@JoinColumn(name="AUTOR_ENCERRAMENTO")
-//	@Column(name="AUTOR_ENCERRAMENTO", nullable=false, unique=false)
-	private UsuarioEntity autorEncerramento;
+//	@ManyToOne
+//	@JoinColumn(name="AUTOR_ENCERRAMENTO")
+	@Column(name="AUTOR_ENCERRAMENTO", nullable=true, unique=false)
+	private Long autorEncerramento;
+//	private UsuarioEntity autorEncerramento;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "demanda")
 	private List<AtividadeEntity> atividades;
@@ -127,16 +128,25 @@ public class DemandaEntity {
 		this.horasEstimadas = horasEstimadas;
 	}
 
-	public UsuarioEntity getAutorEncerramento() {
+//	public UsuarioEntity getAutorEncerramento() {
+//		return autorEncerramento;
+//	}
+//
+//	public void setAutorEncerramento(UsuarioEntity autorEncerramento) {
+//		this.autorEncerramento = autorEncerramento;
+//	}
+
+	
+	public List<AtividadeEntity> getAtividades() {
+		return atividades;
+	}
+
+	public Long getAutorEncerramento() {
 		return autorEncerramento;
 	}
 
-	public void setAutorEncerramento(UsuarioEntity autorEncerramento) {
+	public void setAutorEncerramento(Long autorEncerramento) {
 		this.autorEncerramento = autorEncerramento;
-	}
-
-	public List<AtividadeEntity> getAtividades() {
-		return atividades;
 	}
 
 	public void setAtividades(List<AtividadeEntity> atividades) {

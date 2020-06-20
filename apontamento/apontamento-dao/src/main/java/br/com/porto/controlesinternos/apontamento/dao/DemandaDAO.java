@@ -14,7 +14,9 @@ public interface DemandaDAO {
 	
 	Object selecionaPorDescricao(String descricao);
 
-	DemandaEntity selecionarPorCodigo(long codigo);
+	DemandaEntity selecionarPorCodigo(int codigo);
 	
 	public List<DemandaEntity> listar();
+	
+	public Long horasTotaisDemanda(Long codigoDemanda);
 }

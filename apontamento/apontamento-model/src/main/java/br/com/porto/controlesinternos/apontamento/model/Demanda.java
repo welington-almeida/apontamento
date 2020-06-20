@@ -17,6 +17,7 @@ public class Demanda {
 	private EnumStatus status;
 	private Usuario autorEncerramento;
 	private List<Atividade> atividades;
+	private Long horasTotaisDemanda;
 	
 	public int getCodigoDemanda() {
 		return codigoDemanda;
@@ -79,4 +80,12 @@ public class Demanda {
 	public void setAtividades(List<Atividade> atividades) {
 		this.atividades = atividades;
 	}
+	public Long getHorasTotaisDemanda() {
+		return horasTotaisDemanda;
+	}
+	public void setHorasTotaisDemanda(Long horasTotaisDemanda) {
+		this.horasTotaisDemanda = horasTotaisDemanda;
+	}
+	
+	
 }

@@ -1,5 +1,7 @@
 package br.com.porto.controlesinternos.apontamento.service.impl;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -14,6 +16,7 @@ import br.com.porto.controlesinternos.apontamento.dao.entity.DemandaEntity;
 import br.com.porto.controlesinternos.apontamento.dao.entity.UsuarioEntity;
 import br.com.porto.controlesinternos.apontamento.model.Atividade;
 import br.com.porto.controlesinternos.apontamento.model.Demanda;
+import br.com.porto.controlesinternos.apontamento.model.Grupo;
 import br.com.porto.controlesinternos.apontamento.model.Usuario;
 import br.com.porto.controlesinternos.apontamento.model.enumeracoes.EnumStatus;
 import br.com.porto.controlesinternos.apontamento.service.AtividadeService;
@@ -29,7 +32,9 @@ public class AtividadeServiceImpl implements AtividadeService {
 		List<AtividadeEntity> listaAtividadeEntity = atividadeDAO.listar();
 		List<Atividade> listaAtividade = new ArrayList<Atividade>();
 		for(AtividadeEntity atividadeEntity:listaAtividadeEntity) {
-			listaAtividade.add(atividadeEntityToAtividade(atividadeEntity));
+			Atividade atividade = atividadeEntityToAtividade(atividadeEntity);
+			listaAtividade.add(atividade);
+			
 		}
 		return listaAtividade;
 	}
@@ -67,12 +72,13 @@ public class AtividadeServiceImpl implements AtividadeService {
 	private AtividadeEntity atividadeToAtividadeEntity(Atividade atividade) {
 		AtividadeEntity atividadeEntity = new AtividadeEntity();
 		
-		UsuarioEntity usuarioEntity = new UsuarioEntity();
-		usuarioEntity.setCodigo(atividade.getAutorEncerramento().getCodigo());
+//		UsuarioEntity usuarioEntity = new UsuarioEntity();
+//		usuarioEntity.setCodigo(atividade.getAutorEncerramento().getCodigo());
 		atividadeEntity.setCodigoAtividade(atividade.getCodigoAtividade());
 		atividadeEntity.setNomeAtividade(atividade.getNomeAtividade());
-		atividadeEntity.setAutorEncerramento(usuarioEntity);
-		atividadeEntity.setDataAbertura(atividade.getDataAbertura());
+//		atividadeEntity.setAutorEncerramento(usuarioEntity);
+		atividadeEntity.setAutorEncerramento(null);
+		atividadeEntity.setDataAbertura(new Date(Calendar.getInstance().getTimeInMillis()));
 		atividadeEntity.setDataFinalizacao(atividade.getDataFinalizacao());
 		
 		DemandaEntity demandaEntity = new DemandaEntity();
@@ -89,14 +95,23 @@ public class AtividadeServiceImpl implements AtividadeService {
 	public Atividade atividadeEntityToAtividade(AtividadeEntity atividadeEntity) {
 		Atividade atividade = new Atividade();
 			
-			Usuario usuario= new Usuario();
-			usuario.setCodigo(atividadeEntity.getAutorEncerramento().getCodigo());
-			atividade.setAutorEncerramento(usuario);
+			atividade.setCodigoAtividade(atividadeEntity.getCodigoAtividade());
+			atividade.setNomeAtividade(atividadeEntity.getNomeAtividade());
+//			Usuario usuario= new Usuario();
+//			usuario.setCodigo(atividadeEntity.getAutorEncerramento().getCodigo());
+//			atividade.setAutorEncerramento(usuario);
+			atividade.setAutorEncerramento(null);
 			atividade.setDataAbertura(atividadeEntity.getDataAbertura());
 			atividade.setDataFinalizacao(atividadeEntity.getDataFinalizacao());
 			
 			Demanda demanda = new Demanda();
 			demanda.setCodigoDemanda(atividadeEntity.getDemanda().getCodigoDemanda());
+			demanda.setDescricao(atividadeEntity.getDemanda().getDescricao());
+			
+			Grupo grupo = new Grupo();
+			grupo.setCodigo(atividadeEntity.getDemanda().getGrupo().getCodigo());
+			grupo.setNome(atividadeEntity.getDemanda().getGrupo().getNome());
+			demanda.setGrupo(grupo);
 			atividade.setDemanda(demanda);
 			
 			atividade.setHorasApontadas(atividadeEntity.getHorasApontadas());

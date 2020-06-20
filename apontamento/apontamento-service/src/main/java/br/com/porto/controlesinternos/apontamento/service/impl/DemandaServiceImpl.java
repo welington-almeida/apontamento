@@ -1,6 +1,8 @@
 package br.com.porto.controlesinternos.apontamento.service.impl;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -32,14 +34,14 @@ public class DemandaServiceImpl implements DemandaService {
 	public boolean inserir(Demanda demanda) {
 		boolean retorno = false;
 		if (demanda != null) {
-			if (demanda.getAtividades() != null && demanda.getAutorEncerramento() != null
-					&& demanda.getDataAbertura() != null && demanda.getDataFinalizacao() != null
-					&& demanda.getDescricao() != null && demanda.getGrupo() != null
-					&& demanda.getHorasApontadas() != null && demanda.getHorasEstimadas() != null) {
+			if (demanda.getDescricao() != null && demanda.getGrupo() != null 
+					&& demanda.getHorasEstimadas() != null) {
 				Object registroExistente = demandaDAO.selecionaPorDescricao(demanda.getDescricao());
 				if (registroExistente == null) {
 					DemandaEntity demandaEntity = demandaToDemandaEntity(demanda);
+					demandaEntity.setDataAbertura(new Date(Calendar.getInstance().getTimeInMillis()));
 					demandaEntity.setStatus(EnumStatus.APROVACAO);
+
 					demandaDAO.inserir(demandaEntity);
 					retorno = true;
 				}
@@ -55,13 +57,17 @@ public class DemandaServiceImpl implements DemandaService {
 	}
 
 	@Override
-	public void deletar(long codigo) {
+	public void deletar(int codigo) {
 		DemandaEntity demandaEntity = demandaDAO.selecionarPorCodigo(codigo);
-		demandaDAO.deletar(demandaEntity);
+		demandaEntity.setDataFinalizacao(new Date(Calendar.getInstance().getTimeInMillis()));
+		demandaEntity.setStatus(EnumStatus.DESATIVADO);
+		demandaDAO.alterar(demandaEntity);
+		
+//		demandaDAO.deletar(demandaEntity);
 	}
 
 	@Override
-	public Demanda selecionarPorCodigo(long codigo) {
+	public Demanda selecionarPorCodigo(int codigo) {
 		Demanda demanda = new Demanda();
 		DemandaEntity demandaEntity = demandaDAO.selecionarPorCodigo(codigo);
 		
@@ -90,9 +96,10 @@ public class DemandaServiceImpl implements DemandaService {
 			atividades.add(atividadeEntityToAtividade(atividadeEntity));
 		}
 		demanda.setAtividades(atividades);
-		Usuario usuario = new Usuario();
-		usuario.setCodigo(demandaEntity.getAutorEncerramento().getCodigo());
-		demanda.setAutorEncerramento(usuario);
+//		Usuario usuario = new Usuario();
+//		usuario.setCodigo(demandaEntity.getAutorEncerramento().getCodigo());
+		
+		demanda.setAutorEncerramento(null);
 		demanda.setCodigoDemanda(demandaEntity.getCodigoDemanda());
 		demanda.setDataAbertura(demandaEntity.getDataAbertura());
 		demanda.setDataFinalizacao(demandaEntity.getDataFinalizacao());
@@ -110,9 +117,12 @@ public class DemandaServiceImpl implements DemandaService {
 		List<AtividadeEntity> atividadesEntity = null;
 		demandaEntity.setAtividades(atividadesEntity);
 
-		UsuarioEntity usuarioEntity = new UsuarioEntity();
-		usuarioEntity.setCodigo(demanda.getAutorEncerramento().getCodigo());
-		demandaEntity.setAutorEncerramento(usuarioEntity);
+//		UsuarioEntity usuarioEntity = new UsuarioEntity();
+//		if(autorNulo) {
+//			demanda.getAutorEncerramento().setCodigo(1);;
+//		}
+//		usuarioEntity.setCodigo(demanda.getAutorEncerramento().getCodigo());
+		demandaEntity.setAutorEncerramento(null);
 		demandaEntity.setDataAbertura(demanda.getDataAbertura());
 		demandaEntity.setDataFinalizacao(demanda.getDataFinalizacao());
 		demandaEntity.setDescricao(demanda.getDescricao());
@@ -139,9 +149,10 @@ public class DemandaServiceImpl implements DemandaService {
 	public Atividade atividadeEntityToAtividade(AtividadeEntity atividadeEntity) {
 		Atividade atividade = new Atividade();
 			
-			Usuario usuario= new Usuario();
-			usuario.setCodigo(atividadeEntity.getAutorEncerramento().getCodigo());
-			atividade.setAutorEncerramento(usuario);
+//			Usuario usuario= new Usuario();
+//			usuario.setCodigo(atividadeEntity.getAutorEncerramento().getCodigo());
+//			atividade.setAutorEncerramento(usuario);
+			atividade.setAutorEncerramento(null);
 			atividade.setDataAbertura(atividadeEntity.getDataAbertura());
 			atividade.setDataFinalizacao(atividadeEntity.getDataFinalizacao());
 			

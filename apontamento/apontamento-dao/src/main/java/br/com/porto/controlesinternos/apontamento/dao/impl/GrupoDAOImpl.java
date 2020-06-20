@@ -66,10 +66,13 @@ public class GrupoDAOImpl implements GrupoDAO {
 	
 	@Override
 	public Long horasTotaisDemandasAtivas(long codigoGrupo) {
-		String consulta  = ("select sum(horas_apontadas) as horasApontadas from GrupoEntity as g, DemandaEntity as d where "
-				+ "g.codigo = d.grupo and g.codigo= 1");
-		Query query = entityManager.createQuery(consulta);
+		String consulta  = ("select sum(d.horasApontadas) as horasApontadas from GrupoEntity as g, DemandaEntity as d where "
+				+ "g.codigo = d.grupo and g.codigo=:codigoGrupo");
+		Query query = entityManager.createQuery(consulta).setParameter("codigoGrupo", codigoGrupo);
 		Long resultado = (Long) query.getSingleResult();
+		if(resultado == null){
+			resultado = 0L;
+		}
 		return resultado;
 	}
 }

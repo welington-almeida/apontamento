@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!doctype html>
 <html lang="en">
 
@@ -6,24 +10,26 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
-    <link href="/resources/visual/v.1/css/ps-lib.core-min.css" rel="stylesheet" type="text/css" media="screen" />
-    <link href="/resources/visual/v.1/css/ps-lib-iconGlyphs-min.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="<c:url value="/resources/visual/v.1/css/ps-lib.core-min.css" />" 
+    rel="stylesheet" type="text/css" media="screen" />
+    <link href="<c:url value="/resources/visual/v.1/css/ps-lib-iconGlyphs-min.css" />" 
+    rel="stylesheet" type="text/css" media="screen" />
     <!--[if lt IE 9]> 
-                <script src="/resources/visual/v.1/js/plugins/html5-3.6-respond-1.1.0.min.js"></script> 
+                <script src="<c:url value="/resources/visual/v.1/js/plugins/html5-3.6-respond-1.1.0.min.js" />"></script> 
             <![endif]-->
 
 
-    <script src="/resources/visual/v.1/js/vendor/jquery-1.9.1.min.js"></script>
-    <script src="/resources/visual/v.1/js/min/ps-lib.core-min.js"></script>
-    <script src="/resources/visual/v.1/js/vendor/visualizacoes.js"></script>
-    <script src="/resources/visual/v.1/js/vendor/calendario.js"></script>
+    <script src="<c:url value="/resources/visual/v.1/js/vendor/jquery-1.9.1.min.js" />"></script>
+    <script src="<c:url value="/resources/visual/v.1/js/min/ps-lib.core-min.js" />" ></script>
+    <script src="<c:url value="/resources/visual/v.1/js/vendor/visualizacoes.js" />"></script>
+    <script src="<c:url value="/resources/visual/v.1/js/vendor/calendario.js" />" ></script>
     <meta charset="UTF-8">
 
     <title>Visualizar Grupos</title>
 </head>
 
 <body>
-    <!-- CABEÃALHO -->
+    <!-- CABEÃÂALHO -->
     <c:out value="${grupo.codigo}"></c:out>
     <c:out value="${grupo.nome}"></c:out>
     <c:out value="${grupo.tipo}"></c:out>
@@ -51,9 +57,9 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#" class="ps-menu-hasLevel">Relatórios</a>
+                        <a href="#" class="ps-menu-hasLevel">RelatÃ³rios</a>
                         <ul>
-                            <li><a href="#">Por Funcionário</a></li>
+                            <li><a href="#">Por FuncionÃ¡rio</a></li>
                             <li><a href="#">Por Grupo</a></li>
                             <li><a href="#">Por Demanda</a></li>
                             <li><a href="#">Por Atividade</a></li>
@@ -61,10 +67,10 @@
 
                     </li>
                     <li>
-                        <a href="#" class="ps-menu-hasLevel">Usuário</a>
+                        <a href="#" class="ps-menu-hasLevel">UsuÃ¡rio</a>
                         <ul>
                             <li><a href="#">Redefinir Senha</a></li>
-                            <li><a href="#">Atualizar Usuários</a></li>
+                            <li><a href="#">Atualizar UsuÃ¡rios</a></li>
 
                         </ul>
 
@@ -108,7 +114,7 @@
             <div class="ps-mod8 ps-sm-mod12">
                 <table class="ps-table ps-datagrid" data-pagesize="5" data-filtering="true">
 
-                    <!------------------------------------ CABEÇALHO TABELA ------------------------------------------->
+                    <!------------------------------------ CABEÃALHO TABELA ------------------------------------------->
                     <thead>
                         </br>
                         <tr>
@@ -124,7 +130,7 @@
                                     data-popover="#PopoverHelper1"></span>
                                 <div class="ps-popover ps-popover-event" id="PopoverHelper1">
                                     <div class="ps-popover-ctt">
-                                        As horas totais dos grupos são calculadas com base nas horas apontadas em
+                                        As horas totais dos grupos sÃ£o calculadas com base nas horas apontadas em
                                         demandas ativas
                                     </div>
                                 </div>
@@ -134,23 +140,24 @@
                         </tr>
                     </thead>
 
-                    <!------------------------------------ CABEÇALHO FILTROS------------------------------------------->
+                    <!------------------------------------ CABEÃALHO FILTROS------------------------------------------->
                     <tr class="jsgrid-filter-row">
                         <td class="ps-sm-mod2 jsgrid-align-left" style="width: auto;">
                             <div>
                                 </br></br>
-                                <input style="text-align: center" type="text" class="ps-frm-entry"
-                                    placeholder="Filtrar por ID" value="">
+                                <form action="/apontamento/grupo/pesquisar/" method="POST">
+                                <input style="text-align: center" type="number" class="ps-frm-entry"
+                                    placeholder="Filtrar por ID" name="codigo" min="0" value="">
+                                </form>
                             </div>
                         </td>
                         <td style="text-align: center" class="ps-hide ps-sm-show ps-sm-mod2 jsgrid-align-left">
                             <div class="ps-frm-select">
-                                <select>
-                                    <option value="">Grupo</option>
-                                    <option value="1">Compliance</option>
-                                    <option value="2">Controles Internos</option>
-                                    <option value="3">Prevenção a Lavagem de Dinheiro</option>
-                                    <option value="4">Administração</option>
+                                <select name=grupoSelecionadoFiltrar>
+								<c:forEach items="${grupos}" var="grupo">
+                                	
+                                    <option value="${grupo.codigo}">${grupo.nome}</option>
+                                 </c:forEach>
                                 </select>
                             </div>
                         </td>
@@ -165,34 +172,14 @@
                         </td>
                     </tr>
                     <tbody>
-
-
+                    <c:forEach items="${grupos}" var="grupo">
                         <tr>
-                            <td class="ps-heading-4 ps-light"><a href="#">10000</a><br />
-                            </td>
-                            <td>COMPLIANCE</td>
-                            <td>20:00</td>
+                            <td class="ps-heading-4 ps-light"><a href="#">${grupo.codigo}</td>
+                            <td>${grupo.nome}</td>
+                            <td>${grupo.horasTotaisDemandasAtivas}</td>
 
                         </tr>
-                        <tr>
-                            <td class="ps-heading-4 ps-light"><a href="#">10001</td>
-                            <td>CONTROLES INTERNOS</td>
-                            <td>15:00</td>
-
-                        </tr>
-                        <tr>
-                            <td class="ps-heading-4 ps-light"><a href="#">10002</td>
-                            <td>PREVENÇÃO A LAVAGEM DE DINHEIRO</td>
-                            <td>21:00</td>
-
-                        </tr>
-                        <tr>
-                            <td class="ps-heading-4 ps-light"><a href="#">10003</td>
-                            <td>ADMINISTRAÇÃO</td>
-                            <td>12:00</td>
-
-                        </tr>
-
+					</c:forEach>
                     </tbody>
                 </table>
             </div>
@@ -211,15 +198,17 @@
 
                 <div class="ps-row">
                     <div class="ps-mod8 ps-sm-mod6" style="text-align: center;">
-                        <form name="" id="validateForm">
+                        <form name="" id="validateForm" action="/apontamento/grupo/inserir" method="POST">
                             <div class="ps-row ps-frm-row">
                                 <div class="ps-mod8 ps-sm-mod12">
-                                    <input type="text" name="NomeGrupo" class="ps-frm-entry ps-frm-valid"
+                                    <input type="text" name="nome" class="ps-frm-entry ps-frm-valid"
                                         placeholder="Nome do Grupo">
+                                        <input type="text" name="tipo" class="ps-frm-entry ps-frm-valid"
+                                        placeholder="Tipo">
                                 </div>
                             </div>
-                            <a href="#" class="ps-btn ps-btn-primary ps-btn-blue-dark" style="width: 200px;"
-                                data-validatescope="#validateForm">Criar Grupo</a>
+                            <input type="submit" class="ps-btn ps-btn-primary ps-btn-blue-dark" style="width: 200px;"
+                                data-validatescope="#validateForm" value="Criar Grupo">
 
                         </form>
 
@@ -239,19 +228,18 @@
             <div class="ps-modal-content">
                 <div class="ps-row">
                     <div class="ps-mod8 ps-sm-mod6" style="text-align: center;">
-                        <form name="" id="validateForm">
+                        <form action="/apontamento/grupo/deletar/" id="validateForm" method="POST">
                             <div class="ps-frm-select">
-                                <select>
-                                    <option value="">Selecione</option>
-                                    <option value="1">Compliance</option>
-                                    <option value="2">Controles Internos</option>
-                                    <option value="3">Prevenção a Lavagem de Dinheiro</option>
-                                    <option value="3">Administração</option>
+                                <select name="codigo">
+								<c:forEach items="${grupos}" var="grupo">
+                                	
+                                    <option value="${grupo.codigo}">${grupo.nome}</option>
+                                 </c:forEach>
                                 </select>
                             </div>
                             </br>
-                            <a href="#" class="ps-btn ps-btn-primary ps-btn-blue-dark" style="width: 200px;"
-                                data-validatescope="#validateForm">Desativar Grupo</a>
+                            <input type="submit" class="ps-btn ps-btn-primary ps-btn-blue-dark" style="width: 200px;"
+                                data-validatescope="#validateForm" value="Desativar Grupo">
 
                         </form>
 
@@ -265,14 +253,19 @@
     <footer class="ps-site-foot">
         <div class="ps-container">
             <div class="ps-mod8 ps-sm-mod5 ps-md-mod4">
-                À <span class="ps-currentYear">2020</span> Porto Seguro Todos
+                Ã <span class="ps-currentYear">2020</span> Porto Seguro Todos
                 os direitos reservados.
             </div>
 
         </div>
     </footer>
 
+<script type="javascript">
 
+function valorPadraoPesquisa(){
+document.getElementById("#pesquisar").value = 0;
+}
+</script>
 </body>
 
 </html>

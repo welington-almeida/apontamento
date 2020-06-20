@@ -36,13 +36,13 @@ public class AtividadeEntity {
 	@Column(name="HORAS_ESTIMADAS", nullable=false, unique=false)
 	private Long horasEstimadas;
 	
-	@Column(name="HORAS_APONTADAS", nullable=false, unique=false)
+	@Column(name="HORAS_APONTADAS", nullable=true, unique=false)
 	private Long horasApontadas;
 	
 	@Column(name="DATA_ABERTURA", nullable=false, unique=false)
 	private Date dataAbertura;
 	
-	@Column(name="DATA_FINALIZACAO", nullable=false, unique=false)
+	@Column(name="DATA_FINALIZACAO", nullable=true, unique=false)
 	private Date dataFinalizacao;
 	
 	@Column(name="STATUS", nullable=false, unique=false)
@@ -52,10 +52,11 @@ public class AtividadeEntity {
 	private List<ApontamentoEntity> apontamentos;
 	
 
-	@ManyToOne
-	@JoinColumn(name="AUTOR_ENCERRAMENTO")
-//	@Column(name="CODIGO_USUARIO", nullable=false, unique=false)
-	private UsuarioEntity autorEncerramento;
+//	@ManyToOne
+//	@JoinColumn(name="AUTOR_ENCERRAMENTO")
+	@Column(name="AUTOR_ENCERRAMENTO", nullable=true, unique=false)
+//	private UsuarioEntity autorEncerramento;
+	private Long autorEncerramento;
 
 	
 	public List<ApontamentoEntity> getApontamentos() {
@@ -130,11 +131,21 @@ public class AtividadeEntity {
 		this.status = status;
 	}
 
-	public UsuarioEntity getAutorEncerramento() {
+	public Long getAutorEncerramento() {
 		return autorEncerramento;
 	}
 
-	public void setAutorEncerramento(UsuarioEntity autorEncerramento) {
+	public void setAutorEncerramento(Long autorEncerramento) {
 		this.autorEncerramento = autorEncerramento;
 	}
+
+//	public UsuarioEntity getAutorEncerramento() {
+//		return autorEncerramento;
+//	}
+//
+//	public void setAutorEncerramento(UsuarioEntity autorEncerramento) {
+//		this.autorEncerramento = autorEncerramento;
+//	}
+	
+	
 }

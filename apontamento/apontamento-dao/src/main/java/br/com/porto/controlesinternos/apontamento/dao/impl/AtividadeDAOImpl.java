@@ -37,7 +37,7 @@ public class AtividadeDAOImpl implements AtividadeDAO {
 
 	public AtividadeEntity selecionarPorCodigo(long codigo) {
 
-		Query query = entityManager.createQuery("select a from AtividadeEntity as a where a.codigo = :codigoParam")
+		Query query = entityManager.createQuery("select a from AtividadeEntity as a where a.codigoAtividade = :codigoParam")
 				.setParameter("codigoParam", codigo);
 
 		List<AtividadeEntity> atividades = query.getResultList();
