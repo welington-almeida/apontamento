@@ -37,8 +37,8 @@ public class UsuarioServiceImpl implements UsuarioService {
 					usuarioEntity.setCodigo(usuario.getCodigo());
 					usuarioEntity.setNome(usuario.getNome());
 					usuarioEntity.setEmail(usuario.getEmail());
-					usuarioEntity.setStatus(EnumStatus.APROVACAO);
-					usuarioEntity.setPerfil(EnumPerfilUsuario.USER);
+					usuarioEntity.setStatus(EnumStatus.APROVACAO.getCodigo());
+					usuarioEntity.setPerfil(EnumPerfilUsuario.USER.getCodigo());
 					usuarioEntity.setSenha(usuario.getSenha());
 
 					usuarioDAO.inserir(usuarioEntity);
@@ -86,7 +86,8 @@ public class UsuarioServiceImpl implements UsuarioService {
 				usuario.setCodigo(entity.getCodigo());
 				usuario.setNome(entity.getNome());
 				usuario.setEmail(entity.getEmail());
-				usuario.setSenha(entity.getSenha());
+				usuario.setPerfil(EnumPerfilUsuario.buscarPerfil(entity.getPerfil()));
+				usuario.setAcesso(EnumStatus.buscarStatus(entity.getStatus()));
 				usuarios.add(usuario);
 			}
 		}

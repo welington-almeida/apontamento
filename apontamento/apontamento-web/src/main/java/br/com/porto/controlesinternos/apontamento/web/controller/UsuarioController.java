@@ -26,16 +26,23 @@ public class UsuarioController {
 	@RequestMapping(value="/usuarios/",method=RequestMethod.GET)
 	public ModelAndView listar(){
 		mav.clear();
-		mav.setViewName("index");
+		mav.setViewName("usuarios");
 		List<Usuario> usuarios = usuarioService.listar();
 		mav.addObject("usuarios", usuarios);
+		return mav;
+	}
+	
+	@RequestMapping(value="/usuarios/novo",method=RequestMethod.GET)
+	public ModelAndView novoUsuario(){
+		mav.clear();
+		mav.setViewName("novoUsuario");
 		return mav;
 	}
 	
 	@RequestMapping(value="/usuario/inserir",method=RequestMethod.POST)
 	public ModelAndView inserir(@ModelAttribute Usuario usuario){
 		mav.clear();
-		mav.setViewName("index");
+		mav.setViewName("redirect:/usuarios/");
 		boolean retorno = usuarioService.inserir(usuario);
 		if(retorno){
 			System.out.println("Incluido com sucesso...");
@@ -49,7 +56,7 @@ public class UsuarioController {
 	@RequestMapping(value="/usuario/alterar",method=RequestMethod.PUT)
 	public ModelAndView alterar(@RequestBody Usuario usuario){
 		mav.clear();
-		mav.setViewName("index");
+		mav.setViewName("usuarios");
 		boolean retorno = usuarioService.alterar(usuario);
 		if(retorno){
 			System.out.println("Alterado com sucesso...");

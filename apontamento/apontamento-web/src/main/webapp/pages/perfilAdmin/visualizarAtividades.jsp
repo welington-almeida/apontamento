@@ -131,6 +131,9 @@
                             Pertencente
                         </th>
                         <th class="ps-hide ps-sm-show ps-sm-mod2" data-type="select" data-items="produtos"
+                            data-valuefield="id" data-textfield="Name" data-sorter="number">Status
+                        </th>
+                        <th class="ps-hide ps-sm-show ps-sm-mod2" data-type="select" data-items="produtos"
                             data-valuefield="id" data-textfield="Name" data-sorter="number">Horas Totais
                         </th>
 
@@ -176,6 +179,15 @@
                                 <option value="2">Controles Internos</option>
                                 <option value="3">Prevenção a Lavagem de Dinheiro</option>
                                 <option value="4">Administração</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td style="text-align: center" class="ps-hide ps-sm-show ps-sm-mod2 jsgrid-align-left">
+                        <div class="ps-frm-select">
+                            <select>
+                                <option value="">Status</option>
+                                <option value="1">Aberto</option>
+                                <option value="2">Encerrado</option>
                             </select>
                         </div>
                     </td>
@@ -235,6 +247,18 @@
                                             </c:forEach>
                                         </select>
                                     </div>
+                                </div>
+                                <div class="ps-row">
+                                    <div class="ps-mod8 ps-sm-mod8 ps-frm-row">
+                                        <label class="ps-frm-lbl">Grupo Pertencente</label>
+                                        <select name="grupo.codigo"> 
+                                       <c:forEach items="${grupos}" var="grupo" >
+                                        <option value="${grupo.codigo}">${grupo.nome}</option>
+                                        </c:forEach>
+                                        </select>
+                                           
+                                    </div>
+
                                 </div>
                                 <div class="ps-row">
                                     <div class="ps-mod8 ps-sm-mod8 ps-frm-row">

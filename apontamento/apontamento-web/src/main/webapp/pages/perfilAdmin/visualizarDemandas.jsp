@@ -123,12 +123,13 @@
                             data-valuefield="id" data-textfield="Name" data-sorter="number">Nome do Grupo
                             Pertencente
                         </th>
-                        <th class="ps-hide ps-sm-show ps-sm-mod2" data-type="select" data-items="produtos"
-                            data-valuefield="id" data-textfield="Name" data-sorter="number">Horas Totais
-                        </th>
                          <th class="ps-hide ps-sm-show ps-sm-mod2">
                          Status
                         </th>
+                        <th class="ps-hide ps-sm-show ps-sm-mod2" data-type="select" data-items="produtos"
+                            data-valuefield="id" data-textfield="Name" data-sorter="number">Horas Totais
+                        </th>
+                        
 
 
                     </tr>
@@ -165,6 +166,16 @@
                             </select>
                         </div>
                     </td>
+                    
+                    <td style="text-align: center" class="ps-hide ps-sm-show ps-sm-mod2 jsgrid-align-left">
+                        <div class="ps-frm-select">
+                            <select>
+                                <option value="">Status</option>
+                                <option value="1">Ativa</option>
+                                <option value="2">Encerrada</option>
+                            </select>
+                        </div>
+                    </td>
 
                     <td class="ps-sm-mod2 jsgrid-align-left" style="width: auto;">
                         <div>
@@ -184,9 +195,9 @@
                         </td>
                         <td>${demanda.descricao}</td>
                         <td>${demanda.grupo.nome}</td>
-                        <td>${demanda.horasApontadas}</td>
                         <td>${demanda.status}</td>
-
+                        <td>${demanda.horasApontadas}</td>
+                        
 					</tr>
                     </c:forEach>
                 </tbody>

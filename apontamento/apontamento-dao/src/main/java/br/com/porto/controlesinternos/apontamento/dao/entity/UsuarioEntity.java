@@ -28,10 +28,10 @@ public class UsuarioEntity {
 	private String email;
 
 	@Column(name="PERFIL",nullable=false)
-	private EnumPerfilUsuario perfil;
+	private int perfil;
 	
 	@Column(name="STATUS",nullable=false)
-	private EnumStatus status;
+	private int status;
 
 	@Column(name="SENHA",nullable=false)
 	private String senha;
@@ -90,19 +90,19 @@ public class UsuarioEntity {
 		this.email = email;
 	}
 
-	public EnumPerfilUsuario getPerfil() {
+	public int getPerfil() {
 		return perfil;
 	}
 
-	public void setPerfil(EnumPerfilUsuario perfil) {
+	public void setPerfil(int perfil) {
 		this.perfil = perfil;
 	}
 	
-	public EnumStatus getStatus() {
+	public int getStatus() {
 		return status;
 	}
 
-	public void setStatus(EnumStatus status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 
