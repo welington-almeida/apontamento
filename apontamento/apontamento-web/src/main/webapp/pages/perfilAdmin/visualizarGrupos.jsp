@@ -130,7 +130,7 @@
                                     data-popover="#PopoverHelper1"></span>
                                 <div class="ps-popover ps-popover-event" id="PopoverHelper1">
                                     <div class="ps-popover-ctt">
-                                        As horas totais dos grupos sÃ£o calculadas com base nas horas apontadas em
+                                        As horas totais dos grupos são calculadas com base nas horas apontadas em
                                         demandas ativas
                                     </div>
                                 </div>

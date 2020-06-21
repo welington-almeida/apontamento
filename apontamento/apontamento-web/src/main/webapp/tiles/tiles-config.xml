@@ -10,11 +10,12 @@
 	</definition> -->
 
 	<!-- LOGIN -->
-	<definition name="index" template="/pages/grupos.jsp" />	
+	<definition name="index" template="/pages/incluirApontamento.jsp" />	
 	<definition name="visualizarGrupos" template="/pages/perfilAdmin/visualizarGrupos.jsp" />
   	<definition name="visualizarAtividades" template="/pages/perfilAdmin/visualizarAtividades.jsp" />
   	<definition name="visualizarDemandas" template="/pages/perfilAdmin/visualizarDemandas.jsp"/>
 	<definition name="usuarios" template="/pages/perfilAdmin/visualizarFuncionarios.jsp" />
 	<definition name="novoUsuario" template="/pages/novoUsuario.jsp" />
+	<definition name="novoApontamento" template="/pages/incluirApontamento.jsp" />
 	
 </tiles-definitions>

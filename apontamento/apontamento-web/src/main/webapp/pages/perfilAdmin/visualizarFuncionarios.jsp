@@ -262,8 +262,8 @@
 								<td><a href="javascript:;"
 									style="margin-left: 450px; width: 150px;"
 									class="ps-btn ps-btn-primary ps-btn-ico ps-frm-validate"
-									data-validatescope="validateForm1"
-									data-validatesuccess="alert('Campos vÃ¡lidos')"> <span
+									data-validatescope="validateForm"
+									data-validatesuccess="alert('Campos válidos')"> <span
 										class="ps-ico ps-ico-add"></span> Atualizar
 								</a></td>
 
@@ -279,7 +279,7 @@
 	<footer class="ps-site-foot">
 		<div class="ps-container">
 			<div class="ps-mod8 ps-sm-mod5 ps-md-mod4">
-				Ã <span class="ps-currentYear">2020</span> Porto Seguro Todos os
+				À <span class="ps-currentYear">2020</span> Porto Seguro Todos os
 				direitos reservados.
 			</div>
 

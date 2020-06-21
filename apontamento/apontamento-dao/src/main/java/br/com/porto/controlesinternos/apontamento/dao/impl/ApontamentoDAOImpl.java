@@ -66,4 +66,19 @@ public class ApontamentoDAOImpl implements ApontamentoDAO {
 		return query.getResultList();
 	}
 
+
+
+@SuppressWarnings("unchecked")
+@Override
+public List<ApontamentoEntity> meusApontamentos(long codigoUsuario) {
+	Query query = entityManager.createQuery("select a from ApontamentoEntity as a where a.codigo_usuario = :codigoUsuario")
+			.setParameter("codigoUsuario", codigoUsuario);
+	
+	List<ApontamentoEntity> meusApontamentos = query.getResultList();
+	if (meusApontamentos != null && !meusApontamentos.isEmpty()) {
+		return meusApontamentos;
+	}
+	return null;
+}
+
 }

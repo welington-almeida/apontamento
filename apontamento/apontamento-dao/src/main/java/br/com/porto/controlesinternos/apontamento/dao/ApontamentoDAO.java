@@ -18,4 +18,6 @@ public void inserir(ApontamentoEntity apontamento);
 	public ApontamentoEntity selecionarPorFuncionario(String funcionario);
 
 	public List<ApontamentoEntity> listar();
+	
+	public List<ApontamentoEntity> meusApontamentos(long codigo);
 }

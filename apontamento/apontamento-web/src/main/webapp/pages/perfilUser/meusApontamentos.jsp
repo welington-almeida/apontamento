@@ -119,8 +119,7 @@
 					<tr class="jsgrid-filter-row">
 						<td class="ps-sm-mod2 jsgrid-align-left" style="width: auto;">
 							<div>
-								</br>
-								</br> <input type="text" class="ps-frm-entry"
+								</br> </br> <input type="text" class="ps-frm-entry"
 									placeholder="Filtrar por ID" value="">
 							</div>
 						</td>
@@ -160,8 +159,7 @@
 						<td class="ps-hide ps-sm-show ps-sm-mod2 jsgrid-align-left"
 							style="width: auto;">
 							<div>
-								</br>
-								</br> <input type="date" style="text-align: center" name="test"
+								</br> </br> <input type="date" style="text-align: center" name="test"
 									class="ps-frm-entry" placeholder="dd/mm/aaaa" id="dataIda" />
 
 							</div>
@@ -169,71 +167,32 @@
 
 						<td class="ps-sm-mod2 jsgrid-align-left" style="width: auto;">
 							<div>
-								</br>
-								</br> <input style="width: auto;" type="time" name="horas"
+								</br> </br> <input style="width: auto;" type="time" name="horas"
 									min="00:10" max="23:59" class="ps-frm-entry ps-frm-valid">
 							</div>
 						</td>
 					</tr>
+
 					<tbody>
 
-
-						<tr>
-							<td class="ps-heading-4 ps-light"><a href="javascript:;"
-								class="ps-open-modal" data-modal="#ModalLarge"
-								data-modalbackdropstatic="false"
-								data-modalkeyboarddisable="true"
-								data-modalonshow="console.log('abrir modal')"
-								data-modalonhide="console.log('fechar modal')">10-10001</a><br />
-							</td>
-							<td>Compliance</td>
-							<td>Demanda 1</td>
-							<td>Atividade 3</td>
-							<td>18/05/2020</td>
-							<td>02:00</td>
-						</tr>
-						<tr>
-							<td class="ps-heading-4 ps-light"><a href="javascript:;"
-								class="ps-open-modal" data-modal="#ModalLarge"
-								data-modalbackdropstatic="false"
-								data-modalkeyboarddisable="true"
-								data-modalonshow="console.log('abrir modal')"
-								data-modalonhide="console.log('fechar modal')">10-10002</a><br />
-							</td>
-							<td>Controles Internos</td>
-							<td>Demanda 2</td>
-							<td>Atividade 1</td>
-							<td>13/05/2020</td>
-							<td>01:10</td>
-						</tr>
-						<tr>
-							<td class="ps-heading-4 ps-light"><a href="javascript:;"
-								class="ps-open-modal" data-modal="#ModalLarge"
-								data-modalbackdropstatic="false"
-								data-modalkeyboarddisable="true"
-								data-modalonshow="console.log('abrir modal')"
-								data-modalonhide="console.log('fechar modal')">10-10003</a><br />
-							</td>
-							<td>PrevenÃ§Ã£o a Lavagem de Dinheiro</td>
-							<td>Demanda 3</td>
-							<td>Atividade 2</td>
-							<td>06/04/2020</td>
-							<td>00:30</td>
-						</tr>
-						<tr>
-							<td class="ps-heading-4 ps-light"><a href="javascript:;"
-								class="ps-open-modal" data-modal="#ModalLarge"
-								data-modalbackdropstatic="false"
-								data-modalkeyboarddisable="true"
-								data-modalonshow="console.log('abrir modal')"
-								data-modalonhide="console.log('fechar modal')">10-10004</a><br />
-							</td>
-							<td>AdministraÃ§Ã£o</td>
-							<td>Demanda 1</td>
-							<td>Atividade 1</td>
-							<td>02/03/2020</td>
-							<td>01:30</td>
-						</tr>
+						<c:forEach items="${apontamentos}" var="apontamento">
+							<tr>
+								<td class="ps-heading-4 ps-light"><a href="#"
+									onclick="editarApontamentoSelecionado ('${apontamento.codigo}', '${apontamento.usuario}', '${apontamento.grupo}', '${apontamento.demanda}', '${apontamento.atividade}', '${apontamento.dataApontamento}', '${apontamento.horasApontadas}')"
+									class="ps-open-modal" data-modal="#ModalLarge"
+									data-modalbackdropstatic="false"
+									data-modalkeyboarddisable="true"
+									data-modalonshow="console.log('abrir modal')"
+									data-modalonhide="console.log('fechar modal')"><c:out
+											value="${apontamento.codigo}" /></a><br /></td>
+								<td><c:out value="${apontamento.usuario}" /></td>
+								<td><c:out value="${apontamento.grupo}" /></td>
+								<td><c:out value="${apontamento.demanda}" /></td>
+								<td><c:out value="${apontamento.atividade}" /></td>
+								<td><c:out value="${apontamento.dataApontamento}" /></td>
+								<td><c:out value="${apontamento.horasApontadas}" /></td>
+							</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 			</div>
@@ -249,100 +208,126 @@
 
 				<br />
 
-				<div class="ps-row">
-					<div class="ps-mod8 ps-sm-mod6" style="text-align: center;">
-						<div class="ps-row">
-							<div class="ps-mod8 ps-sm-mod8 ps-frm-row">
-								<label class="ps-frm-lbl">Grupo</label>
-								<div class="ps-frm-select">
-									<select name="test">
-										<option>Selecione</option>
-										<option>OpÃ§Ã£o 1</option>
-										<option>OpÃ§Ã£o 2</option>
-										<option>OpÃ§Ã£o 3</option>
-									</select>
+				<form action="<c:url value="/apontamento/apontamento/alterar" />"
+					id="validateForm" method="PUT">
+					<input id="idApontamentoEditar" type="hidden"> <input
+						id="idUsuarioEditar" type="hidden">
+					<div class="ps-row">
+						<div class="ps-mod8 ps-sm-mod6" style="text-align: center;">
+							<div class="ps-row">
+								<div class="ps-mod8 ps-sm-mod8 ps-frm-row">
+									<label class="ps-frm-lbl">Grupo</label>
+
+									<div class="ps-frm-select">
+										<select id="grupoApontamentoEditar" name="test">
+											<option>Selecione...</option>
+											<c:forEach items="${apontamentos}" var="apontamento">
+												<option value="1"><c:out
+														value="{apontamento.grupo.nome}" /></option>
+
+											</c:forEach>
+										</select>
+									</div>
 								</div>
+
+							</div>
+							<div class="ps-row">
+								<div class="ps-mod8 ps-sm-mod8 ps-frm-row">
+									<label class="ps-frm-lbl">Demanda</label>
+									<div class="ps-frm-select">
+										<select name="test">
+											<option>Selecione...</option>
+											<select id="demandaApontamentoEditar" name="test">
+												<option>Selecione...</option>
+												<c:forEach items="${apontamentos}" var="apontamento">
+													<option value="1"><c:out
+															value="{apontamento.demanda.nome}" /></option>
+
+												</c:forEach>
+
+										</select>
+									</div>
+								</div>
+
 							</div>
 
+							<div class="ps-row">
+								<div class="ps-mod8 ps-sm-mod8 ps-frm-row">
+									<label class="ps-frm-lbl">Atividade</label>
+									<div class="ps-frm-select">
+										<select id="atividadeApontamentoEditar" name="test">
+											<option>Selecione...</option>
+											<c:forEach items="${apontamentos}" var="apontamento">
+												<option value="1"><c:out
+														value="{apontamento.atividade.nome}" /></option>
+
+											</c:forEach>
+										</select>
+									</div>
+								</div>
+
+							</div>
 						</div>
-						<div class="ps-row">
-							<div class="ps-mod8 ps-sm-mod8 ps-frm-row">
-								<label class="ps-frm-lbl">Demanda</label>
-								<div class="ps-frm-select">
-									<select name="test">
-										<option>Selecione</option>
-										<option>OpÃ§Ã£o 1</option>
-										<option>OpÃ§Ã£o 2</option>
-										<option>OpÃ§Ã£o 3</option>
-									</select>
+
+						<div class="ps-mod8 ps-sm-mod6">
+							<div class="ps-row">
+								<div class="ps-mod8 ps-sm-mod8 ps-frm-row ps-frm-valid">
+									<label class="ps-frm-lbl">Data do Apontamento</label> <input
+										id="dataApontamentoEditar" type="date" name="test"
+										class="ps-frm-entry" placeholder="dd/mm/aaaa" id="dataIda" />
 								</div>
 							</div>
-
-						</div>
-
-						<div class="ps-row">
-							<div class="ps-mod8 ps-sm-mod8 ps-frm-row">
-								<label class="ps-frm-lbl">Atividade</label>
-								<div class="ps-frm-select">
-									<select name="test">
-										<option>Selecione</option>
-										<option>OpÃ§Ã£o 1</option>
-										<option>OpÃ§Ã£o 2</option>
-										<option>OpÃ§Ã£o 3</option>
-									</select>
+							<div class="ps-row">
+								<div class="ps-mod8 ps-sm-mod8 ps-frm-row ps-frm-valid">
+									<label class="ps-frm-lbl">Quantidade de Horas</label> <input
+										id="horasApontadasEditar" style="width: 200px" type="time"
+										name="horas" min="00:10" max="23:59"
+										class="ps-frm-entry ps-frm-valid" placeholder="Horas">
 								</div>
 							</div>
 
 						</div>
 					</div>
-					<div class="ps-mod8 ps-sm-mod6">
-						<div class="ps-row">
-							<div class="ps-mod8 ps-sm-mod8 ps-frm-row ps-frm-valid">
-								<label class="ps-frm-lbl">Data do Apontamento</label> <input
-									type="date" name="test" class="ps-frm-entry"
-									placeholder="dd/mm/aaaa" id="dataIda" />
-							</div>
-						</div>
-						<div class="ps-row">
-							<div class="ps-mod8 ps-sm-mod8 ps-frm-row ps-frm-valid">
-								<label class="ps-frm-lbl">Quantidade de Horas</label> <input
-									style="width: 200px" type="time" name="horas" min="00:10"
-									max="23:59" class="ps-frm-entry ps-frm-valid"
-									placeholder="Horas">
-							</div>
-						</div>
+					<table>
+						<tr>
 
-					</div>
-				</div>
-				<table>
-					<tr>
+							<td><a href="javascript:;"
+								style="margin-left: 450px; width: 150px;"
+								class="ps-btn ps-btn-primary ps-btn-ico ps-frm-validate"
+								data-validatescope="validateForm"
+								data-validatesuccess="alert('Campos válidos')"> <span
+									class="ps-ico ps-ico-add"></span> Atualizar
+							</a></td>
 
-						<td><a href="javascript:;"
-							style="margin-left: 450px; width: 150px;"
-							class="ps-btn ps-btn-primary ps-btn-ico ps-frm-validate"
-							data-validatescope="validateForm1"
-							data-validatesuccess="alert('Campos vÃ¡lidos')"> <span
-								class="ps-ico ps-ico-add"></span> Atualizar
-						</a></td>
-
-					</tr>
-				</table>
+						</tr>
+					</table>
+				</form>
 			</div>
-
 		</div>
 	</div>
 
 	<footer class="ps-site-foot">
 		<div class="ps-container">
 			<div class="ps-mod8 ps-sm-mod5 ps-md-mod4">
-				Ã <span class="ps-currentYear">2020</span> Porto Seguro Todos os
+				À <span class="ps-currentYear">2020</span> Porto Seguro Todos os
 				direitos reservados.
 			</div>
 
 		</div>
 	</footer>
-
-
 </body>
+<script>
+	function editarApontamentoSelecionado(codigo, usuario, grupo, demanda,
+			atividade, dataApontamento, horasApontadas) {
+
+		document.getElementById('idApontamentoEditar').value = codigo;
+		document.getElementById('idUsuarioEditar').value = nome;
+		document.getElementById('grupoApontamentoEditar').value = grupo;
+		document.getElementById('demandaApontamentoEditar').value = demanda;
+		document.getElementById('atividadeApontamentoEditar').value = atividade;
+		document.getElementById('dataApontamentoEditar').value = dataApontamento;
+		document.getElementById('horasApontadasEditar').value = horasApontadas;
+	}
+</script>
 
 </html>

@@ -33,7 +33,7 @@ public class GrupoController {
 	}
 	
 	@RequestMapping(value="/grupo/pesquisar/",method=RequestMethod.POST)
-	public ModelAndView pesquisar(Grupo grupo){
+	public ModelAndView pesquisar(@ModelAttribute Grupo grupo){
 		mav.clear();
 
 		if(grupo.getCodigo() > 0 ) {

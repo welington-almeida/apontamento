@@ -1,10 +1,12 @@
 package br.com.porto.controlesinternos.apontamento.web.controller;
 
+
 import java.util.List;
 
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.porto.controlesinternos.apontamento.model.Apontamento;
+
+import br.com.porto.controlesinternos.apontamento.model.Usuario;
 import br.com.porto.controlesinternos.apontamento.service.ApontamentoService;
 
 
@@ -23,7 +27,7 @@ public class ApontamentoController {
 	
 	private final ModelAndView mav = new ModelAndView();
 	
-	@RequestMapping(value="/apontamento/",method=RequestMethod.GET)
+	@RequestMapping(value="/apontamentos/",method=RequestMethod.GET)
 	public ModelAndView listar(){
 		mav.clear();
 		mav.setViewName("index");
@@ -35,7 +39,7 @@ public class ApontamentoController {
 	@RequestMapping(value="/apontamento/inserir",method=RequestMethod.POST)
 	public ModelAndView inserir(@RequestBody Apontamento apontamento){
 		mav.clear();
-		mav.setViewName("index");
+		mav.setViewName("novoApontamento");
 		boolean retorno = apontamentoService.inserir(apontamento);
 		if(retorno){
 			System.out.println("Incluido com sucesso...");
@@ -66,6 +70,20 @@ public class ApontamentoController {
 		mav.setViewName("index");
 		Apontamento apontamento = apontamentoService.selecionar(codigoApontamento);
 		mav.addObject("apontamento", apontamento);
+		return mav;
+	}
+	
+	@RequestMapping(value="/apontamento/meusApontamentos/",method=RequestMethod.POST)
+	public ModelAndView listarMeusApontamentos(@ModelAttribute Usuario usuario){
+		mav.clear();		
+		if(usuario.getCodigo() > 0) {
+		mav.setViewName("index");
+		List<Apontamento> meusApontamentos = apontamentoService.meusApontamentos(usuario.getCodigo());
+		mav.addObject("meusApontamentos", meusApontamentos);
+		}
+		else {
+			mav.setViewName("redirect:/meusApontamentos/");
+		}
 		return mav;
 	}
 	

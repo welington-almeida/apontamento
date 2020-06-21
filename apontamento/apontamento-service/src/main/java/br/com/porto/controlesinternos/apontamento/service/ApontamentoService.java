@@ -16,4 +16,6 @@ public interface ApontamentoService {
 
 	public List<Apontamento> listar();
 	
+	public List<Apontamento> meusApontamentos(long codigo);
+	
 }

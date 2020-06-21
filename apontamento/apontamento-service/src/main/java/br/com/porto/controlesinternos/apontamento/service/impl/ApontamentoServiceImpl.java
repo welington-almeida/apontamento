@@ -109,4 +109,33 @@ public class ApontamentoServiceImpl implements ApontamentoService {
 		return apontamentos;
 
 	}
+
+	@Override
+	public List<Apontamento> meusApontamentos(long codigo) {
+		List<ApontamentoEntity> listaApontamentos = apontamentoDAO.meusApontamentos(codigo);
+		List<Apontamento> meusApontamentos = new ArrayList<Apontamento>();
+		
+		if (listaApontamentos != null) {
+
+			for (ApontamentoEntity apontamentoEntity : listaApontamentos) {
+				Apontamento apontamento = new Apontamento();
+				apontamento.setCodigo(apontamentoEntity.getCodigo());
+
+				UsuarioEntity usuarioEntity = new UsuarioEntity();
+				usuarioEntity.setCodigo(apontamentoEntity.getFuncionario().getCodigo());
+				apontamentoEntity.setFuncionario(usuarioEntity);
+
+				AtividadeEntity atividadeEntity = new AtividadeEntity();
+				atividadeEntity.setCodigoAtividade(apontamentoEntity.getAtividade().getCodigoAtividade());
+				apontamentoEntity.setAtividade(atividadeEntity);
+
+				apontamento.setDataApontamento(apontamentoEntity.getData());
+				apontamento.setHorasApontadas(apontamentoEntity.getHoras());
+
+				meusApontamentos.add(apontamento);
+			}
+		}
+		return meusApontamentos;
+	}
+
 }

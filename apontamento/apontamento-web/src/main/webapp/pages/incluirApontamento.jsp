@@ -87,251 +87,243 @@
 	</header>
 
 	<!----------------------------------------------- CORPO ------------------------------------->
-	</br>
+</br>
 
-	<div class="ps-container">
+    <div class="ps-container">
 
-		<div class="ps-mod4 ps-sm-mod9">
-			<table>
-				<tr>
-					<td>
-						<h1 style="text-align: center; width: 300px;">Novo
-							Apontamento</h1>
-					</td>
-					<td><a style="margin-left: 400px; width: 200px;"
-						class="ps-btn ps-btn-primary ps-btn-ico"> <span
-							class="ps-ico ps-ico-trashcan"></span> Limpar
-					</a></td>
-					<td><a href="javascript:;"
-						style="margin-left: 20px; width: 200px;"
-						class="ps-btn ps-btn-primary ps-btn-ico ps-frm-validate"
-						data-validatescope="validateForm1"
-						data-validatesuccess="alert('Campos vÃ¡lidos')"> <span
-							class="ps-ico ps-ico-add"></span> Inserir
-					</a></td>
-				</tr>
-			</table>
-		</div>
+        <div class="ps-mod4 ps-sm-mod9">
+            <table>
+                <tr>
+                    <td>
+                        <h1 style="text-align: center; width: 300px;">Novo Apontamento</h1>
+                    </td>
+                    <td>
+                        <a style="margin-left: 400px; width: 200px;" class="ps-btn ps-btn-primary ps-btn-ico">
+                            <span class="ps-ico ps-ico-trashcan"></span>
+                            Limpar
+                        </a>
+                    </td>
+                    <td>
+                        <a href="javascript:;" style="margin-left: 20px; width: 200px;"
+                            class="ps-btn ps-btn-primary ps-btn-ico ps-frm-validate" data-validatescope="validateForm1"
+                            data-validatesuccess="alert('Campos válidos')">
+                            <span class="ps-ico ps-ico-add"></span>
+                            Inserir
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </div>
 
-	</div>
-	</br>
-	<div class="ps-container" style="margin-left: 50px">
-		<div class="ps-row">
-			<div class="ps-mod8 ps-sm-mod12"></div>
-			<table class="ps-table ps-datagrid" data-pagesize="15">
-				<thead>
+    </div>
+    </br>
+    <div class="ps-container" style="margin-left: 50px">
+        <div class="ps-row">
+            <div class="ps-mod8 ps-sm-mod12"></div>
+            <table class="ps-table ps-datagrid" data-pagesize="15">
+                <thead>
 
-					<tr>
-						<th class="ps-sm-mod2" data-type="text">01/06</th>
-						<th class="ps-sm-mod2" data-type="text">02/06</th>
-						<th class="ps-sm-mod2" data-type="text">03/06</th>
-						<th class="ps-sm-mod2" data-type="text">04/06</th>
-						<th class="ps-sm-mod2" data-type="text">05/06</th>
-						<th class="ps-sm-mod2" data-type="text">06/06</th>
-						<th class="ps-sm-mod2" data-type="text">07/06</th>
-						<th class="ps-sm-mod2" data-type="text">08/06</th>
-						<th class="ps-sm-mod2" data-type="text">09/06</th>
-						<th class="ps-sm-mod2" data-type="text">10/06</th>
-						<th class="ps-sm-mod2" data-type="text">11/06</th>
-						<th class="ps-sm-mod2" data-type="text">12/06</th>
-						<th class="ps-sm-mod2" data-type="text">13/06</th>
-						<th class="ps-sm-mod2" data-type="text">14/06</th>
-						<th class="ps-sm-mod2" data-type="text">15/06</th>
-						<th class="ps-sm-mod2" data-type="text">Total mês atual</th>
+                    <tr>
+                        <th class="ps-sm-mod2" data-type="text">01/06</th>
+                        <th class="ps-sm-mod2" data-type="text">02/06</th>
+                        <th class="ps-sm-mod2" data-type="text">03/06</th>
+                        <th class="ps-sm-mod2" data-type="text">04/06</th>
+                        <th class="ps-sm-mod2" data-type="text">05/06</th>
+                        <th class="ps-sm-mod2" data-type="text">06/06</th>
+                        <th class="ps-sm-mod2" data-type="text">07/06</th>
+                        <th class="ps-sm-mod2" data-type="text">08/06</th>
+                        <th class="ps-sm-mod2" data-type="text">09/06</th>
+                        <th class="ps-sm-mod2" data-type="text">10/06</th>
+                        <th class="ps-sm-mod2" data-type="text">11/06</th>
+                        <th class="ps-sm-mod2" data-type="text">12/06</th>
+                        <th class="ps-sm-mod2" data-type="text">13/06</th>
+                        <th class="ps-sm-mod2" data-type="text">14/06</th>
+                        <th class="ps-sm-mod2" data-type="text">15/06</th>
+                        <th class="ps-sm-mod2" data-type="text">Total mês atual</th>
 
-					</tr>
-				</thead>
+                    </tr>
+                </thead>
 
-				<tr>
-					<form name="testeform" id="validateForm1">
-						<td>
+                <tr>
+                    <form name="testeform" id="validateForm1">
+                        <td>
 
-							<div class="ps-frm-select">
-								<select>
-									<option value="">Selecione</option>
-									<c:forEach items="${atividades}" var="atividade">
-										<option value="1"><c:out
-												value="{atividade.nomeAtividade}" /></option>
+                            <div class="ps-frm-select">
+                                <select>
+                                    <option value="">Selecione</option>
+                                    <option value="1">Atividade 1</option>
+                                    <option value="2">Atividade 2</option>
+                                    <option value="3">Atividade 3</option>
+                                    <option value="3">Atividade 4</option>
+                                </select>
+                            </div>
 
-									</c:forEach>
+                        </td>
 
-								</select>
-							</div>
+                        <td>
 
-						</td>
+                            </br></br>
+                            <input style="width: 50px;" type="text" name="horas" class="ps-frm-entry ps-frm-valid"
+                                placeholder="Horas">
 
-						<td></br>
-						</br> <c:forEach items="${atividades}" var="atividade">
-								<input style="width: 50px;" type="text" name="horas"
-									class="ps-frm-entry ps-frm-valid" placeholder="Horas">
-							</c:forEach></td>
+                        </td>
 
-						<td><c:forEach items="${atividades}" var="atividade">
-								</br>
-								</br>
-								<input style="width: 50px;" type="text" name="horas"
-									class="ps-frm-entry ps-frm-valid" placeholder="Horas">
-							</c:forEach></td>
+                        <td>
 
-						<td></br>
-						</br> <input style="width: 50px;" type="text" name="horas"
-							class="ps-frm-entry ps-frm-valid" placeholder="Horas"></td>
+                            </br></br>
+                            <input style="width: 50px;" type="text" name="horas" class="ps-frm-entry ps-frm-valid"
+                                placeholder="Horas">
 
-						<td></br>
-						</br> <input style="width: 50px;" type="text" name="horas"
-							class="ps-frm-entry ps-frm-valid" placeholder="Horas"></td>
-						<td></br>
-						</br> <input style="width: 50px;" type="text" name="horas"
-							class="ps-frm-entry ps-frm-valid" placeholder="Horas"></td>
-						<td></br>
-						</br> <input style="width: 50px;" type="text" name="horas"
-							class="ps-frm-entry ps-frm-valid" placeholder="Horas"></td>
-						<td></br>
-						</br> <input style="width: 50px;" type="text" name="horas"
-							class="ps-frm-entry ps-frm-valid" placeholder="Horas"></td>
-						<td></br>
-						</br> <input style="width: 50px;" type="text" name="horas"
-							class="ps-frm-entry ps-frm-valid" placeholder="Horas"></td>
-						<td></br>
-						</br> <input style="width: 50px;" type="text" name="horas"
-							class="ps-frm-entry ps-frm-valid" placeholder="Horas"></td>
-						<td></br>
-						</br> <input style="width: 50px;" type="text" name="horas"
-							class="ps-frm-entry ps-frm-valid" placeholder="Horas"></td>
-						<td></br>
-						</br> <input style="width: 50px;" type="text" name="horas"
-							class="ps-frm-entry ps-frm-valid" placeholder="Horas"></td>
-						<td></br>
-						</br> <input style="width: 50px;" type="text" name="horas"
-							class="ps-frm-entry ps-frm-valid" placeholder="Horas"></td>
-						<td></br>
-						</br> <input style="width: 50px;" type="text" name="horas"
-							class="ps-frm-entry ps-frm-valid" placeholder="Horas"></td>
-						<td></br>
-						</br> <input style="width: 50px;" type="text" name="horas"
-							class="ps-frm-entry ps-frm-valid" placeholder="Horas"></td>
-						<td></br>
-						</br> <label style="width: 50px;"></label></td>
-					</form>
-				</tr>
-				<tr>
-				<tr>
-					<form name="testeform" id="validateForm1">
-						<td>
+                        </td>
 
-							<div class="ps-frm-select">
-								<select>
-									<option value="">Selecione</option>
-									<c:forEach items="${atividades}" var="atividade">
-										<option value="1"><c:out
-												value="{atividade.nomeAtividade}" /></option>
+                        <td>
 
-									</c:forEach>
-								</select>
-							</div>
+                            </br></br>
+                            <input style="width: 50px;" type="text" name="horas" class="ps-frm-entry ps-frm-valid"
+                                placeholder="Horas">
 
-						</td>
+                        </td>
 
-						<td></br>
-						</br> <input style="width: 50px;" type="text" name="horas"
-							class="ps-frm-entry ps-frm-valid" placeholder="Horas"></td>
+                        <td>
 
-						<td></br>
-						</br> <input style="width: 50px;" type="text" name="horas"
-							class="ps-frm-entry ps-frm-valid" placeholder="Horas"></td>
+                            </br></br>
+                            <input style="width: 50px;" type="text" name="horas" class="ps-frm-entry ps-frm-valid"
+                                placeholder="Horas">
 
-						<td></br>
-						</br> <input style="width: 50px;" type="text" name="horas"
-							class="ps-frm-entry ps-frm-valid" placeholder="Horas"></td>
+                        </td>
+                        <td>
 
-						<td></br>
-						</br> <input style="width: 50px;" type="text" name="horas"
-							class="ps-frm-entry ps-frm-valid" placeholder="Horas"></td>
-						<td></br>
-						</br> <input style="width: 50px;" type="text" name="horas"
-							class="ps-frm-entry ps-frm-valid" placeholder="Horas"></td>
-						<td></br>
-						</br> <input style="width: 50px;" type="text" name="horas"
-							class="ps-frm-entry ps-frm-valid" placeholder="Horas"></td>
-						<td></br>
-						</br> <input style="width: 50px;" type="text" name="horas"
-							class="ps-frm-entry ps-frm-valid" placeholder="Horas"></td>
-						<td></br>
-						</br> <input style="width: 50px;" type="text" name="horas"
-							class="ps-frm-entry ps-frm-valid" placeholder="Horas"></td>
-						<td></br>
-						</br> <input style="width: 50px;" type="text" name="horas"
-							class="ps-frm-entry ps-frm-valid" placeholder="Horas"></td>
-						<td></br>
-						</br> <input style="width: 50px;" type="text" name="horas"
-							class="ps-frm-entry ps-frm-valid" placeholder="Horas"></td>
-						<td></br>
-						</br> <input style="width: 50px;" type="text" name="horas"
-							class="ps-frm-entry ps-frm-valid" placeholder="Horas"></td>
-						<td></br>
-						</br> <input style="width: 50px;" type="text" name="horas"
-							class="ps-frm-entry ps-frm-valid" placeholder="Horas"></td>
-						<td></br>
-						</br> <input style="width: 50px;" type="text" name="horas"
-							class="ps-frm-entry ps-frm-valid" placeholder="Horas"></td>
-						<td></br>
-						</br> <input style="width: 50px;" type="text" name="horas"
-							class="ps-frm-entry ps-frm-valid" placeholder="Horas"></td>
-						<td></br>
-						</br> <label style="width: 50px;"></label></td>
-					</form>
-				</tr>
-				<tr>
-					<td><label>Horas Totais Apontadas</label></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
+                            </br></br>
+                            <input style="width: 50px;" type="text" name="horas" class="ps-frm-entry ps-frm-valid"
+                                placeholder="Horas">
 
-				</tr>
-				<tr>
-					<td><label>Horas Apontadas Senior</label></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
+                        </td>
+                        <td>
 
-				</tr>
+                            </br></br>
+                            <input style="width: 50px;" type="text" name="horas" class="ps-frm-entry ps-frm-valid"
+                                placeholder="Horas">
 
-				</tbody>
-			</table>
-		</div>
-	</div>
-	</div>
-	<footer class="ps-site-foot">
-		<div class="ps-container">
-			<div class="ps-mod8 ps-sm-mod5 ps-md-mod4">
-				À <span class="ps-currentYear">2020</span> Porto Seguro Todos os
-				direitos reservados.
-			</div>
+                        </td>
+                        <td>
 
-		</div>
-	</footer>
+                            </br></br>
+                            <input style="width: 50px;" type="text" name="horas" class="ps-frm-entry ps-frm-valid"
+                                placeholder="Horas">
+
+                        </td>
+                        <td>
+
+                            </br></br>
+                            <input style="width: 50px;" type="text" name="horas" class="ps-frm-entry ps-frm-valid"
+                                placeholder="Horas">
+
+                        </td>
+                        <td>
+
+                            </br></br>
+                            <input style="width: 50px;" type="text" name="horas" class="ps-frm-entry ps-frm-valid"
+                                placeholder="Horas">
+
+                        </td>
+                        <td>
+
+                            </br></br>
+                            <input style="width: 50px;" type="text" name="horas" class="ps-frm-entry ps-frm-valid"
+                                placeholder="Horas">
+
+                        </td>
+                        <td>
+
+                            </br></br>
+                            <input style="width: 50px;" type="text" name="horas" class="ps-frm-entry ps-frm-valid"
+                                placeholder="Horas">
+
+                        </td>
+                        <td>
+
+                            </br></br>
+                            <input style="width: 50px;" type="text" name="horas" class="ps-frm-entry ps-frm-valid"
+                                placeholder="Horas">
+
+                        </td>
+                        <td>
+
+                            </br></br>
+                            <input style="width: 50px;" type="text" name="horas" class="ps-frm-entry ps-frm-valid"
+                                placeholder="Horas">
+
+                        </td>
+                        <td>
+
+                            </br></br>
+                            <input style="width: 50px;" type="text" name="horas" class="ps-frm-entry ps-frm-valid"
+                                placeholder="Horas">
+
+                        </td>
+                        <td>
+
+                            </br></br>
+                            <label style="width: 50px;"></label>
+
+                        </td>
+                    </form>
+                </tr>               
+                <tr>
+                    <td>
+                        <label>Horas Totais Apontadas</label>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
+                </tr>
+                <tr>
+                    <td>
+                        <label>Horas Apontadas Senior</label>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+    <footer class="ps-site-foot">
+        <div class="ps-container">
+            <div class="ps-mod8 ps-sm-mod5 ps-md-mod4">
+                À <span class="ps-currentYear">2020</span> Porto Seguro Todos
+                os direitos reservados.
+            </div>
+
+        </div>
+    </footer>
 	</div>
 
 
