@@ -7,13 +7,10 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.com.porto.controlesinternos.apontamento.dao.entity.DemandaEntity;
-import br.com.porto.controlesinternos.apontamento.model.Atividade;
 import br.com.porto.controlesinternos.apontamento.model.Demanda;
 import br.com.porto.controlesinternos.apontamento.model.Grupo;
 import br.com.porto.controlesinternos.apontamento.service.DemandaService;

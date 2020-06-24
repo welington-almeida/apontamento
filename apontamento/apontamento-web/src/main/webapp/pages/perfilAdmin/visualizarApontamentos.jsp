@@ -55,15 +55,15 @@
 					data-mobilewithouttext="true">
 					<li><a href="#" class="ps-menu-hasLevel">Apontamentos</a>
 						<ul>
-							<li><a href="#">Novo Apontamento</a></li>
-							<li><a href="#">Meus Apontamentos</a></li>
+							<li><a href="<c:url value="/apontamento/inserir/" />">Novo Apontamento</a></li>
+							<li><a href="<c:url value="/apontamento/meusApontamentos/" />">Meus Apontamentos</a></li>
 						</ul></li>
 					<li><a href="#" class="ps-menu-hasLevel">Visualizar</a>
 						<ul>
-							<li><a href="#">Grupos</a></li>
-							<li><a href="#">Demandas</a></li>
-							<li><a href="#">Atividades</a></li>
-							<li><a href="#">Apontamentos</a></li>
+							<li><a href="<c:url value = "/grupo/" />">Grupos</a></li>
+							<li><a href="<c:url value = "/demanda/" />">Demandas</a></li>
+							<li><a href="<c:url value = "/atividade/" />">Atividades</a></li>
+							<li><a href="<c:url value = "/apontamentos/" />">Apontamentos</a></li>
 						</ul></li>
 					<li><a href="#" class="ps-menu-hasLevel">Relatórios</a>
 						<ul>
@@ -75,7 +75,7 @@
 					<li><a href="#" class="ps-menu-hasLevel">Usuário</a>
 						<ul>
 							<li><a href="#">Redefinir Senha</a></li>
-							<li><a href="#">Atualizar Usuários</a></li>
+							<li><a href="<c:url value = "/usuarios/" />">Atualizar Usuário</a></li>
 
 						</ul></li>
 

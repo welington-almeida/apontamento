@@ -31,53 +31,44 @@
 
 <body>
 
-    <header class="ps-site-top ps-site-bgWhite">
-        <div class="ps-container">
-            <div class="ps-mod4 ps-sm-mod2">
-                <a href="inicio.html" title="Porto Seguro"><span class="ps-logo"></span></a>
-            </div>
-            <div class="ps-mod4 ps-sm-mod9">
-                <ul class="ps-menu ps-menu-mobile ps-menu-allCaps ps-menu-horizontal" data-mobilewithouttext="true">
-                    <li>
-                        <a href="#" class="ps-menu-hasLevel">Apontamentos</a>
-                        <ul>
-                            <li><a href="#">Novo Apontamento</a></li>
-                            <li><a href="#">Meus Apontamentos</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#" class="ps-menu-hasLevel">Visualizar</a>
-                        <ul>
-                            <li><a href="#">Grupos</a></li>
-                            <li><a href="#">Demandas</a></li>
-                            <li><a href="#">Atividades</a></li>
-                            <li><a href="#">Apontamentos</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#" class="ps-menu-hasLevel">Relatórios</a>
-                        <ul>
-                            <li><a href="#">Por Funcionário</a></li>
-                            <li><a href="#">Por Grupo</a></li>
-                            <li><a href="#">Por Demanda</a></li>
-                            <li><a href="#">Por Atividade</a></li>
-                        </ul>
+   <header class="ps-site-top ps-site-bgWhite">
+		<div class="ps-container">
+			<div class="ps-mod4 ps-sm-mod2">
+				<a href="inicio.html" title="Porto Seguro"><span class="ps-logo"></span></a>
+			</div>
+			<div class="ps-mod4 ps-sm-mod9">
+				<ul
+					class="ps-menu ps-menu-mobile ps-menu-allCaps ps-menu-horizontal"
+					data-mobilewithouttext="true">
+					<li><a href="#" class="ps-menu-hasLevel">Apontamentos</a>
+						<ul>
+							<li><a href="<c:url value="/apontamentos/" />">Novo Apontamento</a></li>
+							<li><a href="<c:url value="/apontamento/meusApontamentos/" />">Meus Apontamentos</a></li>
+						</ul></li>
+					<li><a href="#" class="ps-menu-hasLevel">Visualizar</a>
+						<ul>
+							<li><a href="<c:url value = "/grupo/" />">Grupos</a></li>
+							<li><a href="<c:url value = "/demanda/" />">Demandas</a></li>
+							<li><a href="<c:url value = "/atividade/" />">Atividades</a></li>
+						</ul></li>
+					<li><a href="#" class="ps-menu-hasLevel">Relatórios</a>
+						<ul>
+							<li><a href="#">Por Funcionário</a></li>
+							<li><a href="#">Por Grupo</a></li>
+							<li><a href="#">Por Demanda</a></li>
+							<li><a href="#">Por Atividade</a></li>
+						</ul></li>
+					<li><a href="#" class="ps-menu-hasLevel">Usuário</a>
+						<ul>
+							<li><a href="#">Redefinir Senha</a></li>
+							<li><a href="#">Atualizar Usuário</a></li>
 
-                    </li>
-                    <li>
-                        <a href="#" class="ps-menu-hasLevel">Usuário</a>
-                        <ul>
-                            <li><a href="#">Redefinir Senha</a></li>
-                            <li><a href="#">Atualizar Usuários</a></li>
+						</ul></li>
 
-                        </ul>
-
-                    </li>
-
-                </ul>
-            </div>
-        </div>
-    </header>
+				</ul>
+			</div>
+		</div>
+	</header>
     </br>
     </br>
     </div>

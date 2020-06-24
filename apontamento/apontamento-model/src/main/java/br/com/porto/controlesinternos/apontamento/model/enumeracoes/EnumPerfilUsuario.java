@@ -19,6 +19,15 @@ public enum EnumPerfilUsuario {
 		}
 	return null;
 	}
+	
+	public static int codigoPerfil(EnumPerfilUsuario perfil) {
+		for(EnumPerfilUsuario codigo:EnumPerfilUsuario.values()) {
+			if(perfil == codigo) {
+				return perfil.getCodigo();
+			}
+		}
+		return 0;
+	}
 
 	public int getCodigo() {
 		return codigo;

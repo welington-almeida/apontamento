@@ -30,16 +30,16 @@ public class ApontamentoController {
 	@RequestMapping(value="/apontamentos/",method=RequestMethod.GET)
 	public ModelAndView listar(){
 		mav.clear();
-		mav.setViewName("index");
+		mav.setViewName("apontamentos");
 		List<Apontamento> apontamentos = apontamentoService.listar();
 		mav.addObject("apontamentos", apontamentos);
 		return mav;
 	}
 	
-	@RequestMapping(value="/apontamento/inserir",method=RequestMethod.POST)
+	@RequestMapping(value="/apontamento/inserir/",method=RequestMethod.POST)
 	public ModelAndView inserir(@RequestBody Apontamento apontamento){
 		mav.clear();
-		mav.setViewName("novoApontamento");
+		mav.setViewName("redirect:/novoApontamento");
 		boolean retorno = apontamentoService.inserir(apontamento);
 		if(retorno){
 			System.out.println("Incluido com sucesso...");
@@ -53,7 +53,7 @@ public class ApontamentoController {
 	@RequestMapping(value="/apontamento/alterar",method=RequestMethod.PUT)
 	public ModelAndView alterar(@RequestBody Apontamento apontamento){
 		mav.clear();
-		mav.setViewName("index");
+		mav.setViewName("redirect:/meusApontamentos");
 		boolean retorno = apontamentoService.alterar(apontamento);
 		if(retorno){
 			System.out.println("Alterado com sucesso...");
@@ -73,11 +73,11 @@ public class ApontamentoController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/apontamento/meusApontamentos/",method=RequestMethod.POST)
+	@RequestMapping(value="/apontamento/meusApontamentos/",method=RequestMethod.GET)
 	public ModelAndView listarMeusApontamentos(@ModelAttribute Usuario usuario){
 		mav.clear();		
 		if(usuario.getCodigo() > 0) {
-		mav.setViewName("index");
+		mav.setViewName("redirect:/meusApontamentos");
 		List<Apontamento> meusApontamentos = apontamentoService.meusApontamentos(usuario.getCodigo());
 		mav.addObject("meusApontamentos", meusApontamentos);
 		}

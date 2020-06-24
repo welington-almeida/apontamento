@@ -78,7 +78,17 @@ public class ApontamentoServiceImpl implements ApontamentoService {
 
 	@Override
 	public boolean alterar(Apontamento apontamento) {
-		// TODO Auto-generated method stub
+		ApontamentoEntity apontamentoEntity = new ApontamentoEntity();
+		
+		apontamentoEntity.setCodigo(apontamento.getCodigo());
+		AtividadeEntity atividade = new AtividadeEntity();
+		atividade.setCodigoAtividade(apontamento.getAtividade().getCodigoAtividade());
+		apontamentoEntity.setAtividade(atividade);
+		apontamentoEntity.setData(apontamento.getDataApontamento());
+		apontamentoEntity.setHoras(apontamento.getHorasApontadas());
+		
+		apontamentoDAO.alterar(apontamentoEntity);
+		
 		return false;
 	}
 

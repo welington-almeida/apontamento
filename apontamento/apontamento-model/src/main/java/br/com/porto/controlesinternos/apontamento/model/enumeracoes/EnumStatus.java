@@ -19,6 +19,15 @@ public enum EnumStatus {
 		}
 	return null;
 	}
+	
+	public static int codigoStatus(EnumStatus status) {
+		for(EnumStatus numero:EnumStatus.values()) {
+			if(status == numero) {
+				return status.getCodigo();
+			}
+		}
+		return 0;
+	}
 
 	public int getCodigo() {
 		return codigo;

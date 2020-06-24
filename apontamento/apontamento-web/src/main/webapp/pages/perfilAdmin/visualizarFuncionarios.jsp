@@ -53,17 +53,17 @@
 					data-mobilewithouttext="true">
 					<li><a href="#" class="ps-menu-hasLevel">Apontamentos</a>
 						<ul>
-							<li><a href="#">Novo Apontamento</a></li>
-							<li><a href="#">Meus Apontamentos</a></li>
+							<li><a href="<c:url value="/apontamento/inserir/" />">Novo Apontamento</a></li>
+							<li><a href="<c:url value="/apontamento/meusApontamentos/" />">Meus Apontamentos</a></li>
 						</ul></li>
 					<li><a href="#" class="ps-menu-hasLevel">Visualizar</a>
 						<ul>
-							<li><a href="#">Grupos</a></li>
-							<li><a href="#">Demandas</a></li>
-							<li><a href="#">Atividades</a></li>
-							<li><a href="#">Apontamentos</a></li>
+							<li><a href="<c:url value = "/grupo/" />">Grupos</a></li>
+							<li><a href="<c:url value = "/demanda/" />">Demandas</a></li>
+							<li><a href="<c:url value = "/atividade/" />">Atividades</a></li>
+							<li><a href="<c:url value = "/apontamentos/" />">Apontamentos</a></li>
 						</ul></li>
-					<li><a href="#" class="ps-menu-hasLevel">RelatÃ³rios</a>
+					<li><a href="#" class="ps-menu-hasLevel">Relatórios</a>
 						<ul>
 							<li><a href="#">Por Funcionário</a></li>
 							<li><a href="#">Por Grupo</a></li>
@@ -73,7 +73,7 @@
 					<li><a href="#" class="ps-menu-hasLevel">Usuário</a>
 						<ul>
 							<li><a href="#">Redefinir Senha</a></li>
-							<li><a href="#">Atualizar Usuário</a></li>
+							<li><a href="<c:url value = "/usuarios/" />">Atualizar Usuário</a></li>
 
 						</ul></li>
 
@@ -150,7 +150,8 @@
 								<select>
 									<option value="">Perfil</option>
 									<c:forEach items="${usuarios}" var="usuario">
-										<option value="1"><c:out value="{usuario.perfil.descricao}" /></option>
+										<option value="1"><c:out
+												value="{usuario.perfil.descricao}" /></option>
 
 									</c:forEach>
 								</select>
@@ -162,7 +163,8 @@
 								<select>
 									<option value="">Status</option>
 									<c:forEach items="${usuarios}" var="usuario">
-										<option value="1"><c:out value="{usuario.acesso.descricao}" /></option>
+										<option value="1"><c:out
+												value="{usuario.acesso.descricao}" /></option>
 
 									</c:forEach>
 								</select>
@@ -173,7 +175,8 @@
 					<tbody>
 						<c:forEach items="${usuarios}" var="usuario">
 							<tr>
-								<td class="ps-heading-4 ps-light"><a href="#" onclick="editarUsuarioSelecionado('${usuario.codigo}', '${usuario.nome}', '${usuario.email}', '${usuario.perfil.codigo}', '${usuario.acesso.codigo}')"
+								<td class="ps-heading-4 ps-light"><a href="#"
+									onclick="editarUsuarioSelecionado('${usuario.codigo}', '${usuario.nome}', '${usuario.email}', '${usuario.perfil.codigo}', '${usuario.acesso.codigo}')"
 									class="ps-open-modal" data-modal="#ModalLarge"
 									data-modalbackdropstatic="false"
 									data-modalkeyboarddisable="true"
@@ -201,24 +204,25 @@
 			<div class="ps-modal-content">
 
 				<br />
-				<form action="<c:url value="/apontamento/usuario/alterar" />" id="validateForm" method="PUT">
-				<input id="idFuncionarioEditar" type="hidden">
+				<form action="<c:url value="/apontamento/usuario/alterar" />"
+					id="validateForm" method="PUT">
+					<input id="idFuncionarioEditar" type="hidden">
 					<div class="ps-row">
 						<div class="ps-mod8 ps-sm-mod6" style="text-align: center;">
 							<div class="ps-row">
 								<div class="ps-mod8 ps-sm-mod8 ps-frm-row">
-									<label class="ps-frm-lbl">Nome</label> <input id="nomeFuncionarioEditar" type="text"
-										name="test" class="ps-frm-entry"
-										placeholder="Nome Funcionário" />
+									<label class="ps-frm-lbl">Nome</label> <input
+										id="nomeFuncionarioEditar" type="text" name="test"
+										class="ps-frm-entry" placeholder="Nome Funcionário" />
 								</div>
 
 							</div>
 							</br>
 							<div class="ps-row">
 								<div class="ps-mod8 ps-sm-mod8 ps-frm-row">
-									<label class="ps-frm-lbl">E-mail</label> <input id="emailFuncionarioEditar" type="text"
-										name="test" class="ps-frm-entry"
-										placeholder="E-mail Funcionário" />
+									<label class="ps-frm-lbl">E-mail</label> <input
+										id="emailFuncionarioEditar" type="text" name="test"
+										class="ps-frm-entry" placeholder="E-mail Funcionário" />
 								</div>
 
 							</div>
@@ -231,7 +235,7 @@
 								<div class="ps-mod8 ps-sm-mod8 ps-frm-row ps-frm-valid">
 									<label class="ps-frm-lbl">Perfil de Acesso</label>
 									<div class="ps-frm-select">
-										<select id="perfilFuncionarioEditar" name="test">
+										<select id="perfilFuncionarioEditar" name="EnumPerfilUsuario">
 											<option>Selecione...</option>
 											<option value="1">Usuário</option>
 											<option value="2">Líder</option>
@@ -259,13 +263,10 @@
 						<table>
 							<tr>
 
-								<td><a href="javascript:;"
-									style="margin-left: 450px; width: 150px;"
-									class="ps-btn ps-btn-primary ps-btn-ico ps-frm-validate"
-									data-validatescope="validateForm"
-									data-validatesuccess="alert('Campos válidos')"> <span
-										class="ps-ico ps-ico-add"></span> Atualizar
-								</a></td>
+								<td>
+								<input type="submit" value="Atualizar"
+									class="ps-btn ps-btn-primary ps-btn-blue-dark"
+									style="margin-left: 450px; width: 150px"></td>
 
 							</tr>
 						</table>
@@ -287,16 +288,13 @@
 	</footer>
 </body>
 <script>
+	function editarUsuarioSelecionado(codigo, nome, email, perfil, acesso) {
 
-function editarUsuarioSelecionado(codigo, nome, email, perfil, acesso){
-	
-	document.getElementById('idFuncionarioEditar').value = codigo;
-	document.getElementById('nomeFuncionarioEditar').value = nome;
-	document.getElementById('emailFuncionarioEditar').value = email;
-	document.getElementById('perfilFuncionarioEditar').value = perfil;
-	document.getElementById('acessoFuncionarioEditar').value = acesso;
-}
-
-
+		document.getElementById('idFuncionarioEditar').value = codigo;
+		document.getElementById('nomeFuncionarioEditar').value = nome;
+		document.getElementById('emailFuncionarioEditar').value = email;
+		document.getElementById('perfilFuncionarioEditar').value = perfil;
+		document.getElementById('acessoFuncionarioEditar').value = acesso;
+	}
 </script>
 </html>

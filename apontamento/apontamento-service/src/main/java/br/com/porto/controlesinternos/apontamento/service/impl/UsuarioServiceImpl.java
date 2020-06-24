@@ -65,7 +65,16 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Override
 	public boolean alterar(Usuario usuario) {
-		// TODO Auto-generated method stub
+		UsuarioEntity usuarioEntity = new UsuarioEntity();
+		
+		usuarioEntity.setCodigo(usuario.getCodigo());
+		usuarioEntity.setNome(usuario.getNome());
+		usuarioEntity.setEmail(usuario.getEmail());
+		usuarioEntity.setPerfil(EnumPerfilUsuario.codigoPerfil(usuario.getPerfil()));
+		usuarioEntity.setStatus(EnumStatus.codigoStatus(usuario.getAcesso()));
+		
+		usuarioDAO.alterar(usuarioEntity);
+				
 		return false;
 	}
 

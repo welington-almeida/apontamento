@@ -10,9 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import br.com.porto.controlesinternos.apontamento.model.enumeracoes.EnumStatus;
-import br.com.porto.controlesinternos.apontamento.model.enumeracoes.EnumPerfilUsuario;
-
 @Entity
 @Table(name="USUARIO")
 public class UsuarioEntity {
