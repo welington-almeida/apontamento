@@ -17,4 +17,6 @@ public interface UsuarioDAO {
 	public UsuarioEntity selecionarPorNome(String nome);
 
 	public List<UsuarioEntity> listar();
+	
+	public UsuarioEntity existeUsuario(String email, String senha);
 }

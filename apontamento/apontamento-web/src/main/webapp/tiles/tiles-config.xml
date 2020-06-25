@@ -19,6 +19,7 @@
 	<definition name="novoUsuario" template="/pages/novoUsuario.jsp" />
 	<definition name="novoApontamento" template="/pages/incluirApontamento.jsp" />
 	<definition name="apontamentos" template="/pages/perfilAdmin/visualizarApontamentos.jsp" />
+	<definition name="login" template="/pages/login.jsp" />
 	
 	
 </tiles-definitions>

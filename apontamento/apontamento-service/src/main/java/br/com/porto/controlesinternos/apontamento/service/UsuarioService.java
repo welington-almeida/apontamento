@@ -14,5 +14,7 @@ public interface UsuarioService {
 	public boolean deletar(long codigo);
 
 	public List<Usuario> listar();
+	
+	public Usuario existeUsuario(String email, String senha);
 
 }

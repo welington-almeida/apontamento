@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.porto.controlesinternos.apontamento.dao.UsuarioDAO;
 import br.com.porto.controlesinternos.apontamento.dao.entity.UsuarioEntity;
+
 @Qualifier(value = "usuarioDaoIMPL")
 @Repository
 @Transactional(propagation = Propagation.MANDATORY)
@@ -24,7 +25,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	@Override
 	public void inserir(UsuarioEntity usuario) {
 		entityManager.persist(usuario);
-
+		
 	}
 
 	@Override
@@ -65,5 +66,20 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	public List<UsuarioEntity> listar() {
 		Query query = entityManager.createQuery("select u from UsuarioEntity as u");
 		return query.getResultList();
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public UsuarioEntity existeUsuario(String email, String senha) {
+		Query query = entityManager.createQuery("select u from UsuarioEntity as u where u.email = :emailParam and u.senha = :senhaParam")
+				.setParameter("emailParam", email)
+				.setParameter("senhaParam", senha);
+		
+				
+		List<UsuarioEntity> usuarios = query.getResultList();
+		if (usuarios != null && !usuarios.isEmpty()) {
+			return usuarios.get(0);
+		}
+		return null;
 	}
 }

@@ -31,7 +31,7 @@
 	src="<c:url value="/resources/visual/v.1/js/vendor/calendario.js" />"></script>
 <meta charset="UTF-8">
 
-<title>Meus apontamentos</title>
+<title>Meus apontamentos ${usuarioLogado.email} ${usuarioLogado.nome}</title>
 </head>
 
 <body>
@@ -43,6 +43,8 @@
 	<c:out value="${apontamento.atividade}"></c:out>
 	<c:out value="${apontamento.dataApontamento}"></c:out>
 	<c:out value="${apontamento.horasApontadas}"></c:out>
+	<c:out value="${usuarioLogado.email}"></c:out>
+	<c:out value="${usuarioLogado.nome}"></c:out>
 	<header class="ps-site-top ps-site-bgWhite">
 		<div class="ps-container">
 			<div class="ps-mod4 ps-sm-mod2">

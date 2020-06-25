@@ -103,4 +103,20 @@ public class UsuarioServiceImpl implements UsuarioService {
 		return usuarios;
 	}
 
+	
+	public Usuario existeUsuario(String email, String senha) {
+		UsuarioEntity usuarioEntity = usuarioDAO.existeUsuario(email, senha);
+		Usuario usuario = null;
+		if (usuarioEntity != null) {
+			usuario = new Usuario();
+			usuario.setEmail(usuarioEntity.getEmail());
+			usuario.setSenha(usuarioEntity.getSenha());
+			usuario.setNome(usuarioEntity.getNome());
+		
+		}
+
+		return usuario;
+		
+	}
+	
 }
