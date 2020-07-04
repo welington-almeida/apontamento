@@ -16,6 +16,26 @@ public class Usuario {
 	private String senha;
 	
 	private EnumStatus acesso;
+	
+	private int codigoAcesso;
+	
+	private int codigoPerfil;
+
+	public int getCodigoAcesso() {
+		return codigoAcesso;
+	}
+
+	public void setCodigoAcesso(int codigoAcesso) {
+		this.codigoAcesso = codigoAcesso;
+	}
+
+	public int getCodigoPerfil() {
+		return codigoPerfil;
+	}
+
+	public void setCodigoPerfil(int codigoPerfil) {
+		this.codigoPerfil = codigoPerfil;
+	}
 
 	public EnumPerfilUsuario getPerfil() {
 		return perfil;

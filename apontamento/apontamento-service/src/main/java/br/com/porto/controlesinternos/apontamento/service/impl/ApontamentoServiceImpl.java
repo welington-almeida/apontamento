@@ -122,6 +122,8 @@ public class ApontamentoServiceImpl implements ApontamentoService {
 
 	@Override
 	public List<Apontamento> meusApontamentos(long codigo) {
+		//UsuarioEntity funcionario = new UsuarioEntity();
+		//funcionario.setCodigo(codigo);
 		List<ApontamentoEntity> listaApontamentos = apontamentoDAO.meusApontamentos(codigo);
 		List<Apontamento> meusApontamentos = new ArrayList<Apontamento>();
 		
@@ -131,13 +133,13 @@ public class ApontamentoServiceImpl implements ApontamentoService {
 				Apontamento apontamento = new Apontamento();
 				apontamento.setCodigo(apontamentoEntity.getCodigo());
 
-				UsuarioEntity usuarioEntity = new UsuarioEntity();
-				usuarioEntity.setCodigo(apontamentoEntity.getFuncionario().getCodigo());
-				apontamentoEntity.setFuncionario(usuarioEntity);
+				Usuario usuario = new Usuario();
+				usuario.setCodigo(apontamentoEntity.getFuncionario().getCodigo());
+				apontamento.setFuncionario(usuario);
 
-				AtividadeEntity atividadeEntity = new AtividadeEntity();
-				atividadeEntity.setCodigoAtividade(apontamentoEntity.getAtividade().getCodigoAtividade());
-				apontamentoEntity.setAtividade(atividadeEntity);
+				Atividade atividade = new Atividade();
+				atividade.setCodigoAtividade(apontamentoEntity.getAtividade().getCodigoAtividade());
+				apontamento.setAtividade(atividade);
 
 				apontamento.setDataApontamento(apontamentoEntity.getData());
 				apontamento.setHorasApontadas(apontamentoEntity.getHoras());

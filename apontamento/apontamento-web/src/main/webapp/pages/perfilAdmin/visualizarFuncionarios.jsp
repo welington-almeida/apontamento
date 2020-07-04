@@ -53,8 +53,11 @@
 					data-mobilewithouttext="true">
 					<li><a href="#" class="ps-menu-hasLevel">Apontamentos</a>
 						<ul>
-							<li><a href="<c:url value="/apontamento/inserir/" />">Novo Apontamento</a></li>
-							<li><a href="<c:url value="/apontamento/meusApontamentos/" />">Meus Apontamentos</a></li>
+							<li><a href="<c:url value="/apontamento/inserir/" />">Novo
+									Apontamento</a></li>
+							<li><a
+								href="<c:url value="/apontamento/meusApontamentos/" />">Meus
+									Apontamentos</a></li>
 						</ul></li>
 					<li><a href="#" class="ps-menu-hasLevel">Visualizar</a>
 						<ul>
@@ -73,7 +76,8 @@
 					<li><a href="#" class="ps-menu-hasLevel">Usuário</a>
 						<ul>
 							<li><a href="#">Redefinir Senha</a></li>
-							<li><a href="<c:url value = "/usuarios/" />">Atualizar Usuário</a></li>
+							<li><a href="<c:url value = "/usuarios/" />">Atualizar
+									Usuário</a></li>
 
 						</ul></li>
 
@@ -204,15 +208,15 @@
 			<div class="ps-modal-content">
 
 				<br />
-				<form action="<c:url value="/apontamento/usuario/alterar" />"
-					id="validateForm" method="PUT">
-					<input id="idFuncionarioEditar" type="hidden">
+				<form name="" id="validateForm"
+					action="/apontamento/usuario/alterar/" method="post">
+					<input id="usuario.codigo" name="codigo" value="" type="hidden">
 					<div class="ps-row">
 						<div class="ps-mod8 ps-sm-mod6" style="text-align: center;">
 							<div class="ps-row">
 								<div class="ps-mod8 ps-sm-mod8 ps-frm-row">
 									<label class="ps-frm-lbl">Nome</label> <input
-										id="nomeFuncionarioEditar" type="text" name="test"
+										id="usuario.nome" type="text" name="nome"
 										class="ps-frm-entry" placeholder="Nome Funcionário" />
 								</div>
 
@@ -221,7 +225,7 @@
 							<div class="ps-row">
 								<div class="ps-mod8 ps-sm-mod8 ps-frm-row">
 									<label class="ps-frm-lbl">E-mail</label> <input
-										id="emailFuncionarioEditar" type="text" name="test"
+										id="usuario.email" type="text" value="" name="email"
 										class="ps-frm-entry" placeholder="E-mail Funcionário" />
 								</div>
 
@@ -235,8 +239,7 @@
 								<div class="ps-mod8 ps-sm-mod8 ps-frm-row ps-frm-valid">
 									<label class="ps-frm-lbl">Perfil de Acesso</label>
 									<div class="ps-frm-select">
-										<select id="perfilFuncionarioEditar" name="EnumPerfilUsuario">
-											<option>Selecione...</option>
+										<select id="usuario.perfil" value="" name="codigoPerfil">
 											<option value="1">Usuário</option>
 											<option value="2">Líder</option>
 											<option value="3">Administrador</option>
@@ -249,8 +252,7 @@
 								<div class="ps-mod8 ps-sm-mod8 ps-frm-row ps-frm-valid">
 									<label class="ps-frm-lbl">Status</label>
 									<div class="ps-frm-select">
-										<select id="acessoFuncionarioEditar" name="test">
-											<option>Selecione...</option>
+										<select id="usuario.acesso" value="" name="codigoAcesso">
 											<option value="1">Ativo</option>
 											<option value="2">Aprovação</option>
 											<option value="3">Desativado</option>
@@ -263,10 +265,10 @@
 						<table>
 							<tr>
 
-								<td>
-								<input type="submit" value="Atualizar"
+								<td><input type="submit"
 									class="ps-btn ps-btn-primary ps-btn-blue-dark"
-									style="margin-left: 450px; width: 150px"></td>
+									style="margin-left: 450px; width: 150px"
+									data-validatescope="#validateForm" value="Atualizar"></td>
 
 							</tr>
 						</table>
@@ -290,11 +292,11 @@
 <script>
 	function editarUsuarioSelecionado(codigo, nome, email, perfil, acesso) {
 
-		document.getElementById('idFuncionarioEditar').value = codigo;
-		document.getElementById('nomeFuncionarioEditar').value = nome;
-		document.getElementById('emailFuncionarioEditar').value = email;
-		document.getElementById('perfilFuncionarioEditar').value = perfil;
-		document.getElementById('acessoFuncionarioEditar').value = acesso;
+		document.getElementById('usuario.codigo').value = codigo;
+		document.getElementById('usuario.nome').value = nome;
+		document.getElementById('usuario.email').value = email;
+		document.getElementById('usuario.perfil').value = perfil;
+		document.getElementById('usuario.acesso').value = acesso;
 	}
 </script>
 </html>

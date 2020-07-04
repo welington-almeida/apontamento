@@ -70,7 +70,7 @@
                         <div class="ps-mod8 ps-sm-mod12">
                             <input type="submit" value="Cadastrar" class="ps-btn ps-btn-primary ps-btn-blue-dark">
 
-                            </br> <a href="login.html"
+                            </br> <a href="<c:url value = "/login" />"
                                 class="ps-btn ps-btn-primary ps-btn-blue-dark"><span></span>Voltar</a>
                         </div>
                     </div>

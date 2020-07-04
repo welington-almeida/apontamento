@@ -1,9 +1,9 @@
 package br.com.porto.controlesinternos.apontamento.web.controller;
 
-
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,88 +18,82 @@ import br.com.porto.controlesinternos.apontamento.model.Apontamento;
 import br.com.porto.controlesinternos.apontamento.model.Usuario;
 import br.com.porto.controlesinternos.apontamento.service.ApontamentoService;
 
-
 @Controller
 public class ApontamentoController {
-	
+
 	@Inject
 	private ApontamentoService apontamentoService;
-	
+
 	private final ModelAndView mav = new ModelAndView();
-	
-	@RequestMapping(value="/apontamentos/",method=RequestMethod.GET)
-	public ModelAndView listar(){
+
+	@RequestMapping(value = "/apontamentos/", method = RequestMethod.GET)
+	public ModelAndView listar() {
 		mav.clear();
 		mav.setViewName("apontamentos");
 		List<Apontamento> apontamentos = apontamentoService.listar();
 		mav.addObject("apontamentos", apontamentos);
 		return mav;
 	}
-	
-	@RequestMapping(value="/apontamento/inserir/",method=RequestMethod.POST)
-	public ModelAndView inserir(@RequestBody Apontamento apontamento){
+
+	@RequestMapping(value = "/apontamento/inserir/", method = RequestMethod.POST)
+	public ModelAndView inserir(@RequestBody Apontamento apontamento) {
 		mav.clear();
 		mav.setViewName("redirect:/novoApontamento");
 		boolean retorno = apontamentoService.inserir(apontamento);
-		if(retorno){
+		if (retorno) {
 			System.out.println("Incluido com sucesso...");
-		}
-		else{
+		} else {
 			System.out.println("Erro ao Incluir Apontamento(s)...");
 		}
 		return mav;
 	}
-	
-	@RequestMapping(value="/apontamento/alterar",method=RequestMethod.PUT)
-	public ModelAndView alterar(@RequestBody Apontamento apontamento){
+
+	@RequestMapping(value = "/apontamento/alterar", method = RequestMethod.PUT)
+	public ModelAndView alterar(@RequestBody Apontamento apontamento) {
 		mav.clear();
 		mav.setViewName("redirect:/meusApontamentos");
 		boolean retorno = apontamentoService.alterar(apontamento);
-		if(retorno){
+		if (retorno) {
 			System.out.println("Alterado com sucesso...");
-		}
-		else{
+		} else {
 			System.out.println("Erro ao Alterar Apontamento...");
 		}
 		return mav;
 	}
-	
-	@RequestMapping(value="/apontamento/selecionar/{codigo}",method=RequestMethod.GET)
-	public ModelAndView selecionar(@PathVariable("codigo") long codigoApontamento){
+
+	@RequestMapping(value = "/apontamento/selecionar/{codigo}", method = RequestMethod.GET)
+	public ModelAndView selecionar(@PathVariable("codigo") long codigoApontamento) {
 		mav.clear();
 		mav.setViewName("index");
 		Apontamento apontamento = apontamentoService.selecionar(codigoApontamento);
 		mav.addObject("apontamento", apontamento);
 		return mav;
 	}
-	
-	@RequestMapping(value="/apontamento/meusApontamentos/",method=RequestMethod.GET)
-	public ModelAndView listarMeusApontamentos(@ModelAttribute Usuario usuario){
-		mav.clear();		
-		if(usuario.getCodigo() > 0) {
-		mav.setViewName("redirect:/meusApontamentos");
-		List<Apontamento> meusApontamentos = apontamentoService.meusApontamentos(usuario.getCodigo());
-		mav.addObject("meusApontamentos", meusApontamentos);
-		}
-		else {
-			mav.setViewName("redirect:/meusApontamentos/");
+
+	@RequestMapping(value = "/meusApontamentos", method = RequestMethod.GET)
+	public ModelAndView listarMeusApontamentos(@ModelAttribute Usuario usuario, HttpSession session) {
+		mav.clear();
+		if (session.getAttribute("usuarioLogado") != null) {
+			Usuario usuarioLogado = (Usuario) session.getAttribute("usuarioLogado");
+			mav.setViewName("meusApontamentos");
+			List<Apontamento> meusApontamentos = apontamentoService.meusApontamentos(usuarioLogado.getCodigo());
+			mav.addObject("meusApontamentos", meusApontamentos);
+		} else {
+			mav.setViewName("redirect:/login");
 		}
 		return mav;
 	}
-	
-	@RequestMapping(value="/apontamento/deletar",method=RequestMethod.DELETE)
-	public ModelAndView deletar(@RequestBody long codigoApontamento){
+
+	@RequestMapping(value = "/apontamento/deletar", method = RequestMethod.DELETE)
+	public ModelAndView deletar(@RequestBody long codigoApontamento) {
 		mav.clear();
 		mav.setViewName("index");
 		boolean retorno = apontamentoService.deletar(codigoApontamento);
-		if(retorno){
+		if (retorno) {
 			System.out.println("Excluído com sucesso...");
-		}
-		else{
+		} else {
 			System.out.println("Erro ao Excluir Apontamento...");
 		}
 		return mav;
 	}
 }
-
-

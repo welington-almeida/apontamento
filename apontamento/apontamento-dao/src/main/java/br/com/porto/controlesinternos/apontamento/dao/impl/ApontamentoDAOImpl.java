@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.porto.controlesinternos.apontamento.dao.ApontamentoDAO;
 import br.com.porto.controlesinternos.apontamento.dao.entity.ApontamentoEntity;
+import br.com.porto.controlesinternos.apontamento.dao.entity.UsuarioEntity;
 
 
 @Repository
@@ -70,14 +71,22 @@ public class ApontamentoDAOImpl implements ApontamentoDAO {
 
 @SuppressWarnings("unchecked")
 @Override
-public List<ApontamentoEntity> meusApontamentos(long codigoUsuario) {
-	Query query = entityManager.createQuery("select a from ApontamentoEntity as a where a.codigo_usuario = :codigoUsuario")
-			.setParameter("codigoUsuario", codigoUsuario);
+public List<ApontamentoEntity> meusApontamentos(long funcionario) {
+	UsuarioEntity usuarioEntity = new UsuarioEntity();
+	usuarioEntity.setCodigo(funcionario);
+	Query query = entityManager.createQuery("select a from ApontamentoEntity as a where a.funcionario = :codigoUsuario")
+			.setParameter("codigoUsuario", usuarioEntity);
 	
 	List<ApontamentoEntity> meusApontamentos = query.getResultList();
 	if (meusApontamentos != null && !meusApontamentos.isEmpty()) {
 		return meusApontamentos;
 	}
+	return null;
+}
+
+@Override
+public List<ApontamentoEntity> meusApontamentos(UsuarioEntity funcionario) {
+	// TODO Auto-generated method stub
 	return null;
 }
 

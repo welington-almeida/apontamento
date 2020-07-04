@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,11 +18,10 @@ import br.com.porto.controlesinternos.apontamento.service.UsuarioService;
 @Service
 @Transactional(propagation = Propagation.REQUIRED)
 public class UsuarioServiceImpl implements UsuarioService {
-	
+
 	@Inject
 	private UsuarioDAO usuarioDAO;
 
-	
 	@Override
 	public boolean inserir(Usuario usuario) {
 		boolean retorno = false;
@@ -65,16 +63,17 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Override
 	public boolean alterar(Usuario usuario) {
-		UsuarioEntity usuarioEntity = new UsuarioEntity();
-		
-		usuarioEntity.setCodigo(usuario.getCodigo());
-		usuarioEntity.setNome(usuario.getNome());
-		usuarioEntity.setEmail(usuario.getEmail());
-		usuarioEntity.setPerfil(EnumPerfilUsuario.codigoPerfil(usuario.getPerfil()));
-		usuarioEntity.setStatus(EnumStatus.codigoStatus(usuario.getAcesso()));
-		
-		usuarioDAO.alterar(usuarioEntity);
-				
+		UsuarioEntity usuarioEntity = usuarioDAO.selecionarPorCodigo(usuario.getCodigo());
+		if (usuarioEntity != null) {
+
+			usuarioEntity.setNome(usuario.getNome());
+			usuarioEntity.setEmail(usuario.getEmail());
+			usuarioEntity.setPerfil(usuario.getCodigoPerfil());
+			usuarioEntity.setStatus(usuario.getCodigoAcesso());
+
+			usuarioDAO.alterar(usuarioEntity);
+			return true;
+		}
 		return false;
 	}
 
@@ -103,7 +102,6 @@ public class UsuarioServiceImpl implements UsuarioService {
 		return usuarios;
 	}
 
-	
 	public Usuario existeUsuario(String email, String senha) {
 		UsuarioEntity usuarioEntity = usuarioDAO.existeUsuario(email, senha);
 		Usuario usuario = null;
@@ -112,11 +110,14 @@ public class UsuarioServiceImpl implements UsuarioService {
 			usuario.setEmail(usuarioEntity.getEmail());
 			usuario.setSenha(usuarioEntity.getSenha());
 			usuario.setNome(usuarioEntity.getNome());
-		
+			usuario.setCodigo(usuarioEntity.getCodigo());
+			usuario.setPerfil(EnumPerfilUsuario.buscarPerfil(usuarioEntity.getPerfil()));
+			usuario.setAcesso(EnumStatus.buscarStatus(usuarioEntity.getStatus()));
+
 		}
 
 		return usuario;
-		
+
 	}
-	
+
 }

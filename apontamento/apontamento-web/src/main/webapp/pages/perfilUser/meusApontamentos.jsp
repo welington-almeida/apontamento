@@ -31,7 +31,7 @@
 	src="<c:url value="/resources/visual/v.1/js/vendor/calendario.js" />"></script>
 <meta charset="UTF-8">
 
-<title>Meus apontamentos ${usuarioLogado.email} ${usuarioLogado.nome}</title>
+<title>Meus apontamentos</title>
 </head>
 
 <body>
@@ -92,7 +92,7 @@
 			<div class="ps-mod8 ps-sm-mod12">
 				<table class="ps-table ps-datagrid" data-pagesize="5"
 					data-filtering="true">
-					<h1 style="text-align: center">Meus Apontamentos</h1>
+					<h1 style="text-align: center">Meus Apontamentos ${usuarioLogado.codigo}</h1>
 					<!------------------------------------ CABEÃALHO TABELA ------------------------------------------->
 					<thead>
 						</br>

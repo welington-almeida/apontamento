@@ -53,7 +53,7 @@
 				</br> </br>
 				<h4 class="ps-heading-4 ps-light">Faça seu Login</h4>
 				</br>
-				<form action="http://localhost:8081/apontamento/logar/" method="post" id="validateForm">
+				<form action="http://localhost:8081/apontamento/logar" method="post" id="validateForm">
 					<div class="ps-row ps-frm-row">
 						<div class="ps-mod8 ps-sm-mod12">
 							<input type="email" name="email"
@@ -72,10 +72,10 @@
 								class="ps-btn ps-btn-primary ps-btn-blue-dark" data-validatescope="#validateForm"
 								value="Login">
 								</br> 
-								<a href="#"
+								<a href="<c:url value = "/EsqueciMinhaSenha" />"
 								class="ps-btn ps-btn-primary ps-btn-blue-dark"><span></span>Esqueci minha senha</a> 
 								</br> 
-								<a href="#"
+								<a href="<c:url value = "/NovoUsuario" />"
 								class="ps-btn ps-btn-primary ps-btn-blue-dark"><span></span>Cadastrar-se</a>
 						</div>
 					</div>

@@ -42,7 +42,7 @@ public class UsuarioController {
 	@RequestMapping(value="/usuario/inserir",method=RequestMethod.POST)
 	public ModelAndView inserir(@ModelAttribute Usuario usuario){
 		mav.clear();
-		mav.setViewName("redirect:/usuarios/");
+		mav.setViewName("redirect:/login");
 		boolean retorno = usuarioService.inserir(usuario);
 		if(retorno){
 			System.out.println("Incluido com sucesso...");
@@ -53,13 +53,14 @@ public class UsuarioController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/usuario/alterar",method=RequestMethod.PUT)
-	public ModelAndView alterar(@RequestBody Usuario usuario){
+	@RequestMapping(value="/usuario/alterar",method=RequestMethod.POST)
+	public ModelAndView alterar(@ModelAttribute Usuario usuario){
 		mav.clear();
-		mav.setViewName("usuarios");
+		
 		boolean retorno = usuarioService.alterar(usuario);
 		if(retorno){
 			System.out.println("Alterado com sucesso...");
+			mav.setViewName("redirect:/usuarios/");
 		}
 		else{
 			System.out.println("Erro ao Alterar Usuario...");

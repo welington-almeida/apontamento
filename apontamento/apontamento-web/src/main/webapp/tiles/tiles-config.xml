@@ -10,7 +10,7 @@
 	</definition> -->
 
 	<!-- LOGIN -->	
-	<definition name="index" template="/pages/perfilUser/meusApontamentos.jsp" />	
+	<definition name="index" template="/pages/login.jsp" />	
 	<definition name="meusApontamentos" template="/pages/perfilUser/meusApontamentos.jsp" />	
 	<definition name="visualizarGrupos" template="/pages/perfilAdmin/visualizarGrupos.jsp" />
   	<definition name="visualizarAtividades" template="/pages/perfilAdmin/visualizarAtividades.jsp" />
@@ -20,6 +20,8 @@
 	<definition name="novoApontamento" template="/pages/incluirApontamento.jsp" />
 	<definition name="apontamentos" template="/pages/perfilAdmin/visualizarApontamentos.jsp" />
 	<definition name="login" template="/pages/login.jsp" />
+	<definition name="novoUsuario" template="/pages/novoUsuario.jsp" />
+	<definition name="esqueciMinhaSenha" template="/pages/esqueceuSenha.jsp" />
 	
 	
 </tiles-definitions>
