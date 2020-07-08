@@ -1,5 +1,6 @@
 package br.com.porto.controlesinternos.apontamento.model;
 
+import java.sql.Time;
 import java.util.Calendar;
 
 public class Apontamento {
@@ -16,7 +17,17 @@ public class Apontamento {
 	
 	private Calendar dataApontamento;
 	
-	private Calendar horasApontadas;
+	private Time horasApontadas;
+	
+	private String[] horasApontadasString;
+
+	public String[] getHorasApontadasString() {
+		return horasApontadasString;
+	}
+
+	public void setHorasApontadasString(String[] horasApontadasString) {
+		this.horasApontadasString = horasApontadasString;
+	}
 
 	public long getCodigo() {
 		return codigo;
@@ -66,11 +77,11 @@ public class Apontamento {
 		this.dataApontamento = dataApontamento;
 	}
 
-	public Calendar getHorasApontadas() {
+	public Time getHorasApontadas() {
 		return horasApontadas;
 	}
 
-	public void setHorasApontadas(Calendar horasApontadas) {
+	public void setHorasApontadas(Time horasApontadas) {
 		this.horasApontadas = horasApontadas;
 	}
 	

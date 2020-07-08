@@ -136,7 +136,7 @@
 							<div class="ps-frm-select">
 								<select name=funcionarioSelecionadoFiltrar>
 									<c:forEach items="${apontamentos}" var="apontamento">
-										<option value="${apontamento.codigo}">${apontamento.nome}</option>
+										<option value="${apontamento.codigo}"></option>
 
 									</c:forEach>
 								</select>

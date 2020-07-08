@@ -14,15 +14,24 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.porto.controlesinternos.apontamento.model.Apontamento;
-
+import br.com.porto.controlesinternos.apontamento.model.Atividade;
+import br.com.porto.controlesinternos.apontamento.model.Demanda;
 import br.com.porto.controlesinternos.apontamento.model.Usuario;
 import br.com.porto.controlesinternos.apontamento.service.ApontamentoService;
+import br.com.porto.controlesinternos.apontamento.service.AtividadeService;
+import br.com.porto.controlesinternos.apontamento.service.DemandaService;
 
 @Controller
 public class ApontamentoController {
 
 	@Inject
 	private ApontamentoService apontamentoService;
+	
+	@Inject
+	private AtividadeService atividadeService;
+	
+	@Inject
+	private DemandaService demandaService;
 
 	private final ModelAndView mav = new ModelAndView();
 
@@ -36,10 +45,10 @@ public class ApontamentoController {
 	}
 
 	@RequestMapping(value = "/apontamento/inserir/", method = RequestMethod.POST)
-	public ModelAndView inserir(@RequestBody Apontamento apontamento) {
+	public ModelAndView inserir(int[] codigoAtividade, String[] apontamentos) {
 		mav.clear();
 		mav.setViewName("redirect:/novoApontamento");
-		boolean retorno = apontamentoService.inserir(apontamento);
+		boolean retorno = apontamentoService.inserir(codigoAtividade, apontamentos);
 		if (retorno) {
 			System.out.println("Incluido com sucesso...");
 		} else {
@@ -75,9 +84,17 @@ public class ApontamentoController {
 		mav.clear();
 		if (session.getAttribute("usuarioLogado") != null) {
 			Usuario usuarioLogado = (Usuario) session.getAttribute("usuarioLogado");
-			mav.setViewName("meusApontamentos");
+			List<String> datas = atividadeService.getDatas();
+			mav.setViewName("novoApontamento");
 			List<Apontamento> meusApontamentos = apontamentoService.meusApontamentos(usuarioLogado.getCodigo());
-			mav.addObject("meusApontamentos", meusApontamentos);
+			List<Atividade> atividadesUsuario = atividadeService.listar();
+			List<Demanda> demandasUsuario = demandaService.listarDemandasUsuario(usuarioLogado.getCodigo());
+			
+			mav.addObject("apontamentos", meusApontamentos);
+			mav.addObject("atividades", atividadesUsuario);
+			mav.addObject("demandas", demandasUsuario);
+			
+			mav.addObject("datas", datas);
 		} else {
 			mav.setViewName("redirect:/login");
 		}
@@ -96,4 +113,6 @@ public class ApontamentoController {
 		}
 		return mav;
 	}
+	
+	
 }

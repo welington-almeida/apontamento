@@ -166,6 +166,12 @@ public class DemandaServiceImpl implements DemandaService {
 			
 			return atividade;
 		}
+
+	@Override
+	public List<Demanda> listarDemandasUsuario(long codigoUsuario) {
+		List<DemandaEntity> demandasEntity = demandaDAO.listarDemandasUsuario();
+		return null;
+	}
 	
 
 

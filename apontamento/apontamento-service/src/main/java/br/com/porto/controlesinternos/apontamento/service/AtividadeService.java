@@ -16,4 +16,6 @@ public interface AtividadeService {
 	public boolean deletar(long codigoAtividade);
 
 	public List<Atividade> listar();
+
+	public List<String> getDatas();
 }

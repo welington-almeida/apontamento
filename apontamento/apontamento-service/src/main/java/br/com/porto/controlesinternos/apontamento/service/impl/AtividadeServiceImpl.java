@@ -11,9 +11,11 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.porto.controlesinternos.apontamento.dao.AtividadeDAO;
+import br.com.porto.controlesinternos.apontamento.dao.entity.ApontamentoEntity;
 import br.com.porto.controlesinternos.apontamento.dao.entity.AtividadeEntity;
 import br.com.porto.controlesinternos.apontamento.dao.entity.DemandaEntity;
 import br.com.porto.controlesinternos.apontamento.dao.entity.UsuarioEntity;
+import br.com.porto.controlesinternos.apontamento.model.Apontamento;
 import br.com.porto.controlesinternos.apontamento.model.Atividade;
 import br.com.porto.controlesinternos.apontamento.model.Demanda;
 import br.com.porto.controlesinternos.apontamento.model.Grupo;
@@ -117,8 +119,43 @@ public class AtividadeServiceImpl implements AtividadeService {
 			atividade.setHorasApontadas(atividadeEntity.getHorasApontadas());
 			atividade.setHorasEstimadas(atividadeEntity.getHorasEstimadas());
 			atividade.setStatus(atividadeEntity.getStatus());
+			List<Apontamento> listaApontamentos = new ArrayList<Apontamento>();
+			for(ApontamentoEntity apontamentoEntity:atividadeEntity.getApontamentos()) {
+				listaApontamentos.add(apontamentoEntityToApontamento(apontamentoEntity));
+			}
+			atividade.setApontamentos(listaApontamentos);
 			
 			return atividade;
-		}	
+		}
+
+
+
+	public Apontamento apontamentoEntityToApontamento(ApontamentoEntity apontamentoEntity){
+		Apontamento apontamento = new Apontamento();
+		apontamento.setCodigo(apontamentoEntity.getCodigo());
+		apontamento.setHorasApontadas(apontamentoEntity.getHorasApontadas());
+		Usuario usuario = new Usuario();
+		usuario.setCodigo(apontamentoEntity.getFuncionario().getCodigo());
+		apontamento.setFuncionario(usuario);
+		apontamento.setDataApontamento(apontamentoEntity.getData());
+		Atividade atividade = new Atividade();
+		atividade.setCodigoAtividade(apontamentoEntity.getAtividade().getCodigoAtividade());
+		apontamento.setAtividade(atividade);
+		return apontamento;
+		
+	}
+	@Override
+	public List<String> getDatas() {
+
+		int diaAtual = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+		int i = (diaAtual < 16 ? 1 : 16);
+		int ultimoDia = (i == 1 ? 15 : Calendar.getInstance().getActualMaximum(Calendar.DAY_OF_MONTH));
+		List<String> datas = new ArrayList<String>();
+		while(i <= ultimoDia ) {
+			datas.add(i + "/" + (Calendar.getInstance().get(Calendar.MONTH) + 1) );
+			i++;
+		}
+		return datas;
+	}	
 
 }

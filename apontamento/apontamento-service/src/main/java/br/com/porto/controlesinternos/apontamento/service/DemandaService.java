@@ -17,4 +17,6 @@ public interface DemandaService {
 	public void deletar(int codigo);
 
 	public List<Demanda> listar();
+
+	public List<Demanda> listarDemandasUsuario(long codigo);
 }

@@ -1,6 +1,7 @@
 package br.com.porto.controlesinternos.apontamento.model;
 
 import java.util.Date;
+import java.util.List;
 
 import br.com.porto.controlesinternos.apontamento.model.enumeracoes.EnumStatus;
 
@@ -15,6 +16,7 @@ public class Atividade {
 	private Date dataFinalizacao;
 	private EnumStatus status;
 	private Usuario autorEncerramento;
+	private List<Apontamento> apontamentos;
 	
 	public Long getCodigoAtividade() {
 		return codigoAtividade;
@@ -70,4 +72,12 @@ public class Atividade {
 	public void setAutorEncerramento(Usuario autorEncerramento) {
 		this.autorEncerramento = autorEncerramento;
 	}
+	public List<Apontamento> getApontamentos() {
+		return apontamentos;
+	}
+	public void setApontamentos(List<Apontamento> apontamentos) {
+		this.apontamentos = apontamentos;
+	}
+	
+	
 }

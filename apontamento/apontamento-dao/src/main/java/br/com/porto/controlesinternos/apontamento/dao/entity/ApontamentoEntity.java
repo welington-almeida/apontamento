@@ -1,6 +1,8 @@
 package br.com.porto.controlesinternos.apontamento.dao.entity;
 
 
+import java.sql.Time;
+import java.time.LocalTime;
 import java.util.Calendar;
 
 
@@ -40,8 +42,12 @@ public class ApontamentoEntity {
 	
 	@DateTimeFormat(pattern = "HH:mm")
 	@Column(name="HORAS_APONTADAS", nullable=false)
-	private Calendar horas;
+	private Time horasApontadas;
 	
+//	@DateTimeFormat(pattern ="HH:mm")
+//	@Column(name="HORAS_APONTADAS", nullable=false)
+//	private Time horaspontadas;
+//	
 	
 
 	public long getCodigo() {
@@ -76,13 +82,25 @@ public class ApontamentoEntity {
 		this.data = data;
 	}
 
-	public Calendar getHoras() {
-		return horas;
+	public Time getHorasApontadas() {
+		return horasApontadas;
 	}
 
-	public void setHoras(Calendar horas) {
-		this.horas = horas;
+	public void setHorasApontadas(Time horas) {
+		this.horasApontadas = horas;
 	}
+
+//	public Time getHorasLocalTime() {
+//		return horaspontadas;
+//	}
+//
+//	public void setHorasLocalTime(Time horasLocalTime) {
+//		this.horaspontadas = horasLocalTime;
+//	}
+
+	
+	
+	
 	
 	
 }

@@ -1,5 +1,6 @@
 package br.com.porto.controlesinternos.apontamento.dao;
 
+import java.sql.Time;
 import java.util.List;
 
 import br.com.porto.controlesinternos.apontamento.dao.entity.AtividadeEntity;
@@ -17,6 +18,10 @@ public interface AtividadeDAO {
 	public AtividadeEntity selecionarPorCodigo(long codigo);
 	
 	public AtividadeEntity selecionarPorNome(String nome);
+
+	public void atualizarHorasApontadasAtividade(AtividadeEntity atividade);
+
+	public Long somaHorasApontadasAtividade(AtividadeEntity atividadeEntity);
 
 
 }

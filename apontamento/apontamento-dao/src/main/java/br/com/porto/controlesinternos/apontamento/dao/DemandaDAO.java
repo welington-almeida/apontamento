@@ -19,4 +19,6 @@ public interface DemandaDAO {
 	public List<DemandaEntity> listar();
 	
 	public Long horasTotaisDemanda(Long codigoDemanda);
+
+	public List<DemandaEntity> listarDemandasUsuario();
 }
