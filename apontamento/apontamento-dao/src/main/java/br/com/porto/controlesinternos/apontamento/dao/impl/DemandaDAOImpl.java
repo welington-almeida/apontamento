@@ -59,5 +59,11 @@ public class DemandaDAOImpl implements DemandaDAO {
 	public Long horasTotaisDemanda(Long codigoDemanda) {
 		return codigoDemanda;
 	}
+
+	@Override
+	public List<DemandaEntity> listarDemandasUsuario() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

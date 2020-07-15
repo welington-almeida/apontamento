@@ -15,11 +15,9 @@ import br.com.porto.controlesinternos.apontamento.dao.DemandaDAO;
 import br.com.porto.controlesinternos.apontamento.dao.entity.AtividadeEntity;
 import br.com.porto.controlesinternos.apontamento.dao.entity.DemandaEntity;
 import br.com.porto.controlesinternos.apontamento.dao.entity.GrupoEntity;
-import br.com.porto.controlesinternos.apontamento.dao.entity.UsuarioEntity;
 import br.com.porto.controlesinternos.apontamento.model.Atividade;
 import br.com.porto.controlesinternos.apontamento.model.Demanda;
 import br.com.porto.controlesinternos.apontamento.model.Grupo;
-import br.com.porto.controlesinternos.apontamento.model.Usuario;
 import br.com.porto.controlesinternos.apontamento.model.enumeracoes.EnumStatus;
 import br.com.porto.controlesinternos.apontamento.service.DemandaService;
 
@@ -34,13 +32,12 @@ public class DemandaServiceImpl implements DemandaService {
 	public boolean inserir(Demanda demanda) {
 		boolean retorno = false;
 		if (demanda != null) {
-			if (demanda.getDescricao() != null && demanda.getGrupo() != null 
-					&& demanda.getHorasEstimadas() != null) {
+			if (demanda.getDescricao() != null && demanda.getGrupo() != null && demanda.getHorasEstimadas() != null) {
 				Object registroExistente = demandaDAO.selecionaPorDescricao(demanda.getDescricao());
 				if (registroExistente == null) {
 					DemandaEntity demandaEntity = demandaToDemandaEntity(demanda);
 					demandaEntity.setDataAbertura(new Date(Calendar.getInstance().getTimeInMillis()));
-					demandaEntity.setStatus(EnumStatus.APROVACAO);
+					demandaEntity.setStatus(EnumStatus.ATIVO);
 
 					demandaDAO.inserir(demandaEntity);
 					retorno = true;
@@ -52,17 +49,18 @@ public class DemandaServiceImpl implements DemandaService {
 
 	@Override
 	public void alterar(Demanda demanda) {
-		DemandaEntity demandaEntity = demandaToDemandaEntity(demanda);		
+		DemandaEntity demandaEntity = demandaToDemandaEntity(demanda);
 		this.demandaDAO.alterar(demandaEntity);
 	}
 
 	@Override
-	public void deletar(int codigo) {
+	public boolean deletar(int codigo) {
 		DemandaEntity demandaEntity = demandaDAO.selecionarPorCodigo(codigo);
 		demandaEntity.setDataFinalizacao(new Date(Calendar.getInstance().getTimeInMillis()));
 		demandaEntity.setStatus(EnumStatus.DESATIVADO);
 		demandaDAO.alterar(demandaEntity);
-		
+		return false;
+
 //		demandaDAO.deletar(demandaEntity);
 	}
 
@@ -70,21 +68,21 @@ public class DemandaServiceImpl implements DemandaService {
 	public Demanda selecionarPorCodigo(int codigo) {
 		Demanda demanda = new Demanda();
 		DemandaEntity demandaEntity = demandaDAO.selecionarPorCodigo(codigo);
-		
-		if(demandaEntity != null) {
+
+		if (demandaEntity != null) {
 			demandaEntityToDemanda(demandaEntity);
 		}
 		return demanda;
 	}
-	
+
 	@Override
 	public List<Demanda> listar() {
-		List<DemandaEntity> listaDemandaEntity = this.demandaDAO.listar();
+		List<DemandaEntity> listaDemandaEntity = demandaDAO.listar();
 		List<Demanda> listaDemanda = new ArrayList<Demanda>();
-		
-		for(DemandaEntity demandaEntity: listaDemandaEntity) {
-			
-			listaDemanda.add(demandaEntityToDemanda(demandaEntity));
+		for (DemandaEntity demandaEntity : listaDemandaEntity) {
+
+			Demanda demanda = demandaEntityToDemanda(demandaEntity);
+			listaDemanda.add(demanda);
 		}
 		return listaDemanda;
 	}
@@ -92,25 +90,27 @@ public class DemandaServiceImpl implements DemandaService {
 	public Demanda demandaEntityToDemanda(DemandaEntity demandaEntity) {
 		Demanda demanda = new Demanda();
 		List<Atividade> atividades = new ArrayList<Atividade>();
-		for(AtividadeEntity atividadeEntity: demandaEntity.getAtividades()) {
+		for (AtividadeEntity atividadeEntity : demandaEntity.getAtividades()) {
 			atividades.add(atividadeEntityToAtividade(atividadeEntity));
 		}
 		demanda.setAtividades(atividades);
-//		Usuario usuario = new Usuario();
-//		usuario.setCodigo(demandaEntity.getAutorEncerramento().getCodigo());
-		
 		demanda.setAutorEncerramento(null);
 		demanda.setCodigoDemanda(demandaEntity.getCodigoDemanda());
 		demanda.setDataAbertura(demandaEntity.getDataAbertura());
 		demanda.setDataFinalizacao(demandaEntity.getDataFinalizacao());
 		demanda.setDescricao(demandaEntity.getDescricao());
-		demanda.setGrupo(grupoEntityToGrupo(demandaEntity.getGrupo()));
+
+		Grupo grupo = new Grupo();
+		grupo.setCodigo(demandaEntity.getGrupo().getCodigo());
+		grupo.setNome(demandaEntity.getGrupo().getNome());
+		demanda.setGrupo(grupo);
+
 		demanda.setHorasApontadas(demandaEntity.getHorasApontadas());
-		demanda.setHorasEstimadas(demanda.getHorasEstimadas());
-		demanda.setStatus(demanda.getStatus());
+		demanda.setHorasEstimadas(demandaEntity.getHorasEstimadas());
+		demanda.setStatus(demandaEntity.getStatus());
 		return demanda;
 	}
-	
+
 	public DemandaEntity demandaToDemandaEntity(Demanda demanda) {
 		DemandaEntity demandaEntity = new DemandaEntity();
 		demandaEntity.setCodigoDemanda(demanda.getCodigoDemanda());
@@ -135,44 +135,41 @@ public class DemandaServiceImpl implements DemandaService {
 		demandaEntity.setStatus(EnumStatus.APROVACAO);
 		return demandaEntity;
 	}
-	
+
 	public Grupo grupoEntityToGrupo(GrupoEntity grupoEntity) {
 		Grupo grupo = new Grupo();
 		grupo.setCodigo(grupoEntity.getCodigo());
 		grupo.setNome(grupoEntity.getNome());
 		grupo.setTipo(grupoEntity.getTipo());
-		
+
 		return grupo;
-		
+
 	}
-	
+
 	public Atividade atividadeEntityToAtividade(AtividadeEntity atividadeEntity) {
 		Atividade atividade = new Atividade();
-			
+
 //			Usuario usuario= new Usuario();
 //			usuario.setCodigo(atividadeEntity.getAutorEncerramento().getCodigo());
 //			atividade.setAutorEncerramento(usuario);
-			atividade.setAutorEncerramento(null);
-			atividade.setDataAbertura(atividadeEntity.getDataAbertura());
-			atividade.setDataFinalizacao(atividadeEntity.getDataFinalizacao());
-			
-			Demanda demanda = new Demanda();
-			demanda.setCodigoDemanda(atividadeEntity.getDemanda().getCodigoDemanda());
-			atividade.setDemanda(demanda);
-			
-			atividade.setHorasApontadas(atividadeEntity.getHorasApontadas());
-			atividade.setHorasEstimadas(atividadeEntity.getHorasEstimadas());
-			atividade.setStatus(atividadeEntity.getStatus());
-			
-			return atividade;
-		}
+		atividade.setAutorEncerramento(null);
+		atividade.setDataAbertura(atividadeEntity.getDataAbertura());
+		atividade.setDataFinalizacao(atividadeEntity.getDataFinalizacao());
+
+		Demanda demanda = new Demanda();
+		demanda.setCodigoDemanda(atividadeEntity.getDemanda().getCodigoDemanda());
+		atividade.setDemanda(demanda);
+
+		atividade.setHorasApontadas(atividadeEntity.getHorasApontadas());
+		atividade.setHorasEstimadas(atividadeEntity.getHorasEstimadas());
+		atividade.setStatus(atividadeEntity.getStatus());
+
+		return atividade;
+	}
 
 	@Override
 	public List<Demanda> listarDemandasUsuario(long codigoUsuario) {
-		List<DemandaEntity> demandasEntity = demandaDAO.listarDemandasUsuario();
 		return null;
 	}
-	
-
 
 }

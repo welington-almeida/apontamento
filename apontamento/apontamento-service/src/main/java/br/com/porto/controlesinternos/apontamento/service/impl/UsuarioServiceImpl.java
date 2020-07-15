@@ -28,7 +28,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 		if (usuario != null) {
 			if (usuario.getNome() != null && !usuario.getNome().isEmpty() && usuario.getEmail() != null
 					&& !usuario.getEmail().isEmpty() && usuario.getSenha() != null && !usuario.getSenha().isEmpty()) {
-				Object registroExistente = usuarioDAO.selecionarPorNome(usuario.getNome());
+				Object registroExistente = usuarioDAO.existeUsuario(usuario.getEmail(), usuario.getSenha());
 				if (registroExistente == null) {
 
 					UsuarioEntity usuarioEntity = new UsuarioEntity();
@@ -41,7 +41,10 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 					usuarioDAO.inserir(usuarioEntity);
 					retorno = true;
+				} else {
+					retorno = false;
 				}
+
 			}
 		}
 		return retorno;
@@ -120,4 +123,18 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	}
 
+	@Override
+	public boolean alterarSenha(Usuario usuario, String novaSenha) {
+		UsuarioEntity usuarioEntity = usuarioDAO.selecionarPorCodigo(usuario.getCodigo());
+		{
+			if (usuarioEntity != null) {
+
+				usuarioEntity.setSenha(novaSenha);
+
+				usuarioDAO.alterar(usuarioEntity);
+				return true;
+			}
+			return false;
+		}
+	}
 }

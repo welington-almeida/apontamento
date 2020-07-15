@@ -17,4 +17,6 @@ public interface UsuarioService {
 	
 	public Usuario existeUsuario(String email, String senha);
 
+	boolean alterarSenha(Usuario usuario, String novaSenha);
+
 }

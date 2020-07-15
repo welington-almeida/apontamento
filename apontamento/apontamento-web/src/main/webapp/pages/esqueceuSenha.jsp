@@ -73,7 +73,7 @@
 		<footer class="ps-site-foot">
 			<div class="ps-container">
 				<div class="ps-mod8 ps-sm-mod5 ps-md-mod4">
-					Ã <span class="ps-currentYear">2020</span> Porto Seguro Todos
+					À <span class="ps-currentYear">2020</span> Porto Seguro Todos
 					os direitos reservados.
 				</div>
 

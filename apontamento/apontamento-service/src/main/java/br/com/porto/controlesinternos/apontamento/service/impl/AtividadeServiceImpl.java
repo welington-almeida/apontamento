@@ -1,4 +1,5 @@
 package br.com.porto.controlesinternos.apontamento.service.impl;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -14,7 +15,6 @@ import br.com.porto.controlesinternos.apontamento.dao.AtividadeDAO;
 import br.com.porto.controlesinternos.apontamento.dao.entity.ApontamentoEntity;
 import br.com.porto.controlesinternos.apontamento.dao.entity.AtividadeEntity;
 import br.com.porto.controlesinternos.apontamento.dao.entity.DemandaEntity;
-import br.com.porto.controlesinternos.apontamento.dao.entity.UsuarioEntity;
 import br.com.porto.controlesinternos.apontamento.model.Apontamento;
 import br.com.porto.controlesinternos.apontamento.model.Atividade;
 import br.com.porto.controlesinternos.apontamento.model.Demanda;
@@ -26,28 +26,38 @@ import br.com.porto.controlesinternos.apontamento.service.AtividadeService;
 @Service
 @Transactional(propagation = Propagation.REQUIRED)
 public class AtividadeServiceImpl implements AtividadeService {
-	
+
 	@Inject
 	AtividadeDAO atividadeDAO;
 
 	public List<Atividade> listar() {
 		List<AtividadeEntity> listaAtividadeEntity = atividadeDAO.listar();
 		List<Atividade> listaAtividade = new ArrayList<Atividade>();
-		for(AtividadeEntity atividadeEntity:listaAtividadeEntity) {
+		for (AtividadeEntity atividadeEntity : listaAtividadeEntity) {
 			Atividade atividade = atividadeEntityToAtividade(atividadeEntity);
 			listaAtividade.add(atividade);
-			
+
 		}
 		return listaAtividade;
 	}
-	
-	
+
 	@Override
 	public boolean inserir(Atividade atividade) {
-		AtividadeEntity atividadeEntity = atividadeToAtividadeEntity(atividade);
-		
-		this.atividadeDAO.inserir(atividadeEntity);
-		return false;
+		boolean retorno = false;
+		if (atividade != null) {
+			if (atividade.getNomeAtividade() != null && atividade.getDemanda() != null
+					&& atividade.getHorasEstimadas() != null) {
+				Object registroExistente = atividadeDAO.selecionarPorNome(atividade.getNomeAtividade());
+				if (registroExistente == null) {
+					AtividadeEntity atividadeEntity = atividadeToAtividadeEntity(atividade);
+					atividadeEntity.setStatus(EnumStatus.ATIVO);
+
+					this.atividadeDAO.inserir(atividadeEntity);
+					retorno = true;
+				}
+			}
+		}
+		return retorno;
 	}
 
 	@Override
@@ -56,14 +66,14 @@ public class AtividadeServiceImpl implements AtividadeService {
 		this.atividadeDAO.alterar(atividadeEntity);
 		return true;
 	}
-	
+
 	@Override
 	public Atividade selecionar(long codigo) {
 		AtividadeEntity atividadeEntity = this.atividadeDAO.selecionarPorCodigo(codigo);
 		Atividade atividade = atividadeEntityToAtividade(atividadeEntity);
 		return atividade;
 	}
-	
+
 	@Override
 	public boolean deletar(long codigo) {
 		AtividadeEntity atividadeEntity = this.atividadeDAO.selecionarPorCodigo(codigo);
@@ -73,7 +83,7 @@ public class AtividadeServiceImpl implements AtividadeService {
 
 	private AtividadeEntity atividadeToAtividadeEntity(Atividade atividade) {
 		AtividadeEntity atividadeEntity = new AtividadeEntity();
-		
+
 //		UsuarioEntity usuarioEntity = new UsuarioEntity();
 //		usuarioEntity.setCodigo(atividade.getAutorEncerramento().getCodigo());
 		atividadeEntity.setCodigoAtividade(atividade.getCodigoAtividade());
@@ -82,55 +92,51 @@ public class AtividadeServiceImpl implements AtividadeService {
 		atividadeEntity.setAutorEncerramento(null);
 		atividadeEntity.setDataAbertura(new Date(Calendar.getInstance().getTimeInMillis()));
 		atividadeEntity.setDataFinalizacao(atividade.getDataFinalizacao());
-		
+
 		DemandaEntity demandaEntity = new DemandaEntity();
 		demandaEntity.setCodigoDemanda(atividade.getDemanda().getCodigoDemanda());
 		atividadeEntity.setDemanda(demandaEntity);
-		
+
 		atividadeEntity.setHorasApontadas(atividade.getHorasApontadas());
 		atividadeEntity.setHorasEstimadas(atividade.getHorasEstimadas());
-		atividadeEntity.setStatus(EnumStatus.APROVACAO);
-		
+		atividadeEntity.setStatus(EnumStatus.ATIVO);
+
 		return atividadeEntity;
 	}
 
 	public Atividade atividadeEntityToAtividade(AtividadeEntity atividadeEntity) {
 		Atividade atividade = new Atividade();
-			
-			atividade.setCodigoAtividade(atividadeEntity.getCodigoAtividade());
-			atividade.setNomeAtividade(atividadeEntity.getNomeAtividade());
-//			Usuario usuario= new Usuario();
-//			usuario.setCodigo(atividadeEntity.getAutorEncerramento().getCodigo());
-//			atividade.setAutorEncerramento(usuario);
-			atividade.setAutorEncerramento(null);
-			atividade.setDataAbertura(atividadeEntity.getDataAbertura());
-			atividade.setDataFinalizacao(atividadeEntity.getDataFinalizacao());
-			
-			Demanda demanda = new Demanda();
-			demanda.setCodigoDemanda(atividadeEntity.getDemanda().getCodigoDemanda());
-			demanda.setDescricao(atividadeEntity.getDemanda().getDescricao());
-			
-			Grupo grupo = new Grupo();
-			grupo.setCodigo(atividadeEntity.getDemanda().getGrupo().getCodigo());
-			grupo.setNome(atividadeEntity.getDemanda().getGrupo().getNome());
-			demanda.setGrupo(grupo);
-			atividade.setDemanda(demanda);
-			
-			atividade.setHorasApontadas(atividadeEntity.getHorasApontadas());
-			atividade.setHorasEstimadas(atividadeEntity.getHorasEstimadas());
-			atividade.setStatus(atividadeEntity.getStatus());
-			List<Apontamento> listaApontamentos = new ArrayList<Apontamento>();
-			for(ApontamentoEntity apontamentoEntity:atividadeEntity.getApontamentos()) {
-				listaApontamentos.add(apontamentoEntityToApontamento(apontamentoEntity));
-			}
-			atividade.setApontamentos(listaApontamentos);
-			
-			return atividade;
+
+		atividade.setCodigoAtividade(atividadeEntity.getCodigoAtividade());
+		atividade.setNomeAtividade(atividadeEntity.getNomeAtividade());
+		atividade.setAutorEncerramento(null);
+		atividade.setDataAbertura(atividadeEntity.getDataAbertura());
+		atividade.setDataFinalizacao(atividadeEntity.getDataFinalizacao());
+
+		Demanda demanda = new Demanda();
+		demanda.setCodigoDemanda(atividadeEntity.getDemanda().getCodigoDemanda());
+		demanda.setDescricao(atividadeEntity.getDemanda().getDescricao());
+
+		Grupo grupo = new Grupo();
+		grupo.setCodigo(atividadeEntity.getDemanda().getGrupo().getCodigo());
+		grupo.setNome(atividadeEntity.getDemanda().getGrupo().getNome());
+		demanda.setGrupo(grupo);
+		atividade.setDemanda(demanda);
+
+		atividade.setHorasApontadas(atividadeEntity.getHorasApontadas());
+		atividade.setHorasEstimadas(atividadeEntity.getHorasEstimadas());
+		atividade.setStatus(atividadeEntity.getStatus());
+		
+		List<Apontamento> listaApontamentos = new ArrayList<Apontamento>();
+		for (ApontamentoEntity apontamentoEntity : atividadeEntity.getApontamentos()) {
+			listaApontamentos.add(apontamentoEntityToApontamento(apontamentoEntity));
 		}
+		atividade.setApontamentos(listaApontamentos);
 
+		return atividade;
+	}
 
-
-	public Apontamento apontamentoEntityToApontamento(ApontamentoEntity apontamentoEntity){
+	public Apontamento apontamentoEntityToApontamento(ApontamentoEntity apontamentoEntity) {
 		Apontamento apontamento = new Apontamento();
 		apontamento.setCodigo(apontamentoEntity.getCodigo());
 		apontamento.setHorasApontadas(apontamentoEntity.getHorasApontadas());
@@ -142,8 +148,9 @@ public class AtividadeServiceImpl implements AtividadeService {
 		atividade.setCodigoAtividade(apontamentoEntity.getAtividade().getCodigoAtividade());
 		apontamento.setAtividade(atividade);
 		return apontamento;
-		
+
 	}
+
 	@Override
 	public List<String> getDatas() {
 
@@ -151,11 +158,11 @@ public class AtividadeServiceImpl implements AtividadeService {
 		int i = (diaAtual < 16 ? 1 : 16);
 		int ultimoDia = (i == 1 ? 15 : Calendar.getInstance().getActualMaximum(Calendar.DAY_OF_MONTH));
 		List<String> datas = new ArrayList<String>();
-		while(i <= ultimoDia ) {
-			datas.add(i + "/" + (Calendar.getInstance().get(Calendar.MONTH) + 1) );
+		while (i <= ultimoDia) {
+			datas.add(i + "/" + (Calendar.getInstance().get(Calendar.MONTH) + 1));
 			i++;
 		}
 		return datas;
-	}	
+	}
 
 }

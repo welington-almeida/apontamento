@@ -48,7 +48,7 @@
 	<header class="ps-site-top ps-site-bgWhite">
 		<div class="ps-container">
 			<div class="ps-mod4 ps-sm-mod2">
-				<a href="inicio.html" title="Porto Seguro"><span class="ps-logo"></span></a>
+				<a href="#" title="Porto Seguro"><span class="ps-logo"></span></a>
 			</div>
 			<div class="ps-mod4 ps-sm-mod9">
 				<ul
@@ -56,31 +56,54 @@
 					data-mobilewithouttext="true">
 					<li><a href="#" class="ps-menu-hasLevel">Apontamentos</a>
 						<ul>
-							<li><a href="<c:url value="/apontamento/inserir/" />">Novo Apontamento</a></li>
-							<li><a href="<c:url value="/apontamento/meusApontamentos/" />">Meus Apontamentos</a></li>
+							<!-- <li><a href="<c:url value="/apontamento/inserir/" />">Novo
+									Apontamento</a></li>
+							<li><a href="<c:url value="/meusApontamentos" />">Meus
+									Apontamentos</a></li>
+									 -->
+									 
+						<li><a href="#">Novo
+									Apontamento</a></li>
+							<li><a href="#">Meus
+									Apontamentos</a></li>
+						
 						</ul></li>
 					<li><a href="#" class="ps-menu-hasLevel">Visualizar</a>
 						<ul>
 							<li><a href="<c:url value = "/grupo/" />">Grupos</a></li>
 							<li><a href="<c:url value = "/demanda/" />">Demandas</a></li>
 							<li><a href="<c:url value = "/atividade/" />">Atividades</a></li>
-							<li><a href="<c:url value = "/apontamentos/" />">Apontamentos</a></li>
+							<c:if test="${usuarioLogado.perfil.codigo == '3'}">
+								<li><a href="<c:url value = "/apontamentos/" />">Apontamentos</a></li>
+							</c:if>
 						</ul></li>
+					<c:if test="${usuarioLogado.perfil.codigo == '3'}">
+					
 					<li><a href="#" class="ps-menu-hasLevel">Relatórios</a>
+							<ul>
+								<li><a href="#">Por Funcionário</a></li>
+								<li><a href="#">Por Grupo</a></li>
+								<li><a href="#">Por Demanda</a></li>
+								<li><a href="#">Por Atividade</a></li>
+							</ul></li>
+							
+					</c:if>
+					<li><a href="" class="ps-menu-hasLevel">Usuário</a>
 						<ul>
-							<li><a href="#">Por Funcionário</a></li>
-							<li><a href="#">Por Grupo</a></li>
-							<li><a href="#">Por Demanda</a></li>
-							<li><a href="#">Por Atividade</a></li>
-						</ul></li>
-					<li><a href="#" class="ps-menu-hasLevel">Usuário</a>
-						<ul>
-							<li><a href="#">Redefinir Senha</a></li>
-							<li><a href="<c:url value = "/usuarios/" />">Atualizar Usuário</a></li>
-
-						</ul></li>
-
+					
+							<li style= "text-align: center">${usuarioLogado.nome}</li>
+							<br />
+							<c:if test="${usuarioLogado.perfil.codigo == '3'}">
+								<li><a href="<c:url value = "/usuarios/" />">Atualizar
+										Usuários</a></li>
+							</c:if>
+							<li><a href="<c:url value = "/usuario/alterarSenha" />">Redefinir
+									Senha</a></li>
+							
+							<li><a class="ps-menu-hasLevel" href="<c:url value = "/logout" />">Sair</a></li>
+						</ul></li>						
 				</ul>
+				
 			</div>
 		</div>
 	</header>
@@ -302,16 +325,6 @@
 			</div>
 		</div>
 	</div>
-
-	<footer class="ps-site-foot">
-		<div class="ps-container">
-			<div class="ps-mod8 ps-sm-mod5 ps-md-mod4">
-				À <span class="ps-currentYear">2020</span> Porto Seguro Todos os
-				direitos reservados.
-			</div>
-
-		</div>
-	</footer>
 </body>
 <script>
 	function editarApontamentoSelecionado(codigo, usuario, grupo, demanda,

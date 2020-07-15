@@ -4,6 +4,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -21,8 +22,9 @@ public class LoginController{
 	private final ModelAndView mav = new ModelAndView();
 	
 	@RequestMapping(value="/login",method = RequestMethod.GET)
-	public ModelAndView loginForm() {
+	public ModelAndView loginForm(@ModelAttribute("msg")String msg) {
 		mav.clear();
+		mav.addObject("msg", msg);
 		mav.setViewName("login");
 		return mav;
 	}
@@ -32,11 +34,12 @@ public class LoginController{
         mav.clear();
 		Usuario usuarioLogin = usuarioService.existeUsuario(usuario.getEmail(), usuario.getSenha());
 		if(usuarioLogin != null) {
-			mav.setViewName("redirect:/meusApontamentos");
+			mav.setViewName("redirect:/grupo/");
             session.setAttribute("usuarioLogado", usuarioLogin);
             return mav;
         } else {
-        	System.out.println("Usuário ou senha inválidos");
+        	mav.addObject("msg", "Usuario ou senha incorretos");
+        	System.out.println("Usuário ou senha incorretos");
         	mav.setViewName("redirect:/login");
         }
         return mav;
@@ -56,6 +59,11 @@ public class LoginController{
 		return mav;
 	}
 	
+	  @RequestMapping("/logout")
+	    public String logout(HttpSession session) {
+	        session.invalidate();
+	        return "redirect:/login";
+	    }
 }	
 	
 	

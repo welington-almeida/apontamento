@@ -72,6 +72,6 @@ public class WebSpringConfig extends WebMvcConfigurerAdapter {
 	@Override
 	public void addInterceptors(final InterceptorRegistry registry) {
 	    registry.addInterceptor(new AutorizadorInterceptor()).addPathPatterns("/**").addPathPatterns("/sair**")
-	    .excludePathPatterns("/resources/**","/salvar-nova-senha","/EsqueciMinhaSenha","/NovoUsuario","/logar","/redefinir-senha/**","/enviar-senha","/esqueceu-senha","/apontamento/","/sair","/");
+	    .excludePathPatterns("/resources/**","/salvar-nova-senha","/EsqueciMinhaSenha","/NovoUsuario","/usuarios/novo","/logar","/login","/usuario/inserir", "/redefinir-senha/**","/enviar-senha","/esqueceu-senha","/apontamento/","/sair","/");
 	}
 }

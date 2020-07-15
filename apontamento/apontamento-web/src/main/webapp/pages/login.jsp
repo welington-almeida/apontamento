@@ -51,6 +51,7 @@
 			<div class="ps-sm-mod4 ps-sm-lspan1 lp-chat-frm"
 				style="align-content: center;">
 				</br> </br>
+                        <c:if test="${not empty msg}"><div style="color: red;">${msg}</div></c:if>
 				<h4 class="ps-heading-4 ps-light">Faça seu Login</h4>
 				</br>
 				<form action="http://localhost:8081/apontamento/logar" method="post" id="validateForm">

@@ -22,6 +22,6 @@
 	<definition name="login" template="/pages/login.jsp" />
 	<definition name="novoUsuario" template="/pages/novoUsuario.jsp" />
 	<definition name="esqueciMinhaSenha" template="/pages/esqueceuSenha.jsp" />
-	
+	<definition name="alterarSenha" template="/pages/redefinirSenha.jsp" />
 	
 </tiles-definitions>
