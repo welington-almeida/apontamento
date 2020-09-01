@@ -20,6 +20,8 @@ public interface ApontamentoService {
 
 	void atualizarHorasApontadas(Long codigoAtividade, Long codigoDemanda);
 
-	boolean inserir(int[] listaCodigoAtividades, String[] apontamentos);
+	boolean inserir(int[] listaCodigoAtividades, String[] apontamentos, String[] datas, int[] codigoApontamento);
+
+	public List<Apontamento> meusApontamentosByDemanda(long codigo, int codigoDemanda);
 
 }

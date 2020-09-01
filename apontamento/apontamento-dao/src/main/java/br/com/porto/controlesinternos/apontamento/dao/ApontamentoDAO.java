@@ -23,4 +23,6 @@ public void inserir(ApontamentoEntity apontamento);
 	List<ApontamentoEntity> meusApontamentos(UsuarioEntity funcionario);
 
 	List<ApontamentoEntity> meusApontamentos(long funcionario);
+
+	public List<ApontamentoEntity> meusApontamentosByDemanda(long codigo, int codigoDemanda);
 }

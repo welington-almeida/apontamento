@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.porto.controlesinternos.apontamento.dao.AtividadeDAO;
 import br.com.porto.controlesinternos.apontamento.dao.entity.AtividadeEntity;
+import br.com.porto.controlesinternos.apontamento.dao.entity.DemandaEntity;
 
 @Repository
 @Transactional(propagation = Propagation.MANDATORY)
@@ -77,9 +78,6 @@ public class AtividadeDAOImpl implements AtividadeDAO {
 		
 		Long horasApontadasEmSegundos = somaHorasApontadasAtividade(atividadeEntity);
 		Long minutosApontadosAtividade = TimeUnit.SECONDS.toMinutes(horasApontadasEmSegundos);
-
-//		Long minutosSobradosApontadosAtividade = TimeUnit.SECONDS.toMinutes(horasApontadasEmSegundos) % TimeUnit.SECONDS.toHours(horasApontadasEmSegundos);
-//		Long horas = TimeUnit.SECONDS.toHours(horasApontadasEmSegundos);
 		
 		String sql = "update AtividadeEntity as a set a.horasApontadas = :minutosApontadosAtividade where a.codigoAtividade = :codigoAtividade";
 		Query query = entityManager.createQuery(sql)
@@ -88,4 +86,31 @@ public class AtividadeDAOImpl implements AtividadeDAO {
 		
 		query.executeUpdate();
 	}
+
+	@Override
+	public List<AtividadeEntity> listarByDemanda(Long codigoDemanda) {
+		DemandaEntity demandaEntity = new DemandaEntity();
+		demandaEntity.setCodigoDemanda(codigoDemanda.intValue());
+		Query query = entityManager.createQuery("select a from AtividadeEntity as a, DemandaEntity as d where a.demanda = d and d = :codigoDemanda");
+		query.setParameter("codigoDemanda", demandaEntity);
+		return query.getResultList();
+	}
+	
+	@Override
+	public List<AtividadeEntity> listarPorData(Long codigoAtividade) {
+		int diaAtual = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+		int primeiroDia = (diaAtual < 16 ? 1 : 16);
+		int mes = Calendar.getInstance().get(Calendar.MONTH) + 1;
+		int ano = Calendar.getInstance().get(Calendar.YEAR);
+		int ultimoDia = (primeiroDia == 1 ? 15 : Calendar.getInstance().getActualMaximum(Calendar.DAY_OF_MONTH));
+		Query query = entityManager.createQuery("select a from ApontamentoEntity as a, DemandaEntity as d, AtividadeEntity as at"
+				+ "where a = at.atividade and at.demanda = d "
+				+ "and a.dataApontamento between '" + ano + "-" + mes +"-" + primeiroDia + "' AND '" + ano + "-" + mes + "-" + ultimoDia + "'");
+
+		return query.getResultList();
+//		select a.* from apontamento as a, demanda as d, atividade as at
+//		where a.CODIGO_ATIVIDADE= at.CODIGO_ATIVIDADE
+//		and at.CODIGO_DEMANDA = d.CODIGO_DEMANDA
+//		and a.data_apontamento between '2020-08-13' AND '2020-08-15'
+		}
 }

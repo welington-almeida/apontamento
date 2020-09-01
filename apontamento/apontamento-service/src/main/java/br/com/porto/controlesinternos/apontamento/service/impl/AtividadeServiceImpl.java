@@ -123,7 +123,7 @@ public class AtividadeServiceImpl implements AtividadeService {
 		demanda.setGrupo(grupo);
 		atividade.setDemanda(demanda);
 
-		atividade.setHorasApontadas(atividadeEntity.getHorasApontadas());
+		atividade.setHorasApontadas(atividadeEntity.getHorasApontadas()/60);
 		atividade.setHorasEstimadas(atividadeEntity.getHorasEstimadas());
 		atividade.setStatus(atividadeEntity.getStatus());
 		
@@ -165,4 +165,44 @@ public class AtividadeServiceImpl implements AtividadeService {
 		return datas;
 	}
 
+	@Override
+	public List<Atividade> listarByDemanda(int codigoDemanda) {
+		List<AtividadeEntity> listaAtividadeEntity = atividadeDAO.listarByDemanda(new Long(codigoDemanda));
+		List<Atividade> listaAtividade = new ArrayList<Atividade>();
+		for (AtividadeEntity atividadeEntity : listaAtividadeEntity) {
+			Atividade atividade = atividadeEntityToAtividade(atividadeEntity);
+			
+			listaAtividade.add(atividade);
+
+		}
+		return listaAtividade;
+	}
+	
+//	@Override
+	public List<Apontamento> listarPorData(Long codigoAtividade){
+		return null;
+		
+	}
+//	@Override
+//	public List<Atividade> listarByDemanda(int codigoDemanda) {
+//		List<AtividadeEntity> listaAtividadeEntity = atividadeDAO.listarByDemanda(new Long(codigoDemanda));
+//		List<Atividade> listaAtividade = new ArrayList<Atividade>();
+//		for (AtividadeEntity atividadeEntity : listaAtividadeEntity) {
+//			Atividade atividade = atividadeEntityToAtividade(atividadeEntity);
+//			
+//			listaAtividade.add(atividade);
+//
+//		}
+//		return listaAtividade;
+//	}
+	
+	@Override
+	public int somarHorasAtividadesByDemanda(List<Atividade> atividadesUsuario) {
+		int horasDemandas = 0;
+		for(Atividade atividadeEntity: atividadesUsuario){
+			horasDemandas += atividadeEntity.getHorasApontadas().intValue();
+		}
+		
+		return horasDemandas;
+	}
 }

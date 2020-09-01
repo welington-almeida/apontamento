@@ -22,6 +22,10 @@ public interface AtividadeDAO {
 	public void atualizarHorasApontadasAtividade(AtividadeEntity atividade);
 
 	public Long somaHorasApontadasAtividade(AtividadeEntity atividadeEntity);
+	
+	public List<AtividadeEntity> listarByDemanda(Long codigoDemanda);
+
+	public List<AtividadeEntity> listarPorData(Long codigoAtividade);
 
 
 }

@@ -1,5 +1,6 @@
 package br.com.porto.controlesinternos.apontamento.web.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.porto.controlesinternos.apontamento.dao.entity.AtividadeEntity;
 import br.com.porto.controlesinternos.apontamento.model.Apontamento;
 import br.com.porto.controlesinternos.apontamento.model.Atividade;
 import br.com.porto.controlesinternos.apontamento.model.Demanda;
@@ -45,10 +47,10 @@ public class ApontamentoController {
 	}
 
 	@RequestMapping(value = "/apontamento/inserir/", method = RequestMethod.POST)
-	public ModelAndView inserir(int[] codigoAtividade, String[] apontamentos) {
+	public ModelAndView inserir(int[] codigoAtividade, String[] apontamentos, String[] dataAtual, int[] codigoApontamento) {
 		mav.clear();
 		mav.setViewName("redirect:/novoApontamento");
-		boolean retorno = apontamentoService.inserir(codigoAtividade, apontamentos);
+		boolean retorno = apontamentoService.inserir(codigoAtividade, apontamentos, dataAtual, codigoApontamento);
 		if (retorno) {
 			System.out.println("Incluido com sucesso...");
 		} else {
@@ -79,17 +81,28 @@ public class ApontamentoController {
 		return mav;
 	}
 
-	@RequestMapping(value = "/meusApontamentos", method = RequestMethod.GET)
-	public ModelAndView listarMeusApontamentos(@ModelAttribute Usuario usuario, HttpSession session) {
+	@RequestMapping(value = "/apontamento/meusApontamentos", method = RequestMethod.GET)
+	public ModelAndView listarMeusApontamentos(@ModelAttribute Usuario usuario, HttpSession session, Long codigoDemanda) {
 		mav.clear();
 		if (session.getAttribute("usuarioLogado") != null) {
 			Usuario usuarioLogado = (Usuario) session.getAttribute("usuarioLogado");
 			List<String> datas = atividadeService.getDatas();
 			mav.setViewName("novoApontamento");
-			List<Apontamento> meusApontamentos = apontamentoService.meusApontamentos(usuarioLogado.getCodigo());
-			List<Atividade> atividadesUsuario = atividadeService.listar();
-			List<Demanda> demandasUsuario = demandaService.listarDemandasUsuario(usuarioLogado.getCodigo());
+			List<Apontamento> meusApontamentos = new ArrayList<Apontamento>();
+			List<Atividade> atividadesUsuario = new ArrayList<Atividade>();
+			List<Demanda> demandasUsuario = new ArrayList<Demanda>();
+			if(codigoDemanda == null) {
+//				meusApontamentos = apontamentoService.meusApontamentos(usuarioLogado.getCodigo());
+				atividadesUsuario = atividadeService.listar();
+			} else {
+//				meusApontamentos = apontamentoService.meusApontamentosByDemanda(usuarioLogado.getCodigo(), codigoDemanda.intValue());
+				atividadesUsuario = atividadeService.listarByDemanda(codigoDemanda.intValue());				
+			}
+			demandasUsuario = demandaService.listarDemandasUsuario(usuarioLogado.getCodigo());
+
+			Long horasDemandas = new Long(atividadeService.somarHorasAtividadesByDemanda(atividadesUsuario)); 
 			
+			mav.addObject("horasSomadasDasAtividades", horasDemandas);
 			mav.addObject("apontamentos", meusApontamentos);
 			mav.addObject("atividades", atividadesUsuario);
 			mav.addObject("demandas", demandasUsuario);
@@ -100,6 +113,25 @@ public class ApontamentoController {
 		}
 		return mav;
 	}
+	
+	
+//	@RequestMapping(value = "/apontamento/meusApontamentosByDemanda", method = RequestMethod.GET)
+//	public ModelAndView listarMeusApontamentosByDemanda(@ModelAttribute Usuario usuario, HttpSession session, int codigoDemanda) {
+//		mav.clear();
+//		if (session.getAttribute("usuarioLogado") != null) {
+//			Usuario usuarioLogado = (Usuario) session.getAttribute("usuarioLogado");
+//			List<String> datas = atividadeService.getDatas();
+//			mav.setViewName("novoApontamento");
+//
+//			mav.addObject("apontamentos", meusApontamentos);
+//			mav.addObject("atividades", atividadesUsuario);
+//			mav.addObject("demandas", demandasUsuario);
+//			mav.addObject("datas", datas);
+//		} else {
+//			mav.setViewName("redirect:/login");
+//		}
+//		return mav;
+//	}
 
 	@RequestMapping(value = "/apontamento/deletar", method = RequestMethod.DELETE)
 	public ModelAndView deletar(@RequestBody long codigoApontamento) {

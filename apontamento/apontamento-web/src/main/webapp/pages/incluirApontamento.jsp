@@ -62,12 +62,10 @@
 							<li><a href="<c:url value="/meusApontamentos" />">Meus
 									Apontamentos</a></li>
 									 -->
-									 
-						<li><a href="#">Novo
-									Apontamento</a></li>
-							<li><a href="#">Meus
-									Apontamentos</a></li>
-						
+
+							<li><a href="#">Novo Apontamento</a></li>
+							<li><a href="#">Meus Apontamentos</a></li>
+
 						</ul></li>
 					<li><a href="#" class="ps-menu-hasLevel">Visualizar</a>
 						<ul>
@@ -79,20 +77,20 @@
 							</c:if>
 						</ul></li>
 					<c:if test="${usuarioLogado.perfil.codigo == '3'}">
-					
-					<li><a href="#" class="ps-menu-hasLevel">Relatórios</a>
+
+						<li><a href="#" class="ps-menu-hasLevel">Relatórios</a>
 							<ul>
 								<li><a href="#">Por Funcionário</a></li>
 								<li><a href="#">Por Grupo</a></li>
 								<li><a href="#">Por Demanda</a></li>
 								<li><a href="#">Por Atividade</a></li>
 							</ul></li>
-							
+
 					</c:if>
 					<li><a href="" class="ps-menu-hasLevel">Usuário</a>
 						<ul>
-					
-							<li style= "text-align: center">${usuarioLogado.nome}</li>
+
+							<li style="text-align: center">${usuarioLogado.nome}</li>
 							<br />
 							<c:if test="${usuarioLogado.perfil.codigo == '3'}">
 								<li><a href="<c:url value = "/usuarios/" />">Atualizar
@@ -100,11 +98,12 @@
 							</c:if>
 							<li><a href="<c:url value = "/usuario/alterarSenha" />">Redefinir
 									Senha</a></li>
-							
-							<li><a class="ps-menu-hasLevel" href="<c:url value = "/logout" />">Sair</a></li>
-						</ul></li>						
+
+							<li><a class="ps-menu-hasLevel"
+								href="<c:url value = "/logout" />">Sair</a></li>
+						</ul></li>
 				</ul>
-				
+
 			</div>
 		</div>
 	</header>
@@ -135,55 +134,71 @@
 		<div class="ps-row">
 			<div class="ps-mod8 ps-sm-mod12"></div>
 
-			<form action=<c:url value="/apontamento/inserir/"/> method="POST">
 				<table class="ps-table">
-
+				<form action=<c:url value="/apontamento/meusApontamentos/"/> method="GET">
 					<div class="ps-frm-select">
-						<select>
+						<select name="codigoDemanda">
 							<option value="">Selecione A Demanda</option>
 							<c:forEach items="${demandas}" var="demanda">
 								<option value="${demanda.codigoDemanda}">${demanda.descricao}</option>
 							</c:forEach>
 						</select>
 					</div>
+					<div>
+					</div>
+					<div>
+						<input type="submit">
+					</div>
+					</form>
+					<form action=<c:url value="/apontamento/inserir/"/> method="POST">
 					<thead>
-
-						`
 						<tr>
 							<th>Nome Atividade</th>
 							<c:forEach items="${datas}" var="data">
-								<th class="ps-sm-mod2" data-type="text">${data}</th>
-							</c:forEach>
+								<th class="ps-sm-mod2" data-type="text">${data}
+									<input type="hidden" name="dataAtual" value="${data}"></th>
+							</c:forEach>	
 							<th class="ps-sm-mod2" data-type="text">Total mês atual</th>
+
 
 						</tr>
 					</thead>
 
 					<c:forEach items="${atividades}" var="atividade">
-						<input type="hidden" name="codigoAtividade" value="${atividade.codigoAtividade}">
+						<input type="hidden" name="codigoAtividade"
+							value="${atividade.codigoAtividade}">
 						<tr>
 							<td>${atividade.nomeAtividade},${atividade.codigoAtividade}</td>
-							<c:forEach items="${datas}" var="data" varStatus="posicao">
-								<td><c:choose>
-										<c:when test="${not empty atividade.horasApontadas}">
-											<input type="time" name="apontamentos"></td>
+						<c:choose>
+							<c:when test="${not empty atividade.apontamentos}">
+								<c:forEach items="${atividade.apontamentos}" var="apontamento" varStatus="posicao">
+									<td><c:choose>
+									<c:when test="${not empty apontamento.horasApontadas}">
+										<input type="time" name="apontamentos"
+										value="${apontamento.horasApontadas}">
+										<input type="hidden" name="codigoApontamento" value="${apontamento.codigo}">
+									</c:when>
+									<c:otherwise>
+										<input type="time" name="apontamentos" value="00:00">
+									</c:otherwise>
+								</c:choose></td>
+								</c:forEach>
+							</c:when>
+							<c:otherwise>
+								<c:forEach items="${datas}" var="data">
+									<td><input type="time" name="apontamentos" value="00:00"></td>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
 
-								</c:when>
-								<c:otherwise>
-									<input type="time" name="apontamentos"
-										value="00:00">
-									</td>
-								</c:otherwise>
-								</c:choose>
-							</c:forEach>
-							<td></td>
+							<td>${atividade.horasApontadas}</td>
 						</tr>
 					</c:forEach>
 
 
 					<tr>
-						<td><label>Horas Totais Apontadas</label></td>
-						<td></td>
+						<td><label>Horas Totais Apontadas </label></td>
+						<td>${horasSomadasDasAtividades}</td>
 
 					</tr>
 

@@ -169,7 +169,13 @@ public class DemandaServiceImpl implements DemandaService {
 
 	@Override
 	public List<Demanda> listarDemandasUsuario(long codigoUsuario) {
-		return null;
+		List<DemandaEntity> demandasEntity = demandaDAO.listarDemandasUsuario(codigoUsuario);
+		List<Demanda> demandas = new ArrayList<Demanda>();
+		for(DemandaEntity demandaEntity:demandasEntity) {
+			demandas.add(demandaEntityToDemanda(demandaEntity));
+		}
+		
+		return demandas;
 	}
 
 }

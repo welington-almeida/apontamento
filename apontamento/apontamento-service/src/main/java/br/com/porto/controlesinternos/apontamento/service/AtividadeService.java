@@ -2,6 +2,7 @@ package br.com.porto.controlesinternos.apontamento.service;
 
 import java.util.List;
 
+import br.com.porto.controlesinternos.apontamento.model.Apontamento;
 import br.com.porto.controlesinternos.apontamento.model.Atividade;
 import br.com.porto.controlesinternos.apontamento.model.Grupo;
 
@@ -18,4 +19,10 @@ public interface AtividadeService {
 	public List<Atividade> listar();
 
 	public List<String> getDatas();
+
+	public List<Atividade> listarByDemanda(int intValue);
+
+	public int somarHorasAtividadesByDemanda(List<Atividade> atividadesUsuario);
+
+	public List<Apontamento> listarPorData(Long codigoAtividade);
 }

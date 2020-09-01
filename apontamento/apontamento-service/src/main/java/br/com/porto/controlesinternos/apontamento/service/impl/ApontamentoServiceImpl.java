@@ -1,11 +1,13 @@
 package br.com.porto.controlesinternos.apontamento.service.impl;
 
 import java.sql.Time;
+import java.text.ParseException;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
+import java.sql.Date;
 
 import javax.inject.Inject;
 
@@ -15,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.porto.controlesinternos.apontamento.dao.ApontamentoDAO;
 import br.com.porto.controlesinternos.apontamento.dao.AtividadeDAO;
+import br.com.porto.controlesinternos.apontamento.dao.DemandaDAO;
 import br.com.porto.controlesinternos.apontamento.dao.entity.ApontamentoEntity;
 import br.com.porto.controlesinternos.apontamento.dao.entity.AtividadeEntity;
 import br.com.porto.controlesinternos.apontamento.dao.entity.DemandaEntity;
@@ -34,6 +37,8 @@ public class ApontamentoServiceImpl implements ApontamentoService {
 	
 	@Inject
 	private AtividadeDAO atividadeDAO;
+	
+	@Inject DemandaDAO demandaDAO;
 
 	@Override
 	public boolean inserir(Apontamento apontamento) {
@@ -165,17 +170,21 @@ public class ApontamentoServiceImpl implements ApontamentoService {
 		AtividadeEntity atividadeEntity = new AtividadeEntity();
 		atividadeEntity.setCodigoAtividade(codigoAtividade);
 		atividadeDAO.atualizarHorasApontadasAtividade(atividadeEntity);
-		// demandaDAO.atualizarHorasApontadasDemanda(codigoDemanda);
+		DemandaEntity demandaEntity = atividadeDAO.selecionarPorCodigo(codigoAtividade).getDemanda();
+		demandaDAO.atualizarHorasApontadasDemanda(demandaEntity);
 
 	}
 
 
 	@Override
-	public boolean inserir(int[] listaCodigoAtividades, String[] apontamentos) {
+	public boolean inserir(int[] listaCodigoAtividades, String[] apontamentos, String[] datas, int[] codigoApontamento) {
+
 		boolean retorno = false;
 		int posicaoFinal = 15;
 		int posicaoInicial = 0;
 		int contador = 0;
+		int contadorDataInicial = 0;
+		int contadorDataFinal = 15;
 		for (int codigoAtividade : listaCodigoAtividades) {
 			
 			
@@ -184,22 +193,44 @@ public class ApontamentoServiceImpl implements ApontamentoService {
 				Long hora = new Long(horas[0]);
 				Long minutos = new Long(horas[1]);
 
+				String[] data = datas[contadorDataInicial].split("/");
+				Long dia = new Long(data[0]);
+				Long mes = new Long(data[1]);
+				contadorDataInicial++;
+				if(contadorDataInicial == contadorDataFinal) {
+					contadorDataInicial = 0;
+				}
 				ApontamentoEntity apontamentoEntity = new ApontamentoEntity();
+	
+				
+				
+				
 				apontamentoEntity.setHorasApontadas(Time.valueOf(LocalTime.of(hora.intValue(), minutos.intValue())));
-				Calendar dataAtual = Calendar.getInstance();
-				apontamentoEntity.setData(dataAtual);
+				
+				Calendar calendar = new GregorianCalendar();
+				calendar.set(Calendar.getInstance().get(Calendar.YEAR), mes.intValue()-1, dia.intValue(), 0, 0, 0);;
+				System.out.println(Calendar.getInstance());
+				apontamentoEntity.setData(calendar);
+				
 				AtividadeEntity atividadeEntity = new AtividadeEntity();
 				atividadeEntity.setCodigoAtividade(new Long(codigoAtividade));
 				apontamentoEntity.setAtividade(atividadeEntity);
 				UsuarioEntity funcionario = new UsuarioEntity();
 				funcionario.setCodigo(1);
 				apontamentoEntity.setFuncionario(funcionario);
-				apontamentoDAO.inserir(apontamentoEntity);
 				
+				if (codigoApontamento[posicaoInicial] != 0) {
+					ApontamentoEntity apontamentoEncontrado = apontamentoDAO.selecionarPorCodigo(codigoApontamento[posicaoInicial]);
+					apontamentoEncontrado.setHorasApontadas(Time.valueOf(LocalTime.of(hora.intValue(), minutos.intValue())));
+					apontamentoDAO.alterar(apontamentoEncontrado);
+				} else {
+					apontamentoDAO.inserir(apontamentoEntity);
+				}
 			}
-			posicaoFinal+=15;
-			contador+=15;
-			
+			if(posicaoFinal < apontamentos.length) {
+				posicaoFinal+=15;
+				contador+=15;
+			}
 			atualizarHorasApontadas(new Long(codigoAtividade), 0l);
 			retorno = true;
 			
@@ -240,6 +271,34 @@ public class ApontamentoServiceImpl implements ApontamentoService {
 		atividadeEntity.setStatus(EnumStatus.APROVACAO);
 		
 		return atividadeEntity;
+	}
+
+	@Override
+	public List<Apontamento> meusApontamentosByDemanda(long codigo, int codigoDemanda) {
+		List<ApontamentoEntity> listaApontamentos = apontamentoDAO.meusApontamentosByDemanda(codigo, codigoDemanda);
+		List<Apontamento> meusApontamentos = new ArrayList<Apontamento>();
+		
+		if (listaApontamentos != null) {
+
+			for (ApontamentoEntity apontamentoEntity : listaApontamentos) {
+				Apontamento apontamento = new Apontamento();
+				apontamento.setCodigo(apontamentoEntity.getCodigo());
+
+				Usuario usuario = new Usuario();
+				usuario.setCodigo(apontamentoEntity.getFuncionario().getCodigo());
+				apontamento.setFuncionario(usuario);
+
+				Atividade atividade = new Atividade();
+				atividade.setCodigoAtividade(apontamentoEntity.getAtividade().getCodigoAtividade());
+				apontamento.setAtividade(atividade);
+
+				apontamento.setDataApontamento(apontamentoEntity.getData());
+				apontamento.setHorasApontadas(apontamentoEntity.getHorasApontadas());
+
+				meusApontamentos.add(apontamento);
+			}
+		}
+		return meusApontamentos;
 	}
 
 }

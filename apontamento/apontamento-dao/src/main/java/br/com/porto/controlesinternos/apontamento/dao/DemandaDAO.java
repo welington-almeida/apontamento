@@ -3,6 +3,7 @@ package br.com.porto.controlesinternos.apontamento.dao;
 import java.util.List;
 
 import br.com.porto.controlesinternos.apontamento.dao.entity.DemandaEntity;
+import br.com.porto.controlesinternos.apontamento.model.Demanda;
 
 public interface DemandaDAO {
 	
@@ -20,5 +21,9 @@ public interface DemandaDAO {
 	
 	public Long horasTotaisDemanda(Long codigoDemanda);
 
-	public List<DemandaEntity> listarDemandasUsuario();
+	public List<DemandaEntity> listarDemandasUsuario(long codigoUsuario);
+
+	public void atualizarHorasApontadasDemanda(DemandaEntity demandaEntity);
+
+	public Long somaHorasApontadasDemanda(DemandaEntity demandaEntity);
 }
