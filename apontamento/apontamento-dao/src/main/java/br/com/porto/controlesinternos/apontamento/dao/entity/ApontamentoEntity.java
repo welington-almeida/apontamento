@@ -15,6 +15,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -37,6 +39,7 @@ public class ApontamentoEntity {
 	private AtividadeEntity atividade;
 	
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@Temporal(TemporalType.DATE)
 	@Column(name="DATA_APONTAMENTO",nullable=false)
 	private Calendar data;
 	

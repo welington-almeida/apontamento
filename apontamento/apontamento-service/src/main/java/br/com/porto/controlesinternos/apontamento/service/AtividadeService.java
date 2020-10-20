@@ -20,9 +20,11 @@ public interface AtividadeService {
 
 	public List<String> getDatas();
 
-	public List<Atividade> listarByDemanda(int intValue);
-
 	public int somarHorasAtividadesByDemanda(List<Atividade> atividadesUsuario);
 
-	public List<Apontamento> listarPorData(Long codigoAtividade);
+	public List<Atividade> listarByDemanda(Long codigoDemanda);
+
+	public List<Apontamento> listarPorDataEDemanda(Long codigoDemanda, Long codigoUsuario);
+
+	public List<Atividade> listarAtividadesNaoApontadas(Long codigoDemanda, Long codigoUsuario);
 }

@@ -3,6 +3,7 @@ package br.com.porto.controlesinternos.apontamento.dao;
 import java.sql.Time;
 import java.util.List;
 
+import br.com.porto.controlesinternos.apontamento.dao.entity.ApontamentoEntity;
 import br.com.porto.controlesinternos.apontamento.dao.entity.AtividadeEntity;
 
 public interface AtividadeDAO {
@@ -25,7 +26,9 @@ public interface AtividadeDAO {
 	
 	public List<AtividadeEntity> listarByDemanda(Long codigoDemanda);
 
-	public List<AtividadeEntity> listarPorData(Long codigoAtividade);
+	public List<ApontamentoEntity> listarPorDataEDemanda(Long codigoDemanda, Long codigoUsuario);
+
+	public List<AtividadeEntity> listarAtividadesNaoApontadas(Long codigoDemanda, Long codigoUsuario);
 
 
 }

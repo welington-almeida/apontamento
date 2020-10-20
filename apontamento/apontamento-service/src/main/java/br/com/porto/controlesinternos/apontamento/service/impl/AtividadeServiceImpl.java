@@ -146,10 +146,13 @@ public class AtividadeServiceImpl implements AtividadeService {
 		apontamento.setDataApontamento(apontamentoEntity.getData());
 		Atividade atividade = new Atividade();
 		atividade.setCodigoAtividade(apontamentoEntity.getAtividade().getCodigoAtividade());
+		atividade.setNomeAtividade(apontamentoEntity.getAtividade().getNomeAtividade());
+		atividade.setHorasApontadas(apontamentoEntity.getAtividade().getHorasApontadas()/60);
 		apontamento.setAtividade(atividade);
 		return apontamento;
 
 	}
+
 
 	@Override
 	public List<String> getDatas() {
@@ -166,7 +169,7 @@ public class AtividadeServiceImpl implements AtividadeService {
 	}
 
 	@Override
-	public List<Atividade> listarByDemanda(int codigoDemanda) {
+	public List<Atividade> listarByDemanda(Long codigoDemanda) {
 		List<AtividadeEntity> listaAtividadeEntity = atividadeDAO.listarByDemanda(new Long(codigoDemanda));
 		List<Atividade> listaAtividade = new ArrayList<Atividade>();
 		for (AtividadeEntity atividadeEntity : listaAtividadeEntity) {
@@ -178,23 +181,17 @@ public class AtividadeServiceImpl implements AtividadeService {
 		return listaAtividade;
 	}
 	
-//	@Override
-	public List<Apontamento> listarPorData(Long codigoAtividade){
-		return null;
+	@Override
+	public List<Apontamento> listarPorDataEDemanda(Long codigoDemanda, Long codigoUsuario){
+		List<ApontamentoEntity> apontamentosEntity = atividadeDAO.listarPorDataEDemanda(codigoDemanda, codigoUsuario);
+		List<Apontamento> apontamentos = new ArrayList<Apontamento>();
+		for(ApontamentoEntity apontamentoEntity: apontamentosEntity) {
+			Apontamento apontamento = apontamentoEntityToApontamento(apontamentoEntity);
+			apontamentos.add(apontamento);
+		}
 		
+		return apontamentos;
 	}
-//	@Override
-//	public List<Atividade> listarByDemanda(int codigoDemanda) {
-//		List<AtividadeEntity> listaAtividadeEntity = atividadeDAO.listarByDemanda(new Long(codigoDemanda));
-//		List<Atividade> listaAtividade = new ArrayList<Atividade>();
-//		for (AtividadeEntity atividadeEntity : listaAtividadeEntity) {
-//			Atividade atividade = atividadeEntityToAtividade(atividadeEntity);
-//			
-//			listaAtividade.add(atividade);
-//
-//		}
-//		return listaAtividade;
-//	}
 	
 	@Override
 	public int somarHorasAtividadesByDemanda(List<Atividade> atividadesUsuario) {
@@ -204,5 +201,11 @@ public class AtividadeServiceImpl implements AtividadeService {
 		}
 		
 		return horasDemandas;
+	}
+
+	@Override
+	public List<Atividade> listarAtividadesNaoApontadas(Long codigoDemanda, Long codigoUsuario) {
+		List<AtividadeEntity> atividadesEntity = atividadeDAO.listarAtividadesNaoApontadas(codigoDemanda, codigoUsuario);
+		return null;
 	}
 }

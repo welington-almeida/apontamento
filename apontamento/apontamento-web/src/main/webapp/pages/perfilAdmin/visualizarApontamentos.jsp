@@ -32,18 +32,14 @@
 	src="<c:url value="/resources/visual/v.1/js/vendor/calendario.js" />"></script>
 <meta charset="UTF-8">
 
-<title>Visualizar Apontamentos</title>
+<title>Visualizar Apontamentos de Usuários</title>
 </head>
 
 <body>
 	<!-- CABEÃÂALHO -->
-	<c:out value="${apontamento.codigo}"></c:out>
-	<c:out value="${apontamento.funcionario}"></c:out>
-	<c:out value="${apontamento.grupo}"></c:out>
-	<c:out value="${apontamento.demanda}"></c:out>
-	<c:out value="${apontamento.atividade}"></c:out>
-	<c:out value="${apontamento.dataApontamento}"></c:out>
-	<c:out value="${apontamento.horasApontadas}"></c:out>
+	<c:out value="${grupo.codigo}"></c:out>
+	<c:out value="${grupo.nome}"></c:out>
+	<c:out value="${grupo.tipo}"></c:out>
 	<header class="ps-site-top ps-site-bgWhite">
 		<div class="ps-container">
 			<div class="ps-mod4 ps-sm-mod2">
@@ -60,12 +56,10 @@
 							<li><a href="<c:url value="/meusApontamentos" />">Meus
 									Apontamentos</a></li>
 									 -->
-									 
-						<li><a href="#">Novo
-									Apontamento</a></li>
-							<li><a href="#">Meus
-									Apontamentos</a></li>
-						
+
+							<li><a href="#">Novo Apontamento</a></li>
+							<li><a href="#">Meus Apontamentos</a></li>
+
 						</ul></li>
 					<li><a href="#" class="ps-menu-hasLevel">Visualizar</a>
 						<ul>
@@ -77,20 +71,20 @@
 							</c:if>
 						</ul></li>
 					<c:if test="${usuarioLogado.perfil.codigo == '3'}">
-					
-					<li><a href="#" class="ps-menu-hasLevel">Relatórios</a>
+
+						<li><a href="#" class="ps-menu-hasLevel">Relatórios</a>
 							<ul>
 								<li><a href="#">Por Funcionário</a></li>
 								<li><a href="#">Por Grupo</a></li>
 								<li><a href="#">Por Demanda</a></li>
 								<li><a href="#">Por Atividade</a></li>
 							</ul></li>
-							
+
 					</c:if>
 					<li><a href="" class="ps-menu-hasLevel">Usuário</a>
 						<ul>
-					
-							<li style= "text-align: center">${usuarioLogado.nome}</li>
+
+							<li style="text-align: center">${usuarioLogado.nome}</li>
 							<br />
 							<c:if test="${usuarioLogado.perfil.codigo == '3'}">
 								<li><a href="<c:url value = "/usuarios/" />">Atualizar
@@ -98,145 +92,127 @@
 							</c:if>
 							<li><a href="<c:url value = "/usuario/alterarSenha" />">Redefinir
 									Senha</a></li>
-							
-							<li><a class="ps-menu-hasLevel" href="<c:url value = "/logout" />">Sair</a></li>
-						</ul></li>						
+
+							<li><a class="ps-menu-hasLevel"
+								href="<c:url value = "/logout" />">Sair</a></li>
+						</ul></li>
 				</ul>
-				
+
 			</div>
 		</div>
 	</header>
 
 	<!------------------------------------ CORPO ------------------------------------------->
-
-	<div class="ps-container">
+	<br />
 		<div class="ps-row">
 			<div class="ps-mod8 ps-sm-mod12">
 				<table class="ps-table ps-datagrid" data-pagesize="5"
 					data-filtering="true">
-					<h1 style="text-align: center">Apontamentos</h1>
+
 					<!------------------------------------ CABEÃALHO TABELA ------------------------------------------->
 					<thead>
 						</br>
 						<tr>
 							<th class="ps-sm-mod2" data-type="text"
-								data-itemtemplate="PropostaTemplate">ID Apontamento</th>
+								data-itemtemplate="PropostaTemplate">Nome do Usuário</th>
 							<th class="ps-hide ps-sm-show ps-sm-mod2" data-type="select"
 								data-items="produtos" data-valuefield="id" data-textfield="Name"
-								data-sorter="number">Funcionário(a)</th>
-							<th class="ps-hide ps-sm-show ps-sm-mod2" data-type="select"
-								data-items="produtos" data-valuefield="id" data-textfield="Name"
-								data-sorter="number">Grupo</th>
-							<th class="ps-hide ps-sm-show ps-sm-mod2" data-type="select"
-								data-items="produtos" data-valuefield="id" data-textfield="Name"
-								data-sorter="number">Demanda</th>
-							<th class="ps-hide ps-sm-show ps-sm-mod2" data-type="select"
-								data-items="produtos" data-valuefield="id" data-textfield="Name"
-								data-sorter="number">Atividade</th>
-							<th class="ps-hide ps-sm-show ps-sm-mod2" data-type="select"
-								data-items="produtos" data-valuefield="id" data-textfield="Name"
-								data-sorter="number">Data Apontamento</th>
-							<th class="ps-hide ps-sm-show ps-sm-mod2" data-type="select"
-								data-items="produtos" data-valuefield="id" data-textfield="Name"
-								data-sorter="number">Horas Apontadas</th>
-
-
+								data-sorter="number">Ação</th>
 						</tr>
 					</thead>
-
-					<!------------------------------------ CABEÃALHO FILTROS------------------------------------------->
-					<tr class="jsgrid-filter-row">
-						<td class="ps-sm-mod2 jsgrid-align-left" style="width: auto;">
-							<div>
-								</br>
-								</br> <input style="text-align: center" type="text"
-									class="ps-frm-entry" placeholder="Filtrar por ID"
-									value="${apontamento.codigo}">
-							</div>
-						</td>
-						<td style="text-align: center"
-							class="ps-hide ps-sm-show ps-sm-mod2 jsgrid-align-left">
-							<div class="ps-frm-select">
-								<select name=funcionarioSelecionadoFiltrar>
-									<c:forEach items="${apontamentos}" var="apontamento">
-										<option value="${apontamento.codigo}"></option>
-
-									</c:forEach>
-								</select>
-							</div>
-						</td>
-						<td style="text-align: center"
-							class="ps-hide ps-sm-show ps-sm-mod2 jsgrid-align-left">
-							<div class="ps-frm-select">
-								<select name=grupoSelecionadoFiltrar>
-									<c:forEach items="${apontamentos}" var="apontamento">
-										<option value="${apontamento.codigo}">${apontamento.grupo}</option>
-									</c:forEach>
-								</select>
-							</div>
-						</td>
-						<td style="text-align: center"
-							class="ps-hide ps-sm-show ps-sm-mod2 jsgrid-align-left">
-							<div class="ps-frm-select">
-								<select name=demandaSelecionadaFiltrar>
-									<c:forEach items="${apontamentos}" var="apontamento">
-										<option value="${apontamento.codigo}">${apontamento.demanda}</option>
-									</c:forEach>
-								</select>
-							</div>
-						</td>
-						<td style="text-align: center"
-							class="ps-hide ps-sm-show ps-sm-mod2 jsgrid-align-left">
-							<div class="ps-frm-select">
-								<select name=atividadeSelecionadaFiltrar>
-									<c:forEach items="${apontamentos}" var="apontamento">
-										<option value="${apontamento.codigo}">${apontamento.atividade}</option>
-									</c:forEach>
-								</select>
-							</div>
-						</td>
-						<td></br>
-						</br> <input type="text" name="test"
-							class="ps-frm-entry ps-frm-calendar"
-							data-calendardefaultdate="+1D" data-calendarmindate="-1M"
-							data-calendarmaxdate="+45D" data-calendarselect="setDataVolta()"
-							placeholder="dd/mm/aaaa" style="text-align: center;" id="dataIda" />
-
-						</td>
-
-
-						<td class="ps-sm-mod2 jsgrid-align-left" style="width: auto;">
-							<div>
-								</br>
-								</br> <input
-									style="-ms-grid-column-align: center; text-align: center;"
-									type="time" name="horas" min="00:10" max="23:59"
-									class="ps-frm-entry ps-frm-valid">
-							</div>
-						</td>
-					</tr>
 					<tbody>
-
-						<c:forEach items="${apontamentos}" var="apontamento">
-
+						<c:forEach items="${usuarios}" var="usuario">
 							<tr>
-								<td>${apontamento.codigo}</td>
-								<td>${apontamento.funcionario}</td>
-								<td>${apontamento.grupo}</td>
-								<td>${apontamento.demanda}</td>
-								<td>${apontamento.atividade}</td>
-								<td>${apontamento.dataApontamento}</td>
-								<td>${apontamento.horasApontadas}</td>
-							</tr>
+								<td>${usuario.nome}</td>
+								
+								<td>
+								<form action=<c:url value="/apontamento/apontamentoUsuarioSelecionado/"/>
+									method="POST">
+									<input type="hidden" value="${usuario.codigo}" name="codigoUsuarioSelecionado">
+									<input type="submit" value="Visualizar Demandas">
+								</form>
+								</td>
 
+							</tr>
 						</c:forEach>
 					</tbody>
 				</table>
 			</div>
 		</div>
 	</div>
+	<div class="ps-modal" id="ModalLarge">
+		<a href="javascript:;" class="ps-modal-close ps-modal-close-default"><span
+			class="ps-ico ps-ico-sm ps-sm-ico-lg ps-ico-close"></span></a>
+		<div class="ps-modal-container ps-sm-modal-large">
+			<div class="ps-modal-title">Novo Grupo</div>
+			<div class="ps-modal-content">
 
 
+
+				<div class="ps-row">
+					<div class="ps-mod8 ps-sm-mod6" style="text-align: center;">
+						<form name="" id="validateForm"
+							action="/apontamento/grupo/inserir" method="POST">
+							<div class="ps-row ps-frm-row">
+								<div class="ps-mod8 ps-sm-mod12">
+									<input type="text" name="nome"
+										class="ps-frm-entry ps-frm-valid" placeholder="Nome do Grupo">
+									<input type="text" name="tipo"
+										class="ps-frm-entry ps-frm-valid" placeholder="Tipo">
+								</div>
+							</div>
+							<input type="submit"
+								class="ps-btn ps-btn-primary ps-btn-blue-dark"
+								style="width: 200px;" data-validatescope="#validateForm"
+								value="Criar Grupo">
+
+						</form>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="ps-modal" id="ModalLarge2">
+		<a href="javascript:;" class="ps-modal-close ps-modal-close-default"><span
+			class="ps-ico ps-ico-sm ps-sm-ico-lg ps-ico-close"></span></a>
+		<div class="ps-modal-container ps-sm-modal-large">
+			<div class="ps-modal-title">Desativar Grupo</div>
+			<div class="ps-modal-content">
+				<div class="ps-row">
+					<div class="ps-mod8 ps-sm-mod6" style="text-align: center;">
+						<form action="/apontamento/grupo/deletar/" id="validateForm"
+							method="POST">
+							<div class="ps-frm-select">
+								<select name="codigo">
+									<c:forEach items="${grupos}" var="grupo">
+
+										<option value="${grupo.codigo}">${grupo.nome}</option>
+									</c:forEach>
+								</select>
+							</div>
+							</br> <input type="submit"
+								class="ps-btn ps-btn-primary ps-btn-blue-dark"
+								style="width: 200px;" data-validatescope="#validateForm"
+								value="Desativar Grupo">
+
+						</form>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<script type="javascript">
+
+function valorPadraoPesquisa(){
+document.getElementById("#pesquisar").value = 0;
+}
+</script>
 </body>
 
 </html>

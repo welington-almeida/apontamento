@@ -54,7 +54,7 @@
                         <c:if test="${not empty msg}"><div style="color: red;">${msg}</div></c:if>
 				<h4 class="ps-heading-4 ps-light">Faça seu Login</h4>
 				</br>
-				<form action="http://localhost:8081/apontamento/logar" method="post" id="validateForm">
+				<form action="http://localhost:8080/apontamento/logar" method="post" id="validateForm">
 					<div class="ps-row ps-frm-row">
 						<div class="ps-mod8 ps-sm-mod12">
 							<input type="email" name="email"

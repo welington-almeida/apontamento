@@ -135,7 +135,11 @@
 			<div class="ps-mod8 ps-sm-mod12"></div>
 
 			<table class="ps-table">
-				<form action=<c:url value="/apontamento/novoApontamento/"/>
+				<c:choose>
+					
+					<c:when test="${empty codigoUsuarioSelecionado}">
+					
+					<form action=<c:url value="/apontamento/meusApontamentos/"/>
 					method="GET">
 					<div class="ps-frm-select">
 						<select name="codigoDemanda">
@@ -153,7 +157,40 @@
 					</div>
 					
 				</form>
-					<!--<c:choose>
+					
+					</c:when>
+					
+					<c:otherwise>
+					
+					<form action=<c:url value="/apontamento/apontamentoUsuarioSelecionado/"/> method="POST">
+						<input type="hidden" value="${codigoUsuarioSelecionado}" name="codigoUsuarioSelecionado">
+					<div class="ps-frm-select">
+					
+						<select name="codigoDemanda">
+							<c:if test="${empty codigoDemanda}">
+								<option value="">Selecione A Demanda</option>
+							</c:if>
+							<c:forEach items="${demandas}" var="demanda">
+								<option value="${demanda.codigoDemanda}">${demanda.descricao}</option>
+							</c:forEach>
+						</select>
+					</div>
+					<div></div>
+					<div>
+						<input type="submit">
+					</div>
+					
+				</form>
+					
+					</c:otherwise>
+				
+				
+				</c:choose>
+				
+				
+				<c:if test="${not empty codigoDemanda}">
+				
+					<c:choose>
 						<c:when test="${not empty apontamentos}">
 							<form action=<c:url value="/apontamento/inserir/"/> method="POST">
 								<thead>
@@ -219,9 +256,11 @@
 								<td><input type="time" name="apontamentos" value="00:00"></td>
 							</c:forEach>
 							-->
-					<!-- 	</c:otherwise>
-					</c:choose>-->
-							
+						</c:otherwise>
+					</c:choose>
+				
+
+
 
 
 
@@ -279,7 +318,8 @@
 						</tr>
 					</c:forEach>
 					-->
-
+			
+		</c:if>
 		</div>
 	</div>
 
